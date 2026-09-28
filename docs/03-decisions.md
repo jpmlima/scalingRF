@@ -130,3 +130,11 @@ Filter bank **before** the LNA. Costs ~1–2 dB of noise figure, protects the LN
 Analysis (sim/hf_rx, validated against datasheet measurement): without an LNA the HF receiver NF is 16–34 dB depending on FDA gain. That is fine below ~10 MHz and in noisy locations, but at 28–49 MHz it loses 6–13 dB against quiet-rural noise and 2–6 dB even against galactic noise.
 
 **Decision:** LNA path (1–50 MHz, NF ≤ 2 dB, ~16 dB, IIP3 ≥ +21.5 dBm) in parallel with a DC-coupled bypass; FDA fixed at AV5; 0/10/20 dB attenuator. Result: NF 7–8 dB with LNA (≤ 1 dB above galactic noise up to 49 MHz), full-scale range −19 to +17 dBm across modes.
+
+---
+
+## D12 — HF LNA part: LTC6433-15, with a sub-octave preselector
+
+- LTC6433-15 A-grade: SiGe (low 1/f noise, usable at HF), 16 dB, NF 2.9–3.7 dB at 10–50 MHz, IIP3 ≈ +32 dBm. NF misses the rev 1 target (2 dB) but costs only +0.5 dB at system level; linearity exceeds it by 10 dB. Low-NF alternatives in this range typically have much lower IIP3.
+- Its HD2 (−54 dBc) implies IIP2 ≈ +38 dBm; unfiltered, IM2 from two strong in-band stations lands ~44 dB above the noise floor. Required IIP2 without filtering (~+82 dBm) is not achievable by any part.
+- **Decision:** LNA used only 10–49 MHz, behind a 3-band sub-octave preselector (10–17 / 17–29 / 29–49 MHz). Below 10 MHz the bypass is used (antenna-noise limited). System NF 8.5–9.2 dB, ≤ 1.3 dB above galactic noise.

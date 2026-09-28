@@ -10,7 +10,7 @@ flowchart LR
     BT --> LIM[Limiter<br/>low-C anti-parallel diodes]
     LIM --> DIP{Diplexer<br/>~60 MHz}
     DIP -->|LP| DCB[Switchable DC block<br/>in only when bias-tee on]
-    DCB --> LNA{LNA 16 dB / bypass}
+    DCB --> LNA{Preselector 3 bands + LTC6433-15 / bypass}
     LNA --> ATT[Atten 0/10/20 dB<br/>resistive pads + switches]
     ATT --> FDA[LTC6409 FDA<br/>DC-coupled, AV5]
     FDA --> AAF[7th-order elliptic LPF<br/>fc ~60 MHz, deep by 90 MHz]
@@ -25,11 +25,12 @@ flowchart LR
 
 Analysed in [`sim/hf_rx/`](../sim/hf_rx/README.md) (model validated against the LTC6409 + LTC2262-14 datasheet measurement to within 0.3 dB).
 
-- **LNA path + DC-coupled bypass** (revised — the v0 "no LNA" decision was wrong above ~10 MHz). LNA requirement: 1–50 MHz, NF ≤ 2 dB, ~16 dB gain, IIP3 ≥ +21.5 dBm.
+- **LNA path + DC-coupled bypass** (revised — the v0 "no LNA" decision was wrong above ~10 MHz). LNA: **LTC6433-15 A-grade** (16 dB, NF 2.9–3.7 dB, IIP3 ≈ +32 dBm). Used from 10 to 49 MHz only.
+- **Sub-octave preselector in the LNA path** (mandatory — 2nd-order intermod): 10–17 / 17–29 / 29–49 MHz. Below 10 MHz the bypass path is used (antenna-noise limited).
 - **Attenuator 0/10/20 dB:** resistive pads with switches that work from DC.
 - **FDA:** LTC6409, fixed AV5 (RI 50 Ω, RF 250 Ω, RT 120 Ω for a 50 Ω match), DC-coupled.
 - **Anti-alias filter** (50 Ω, before the FDA) must be deep by 90 MHz; post-FDA RC limits wideband noise folding.
-- Modes: LNA on → NF 7–8 dB, FS −19 dBm; bypass → NF 21 dB, FS −3 dBm; +10/+20 dB attenuation → FS +7/+17 dBm.
+- Modes: LNA + preselector (10–49 MHz) → NF 8.5–9.2 dB, FS −19 dBm; bypass → NF 21 dB, FS −3 dBm; +10/+20 dB attenuation → FS +7/+17 dBm.
 
 ### VHF–6 GHz RX
 

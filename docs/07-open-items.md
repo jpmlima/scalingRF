@@ -45,7 +45,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 
 - [x] Diplexer (sim/diplexer)
 - [x] HF RX lineup (sim/hf_rx rev 1): NF, full scale, gain modes; LNA path added
-- [ ] HF RX: select LNA part (1–50 MHz, NF ≤ 2 dB, 16 dB, IIP3 ≥ +21.5 dBm)
+- [x] HF RX: LNA selected — LTC6433-15 A-grade (sim/hf_rx rev 2)
+- [ ] HF RX: LTC6433-15 price/availability; add 475 mW to power budget; bias choke network per datasheet Table 1
+- [ ] HF RX: design 3-band sub-octave preselector (10–17 / 17–29 / 29–49 MHz, 50 Ω, loss ≤ 1 dB), with switches
 - [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
 - [ ] HF TX lineup: AD9707 → amplifier → reconstruction filter → port; images, sinc, output level

@@ -1,0 +1,93 @@
+{
+ "LTC6433_A": {
+  "G_dB": 15.9,
+  "IIP3_dBm_10MHz": 31.7,
+  "OIP2_from_HD2_dBm": 60.0,
+  "IIP2_IM2_est_dBm": 38.1
+ },
+ "scenario_tone_at_LNA_dBm": -25.6,
+ "IM3_input_referred_dBm": -140.2,
+ "IM2_input_referred_dBm": -89.3,
+ "MDS_2k4_dBm": -132.8,
+ "IM3_margin_below_MDS_dB": 7.4,
+ "IM2_above_MDS_dB": 43.5,
+ "IIP2_needed_without_preselection_dBm": 81.6,
+ "system_LNA_mode": {
+  "no preselector": {
+   "f_MHz": [
+    0.5,
+    1.8,
+    3.5,
+    7.0,
+    10.0,
+    14.0,
+    21.0,
+    28.0,
+    40.0,
+    49.0
+   ],
+   "NF_dB": [
+    8.3,
+    7.5,
+    7.5,
+    7.5,
+    7.5,
+    7.5,
+    7.6,
+    7.6,
+    7.9,
+    8.2
+   ],
+   "desense_galactic_dB": [
+    null,
+    null,
+    null,
+    null,
+    0.0,
+    0.1,
+    0.1,
+    0.3,
+    0.6,
+    1.1
+   ]
+  },
+  "with preselector 1.0 dB": {
+   "f_MHz": [
+    0.5,
+    1.8,
+    3.5,
+    7.0,
+    10.0,
+    14.0,
+    21.0,
+    28.0,
+    40.0,
+    49.0
+   ],
+   "NF_dB": [
+    9.3,
+    8.5,
+    8.5,
+    8.5,
+    8.5,
+    8.5,
+    8.6,
+    8.6,
+    8.9,
+    9.2
+   ],
+   "desense_galactic_dB": [
+    null,
+    null,
+    null,
+    null,
+    0.0,
+    0.1,
+    0.2,
+    0.4,
+    0.8,
+    1.3
+   ]
+  }
+ }
+}
