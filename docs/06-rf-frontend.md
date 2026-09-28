@@ -10,8 +10,9 @@ flowchart LR
     BT --> LIM[Limiter<br/>low-C anti-parallel diodes]
     LIM --> DIP{Diplexer<br/>~60 MHz}
     DIP -->|LP| DCB[Switchable DC block<br/>in only when bias-tee on]
-    DCB --> ATT[Atten 0/10/20 dB<br/>resistive pads + CMOS switches]
-    ATT --> FDA[LTC6409 FDA<br/>DC-coupled, 10–20 dB]
+    DCB --> LNA{LNA 16 dB / bypass}
+    LNA --> ATT[Atten 0/10/20 dB<br/>resistive pads + switches]
+    ATT --> FDA[LTC6409 FDA<br/>DC-coupled, AV5]
     FDA --> AAF[7th-order elliptic LPF<br/>fc ~60 MHz, deep by 90 MHz]
     AAF --> ADC[LTC2262-14]
     DIP -->|HP| RXF[RX filter bank<br/>SP6T/SP8T + bypass]
@@ -22,10 +23,13 @@ flowchart LR
 
 ### HF RX
 
-- **Attenuator:** must work from DC, so resistive pads switched by CMOS switches (ADG918/919 family), not typical RF step attenuators, which are specified from kHz/MHz upwards.
-- **FDA:** LTC6409, DC-coupled, fixed gain ~10–20 dB, sets the ADC input common mode. ADI's DC1760A demo board (LTC2261-14 + LTC6409) is the reference.
-- **Anti-alias filter:** at 150 Msps anything at 90 MHz folds onto 60 MHz, so the filter must be well down by 90 MHz.
-- **No LNA:** at HF, atmospheric noise dominates; overload is the real problem. Same approach as direct-sampling HF receivers.
+Analysed in [`sim/hf_rx/`](../sim/hf_rx/README.md) (model validated against the LTC6409 + LTC2262-14 datasheet measurement to within 0.3 dB).
+
+- **LNA path + DC-coupled bypass** (revised — the v0 "no LNA" decision was wrong above ~10 MHz). LNA requirement: 1–50 MHz, NF ≤ 2 dB, ~16 dB gain, IIP3 ≥ +21.5 dBm.
+- **Attenuator 0/10/20 dB:** resistive pads with switches that work from DC.
+- **FDA:** LTC6409, fixed AV5 (RI 50 Ω, RF 250 Ω, RT 120 Ω for a 50 Ω match), DC-coupled.
+- **Anti-alias filter** (50 Ω, before the FDA) must be deep by 90 MHz; post-FDA RC limits wideband noise folding.
+- Modes: LNA on → NF 7–8 dB, FS −19 dBm; bypass → NF 21 dB, FS −3 dBm; +10/+20 dB attenuation → FS +7/+17 dBm.
 
 ### VHF–6 GHz RX
 

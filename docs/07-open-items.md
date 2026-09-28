@@ -44,7 +44,10 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 ## Simulation plan (before any purchase)
 
 - [x] Diplexer (sim/diplexer)
-- [ ] HF RX lineup: gain, noise, full-scale and overload levels from antenna to LTC2262-14; anti-alias filter
+- [x] HF RX lineup (sim/hf_rx rev 1): NF, full scale, gain modes; LNA path added
+- [ ] HF RX: select LNA part (1–50 MHz, NF ≤ 2 dB, 16 dB, IIP3 ≥ +21.5 dBm)
+- [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
+- [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
 - [ ] HF TX lineup: AD9707 → amplifier → reconstruction filter → port; images, sinc, output level
 - [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power

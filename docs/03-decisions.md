@@ -122,3 +122,11 @@ A bias-tee for active antennas puts DC on the RX port, which the DC-coupled HF a
 ## D10 — Filter placement in the RX VHF–6 GHz chain
 
 Filter bank **before** the LNA. Costs ~1–2 dB of noise figure, protects the LNA from strong broadcast FM and cellular signals, which will always be present.
+
+---
+
+## D11 — HF RX: add a switchable LNA (reverses the v0 "no LNA" choice)
+
+Analysis (sim/hf_rx, validated against datasheet measurement): without an LNA the HF receiver NF is 16–34 dB depending on FDA gain. That is fine below ~10 MHz and in noisy locations, but at 28–49 MHz it loses 6–13 dB against quiet-rural noise and 2–6 dB even against galactic noise.
+
+**Decision:** LNA path (1–50 MHz, NF ≤ 2 dB, ~16 dB, IIP3 ≥ +21.5 dBm) in parallel with a DC-coupled bypass; FDA fixed at AV5; 0/10/20 dB attenuator. Result: NF 7–8 dB with LNA (≤ 1 dB above galactic noise up to 49 MHz), full-scale range −19 to +17 dBm across modes.
