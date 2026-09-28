@@ -107,7 +107,7 @@ Requirement R4 (two connectors only) means the HF and VHF–6 GHz paths must sha
 | Wideband RF switch | Switches that reach both DC/1 kHz and 6 GHz are rare or expensive |
 | **Passive diplexer, crossover ~60 MHz** | LP arm is naturally DC-coupled; no control; allows HF + VHF simultaneously. **Chosen.** |
 
-Main risk: the HP arm must stay clean to 6 GHz while having a 60 MHz corner. Simulation (sim/diplexer, rev 1) shows a 5th+5th-order design meets spec with standard wirewound inductors if Q ≥ 60 at 50–70 MHz and parasitic C ≤ 0.15 pF; conical inductors are not needed. Layout must be compact (≤ 1.5 mm between HP parts, two vias per shunt part).
+Main risk: the HP arm must stay clean to 6 GHz while having a 60 MHz corner. Simulation rev 2 (Coilcraft 0805HP manufacturer models): LP ≤ 1 dB to 49 MHz, HP ≤ 1 dB from 67 MHz, ~4 dB at the ~57 MHz crossover. The rev 1 requirement Q ≥ 60 turned out unattainable with 0805HP (Q ≈ 30–40 at 50–70 MHz); the spec was revised rather than moving to larger/air-core parts for ~1 MHz. Conical inductors are not needed. Layout must be compact (≤ 1.5 mm between HP parts, two vias per shunt part).
 
 ---
 

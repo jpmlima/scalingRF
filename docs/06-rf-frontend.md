@@ -63,19 +63,16 @@ flowchart LR
 
 ## Diplexer — highest-risk block
 
-Simulated in [`sim/diplexer/`](../sim/diplexer/README.md). 5th-order LP + 5th-order HP, 10 parts:
-LP 220n / 91p / 220n / 51p / 68n, HP 39p / 68n / 33p / 82n / 82p.
+Simulated in [`sim/diplexer/`](../sim/diplexer/README.md), rev 2, with Coilcraft 0805HP manufacturer models, board parasitics and Monte Carlo.
 
-With realistic parasitics it meets spec (LP ≤ 0.8 dB to 50 MHz, HP ≤ 0.9 dB from 70 MHz to 6 GHz, RL ≥ 13 dB; Monte Carlo 0 % fail), **provided**:
+- LP: 0805HP-271 / 82 pF / 0805HP-271 / 62 pF / 0805HP-56N
+- HP: 33 pF / 0805HP-82N / 30 pF / 0805HP-101 / 110 pF
 
-- inductor Q ≥ 60 at 50–70 MHz;
-- inductor parasitic C ≤ 0.15 pF (SRF ≥ 876 MHz for 220 nH, ≥ 1.44 GHz for 82 nH, ≥ 1.58 GHz for 68 nH);
-- ≤ 0.8 nH to ground per shunt part (two vias);
-- 0.5–1.5 mm between HP-arm parts.
+Result (worst 1 % of Monte Carlo): LP ≤ 1 dB to 49 MHz, HP ≤ 1 dB from 67 MHz to 6 GHz (≤ 0.75 dB above 100 MHz), return loss ≥ 11 dB. **Crossover ~57 MHz with ~4 dB loss** — inherent to sharing one port.
 
-The 50–70 MHz crossover zone carries 1–3 dB extra loss around 60 MHz; that is inherent to sharing one port.
+Layout constraints from the sensitivity analysis: ≤ 0.8 nH to ground per shunt part (two vias), 0.5–1.5 mm between HP-arm parts, inductor parasitic C ≤ 0.15 pF.
 
-Conical inductors turned out unnecessary. Still to do: manufacturer S-parameters, layout extraction and re-tune, EM check.
+Open: inductor models are extrapolated above 2 GHz for the HP shunt parts → first thing to measure on a prototype. Capacitors still on a generic model.
 
 ## Bias-tee
 

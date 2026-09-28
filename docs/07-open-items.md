@@ -28,7 +28,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 ## Design risks
 
 - [x] Diplexer: ideal + parasitic simulation, sensitivity, Monte Carlo (sim/diplexer rev 1)
-- [ ] Diplexer: select inductors (Q ≥ 60 @ 50–70 MHz, SRF limits), re-simulate with manufacturer S2P files
+- [x] Diplexer: re-simulated with Coilcraft 0805HP manufacturer models (rev 2); spec revised (LP 49 MHz / HP 67 MHz / crossover ~57 MHz, ~4 dB)
+- [ ] Diplexer: capacitor manufacturer models
+- [ ] Diplexer: measure HP arm 2–6 GHz on prototype (inductor models extrapolated there)
 - [ ] Diplexer: layout, parasitic extraction, re-tune, openEMS on HP arm
 - [ ] Single-ended 1.8 V CMOS through the SoM connector: SI check at the chosen DATA_CLK
 - [ ] TX→RX isolation on the board

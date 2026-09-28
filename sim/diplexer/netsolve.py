@@ -27,6 +27,10 @@ def _elem_admittance(kind, val, w):
     if kind == "Creal":                  # C + ESL + ESR in series
         C, ESL, ESR = val
         return 1.0 / (ESR + jw * ESL + 1.0 / (jw * C))
+    if kind == "Lcc":                    # Coilcraft lumped model (Doc 158):
+        L, R1, R2, C, k = val             # (R2 + k*sqrt(f) + jwL) || (R1 + 1/(jwC))
+        f = w / (2 * np.pi)
+        return 1.0 / (R2 + k * np.sqrt(f) + jw * L) + 1.0 / (R1 + 1.0 / (jw * C))
     raise ValueError(kind)
 
 

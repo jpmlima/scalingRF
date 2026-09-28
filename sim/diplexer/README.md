@@ -1,8 +1,48 @@
-# Diplexer — simulation report (rev 1)
+# Diplexer — simulation report (rev 2)
 
 Port diplexer splitting HF (DC–50 MHz) from VHF–SHF (70 MHz–6 GHz). The same design is used on the RX and TX ports.
 
-**Status:** ideal design and first parasitic analysis done. Passes spec with a **derived component requirement** (inductor Q ≥ 60 at 50–70 MHz). Not yet verified with manufacturer S-parameter models. Not yet laid out.
+**Status (rev 2):** design verified with **manufacturer models of the actual inductors** (Coilcraft 0805HP) plus board parasitics and Monte Carlo. Spec revised to what real parts achieve (see rev 2 below). Not yet laid out; capacitors still use a generic model.
+
+## Rev 2 — real inductors (current design)
+
+**Finding:** the rev 1 requirement "Q ≥ 60 at 50–70 MHz" is not met by 0805HP parts. Coilcraft's lumped model (Doc 158-27, reproduces the datasheet Q exactly: 75 @ 250 MHz for 221, 103 @ 500 MHz for 82N, 100 @ 500 MHz for 101) gives **Q ≈ 30–40 at 50–70 MHz**, rising to ~47–59 for 271.
+
+**Method:** discrete search over available 0805HP values (72 combinations), capacitors optimised with the real inductor models and all board parasitics, snapped to E24, then 200-run Monte Carlo (L ±2 %, inductor C ±10 %, C ±2 % / ±0.1 pF, board parasitics ±20 %).
+
+**Selected design**
+
+| Ref | Part | | Ref | Part |
+|---|---|---|---|---|
+| L1 (LP series) | 0805HP-271 | | C1 (HP series) | 33 pF C0G |
+| C2 (LP shunt) | 82 pF C0G | | L2 (HP shunt) | 0805HP-82N |
+| L3 (LP series) | 0805HP-271 | | C3 (HP series) | 30 pF C0G |
+| C4 (LP shunt) | 62 pF C0G | | L4 (HP shunt) | 0805HP-101 |
+| L5 (LP series) | 0805HP-56N | | C5 (HP series) | 110 pF C0G |
+
+**Performance (nominal / Monte Carlo worst 1 %)**
+
+| Parameter | Result |
+|---|---|
+| LP 1 dB edge | 49.8 MHz / 49.2 MHz |
+| HP 1 dB edge | 65.9 MHz / 66.5 MHz |
+| Crossover | ~57 MHz, **~4 dB loss in each arm** |
+| LP loss | 0.14 dB at DC (DCR), 0.27 dB @ 10 MHz, ~0.5 dB @ 30 MHz (skin effect) |
+| HP loss 100 MHz–6 GHz | p99 0.75 dB |
+| Return loss, both passbands | p1 11.3 dB |
+| HP rejection @ 30 MHz / LP rejection @ 120 MHz | 37 dB / 40 dB |
+
+**Revised spec (replaces the 50/70 MHz edges):** LP ≤ 1 dB from 1 kHz to 49 MHz; HP ≤ 1 dB from 67 MHz to 6 GHz; ~4 dB at the ~57 MHz crossover. Relative to the original target, LP loses ~1 MHz and HP gains ~3 MHz. Recovering the full 50 MHz would need higher-Q (larger or air-core) LP inductors; not worth it for 1 MHz.
+
+**Correction:** rev 1 stated 1–3 dB extra loss around 60 MHz. With real parts the crossover point is ~4 dB.
+
+**Open limitation — the most important one:** the Coilcraft models for 82N and 101 are only valid to 2 GHz (56N to 5 GHz). HP-arm behaviour from 2 to 6 GHz relies on **extrapolated** inductor models (shaded in the plot). This can only be closed by measurement: VNA on a prototype, or an EM model of the part. It is flagged as the first measurement to make.
+
+Plot: `diplexer_rev2_real_parts.png`. Scripts: `real_parts.py` (search), `real_parts_mc.py` (edges + Monte Carlo), `coilcraft_0805hp.py` (model data).
+
+---
+
+# Rev 1 (superseded — generic parasitics)
 
 ## Specification
 
@@ -72,13 +112,16 @@ The trace-length sensitivity also means the final values must be **re-tuned afte
 ## Engineering log
 
 - rev 0: unbounded optimisation produced unbuildable values (8.2 pH, 0.015 pF, 3.9 nF). Fixed with bounds.
+- rev 2: 0805HP models show Q ≈ 30–40 at the crossover; rev 1 Q requirement unattainable with these parts. Spec revised to measured-model reality.
+- rev 2: apparent 0.5 dB flat LP loss in a plot was a misreading (that value is at 30 MHz); DC loss verified = DCR (0.141 dB model vs 0.140 dB hand calc).
 - rev 0: bug in `check()` — `-db(x).max()` reported the **best** insertion loss instead of the worst. All early "pass" results on IL were wrong. Fixed (`-db(x).min()`), regression test added. After the fix, the Q = 40 design fails; the Q ≥ 60 requirement comes from this.
 
 ## Next steps
 
-1. Shortlist inductors meeting Q ≥ 60 at 50–70 MHz and the SRF limits; get their S2P files.
-2. Re-run with S2P models (replace generic `Lreal`/`Creal`).
+1. ~~Shortlist inductors, re-run with manufacturer models~~ → done in rev 2.
+2. Replace generic capacitor model with manufacturer data (Murata/Samsung C0G, 0402).
 3. Draft layout, extract parasitics, re-tune, then openEMS on the HP arm.
+4. First measurement on prototype: HP arm 2–6 GHz (inductor models extrapolated there).
 
 ## Reproduce
 

@@ -16,8 +16,8 @@
 | Parameter | Target | Notes |
 |---|---|---|
 | Streaming bandwidth | 10–20 MHz per direction, simultaneous | GbE is ~110 MB/s each way; 4 bytes per complex sample |
-| HF path usable range | 1 kHz – ~60 MHz | 150 Msps, anti-alias filter must be deep by 90 MHz |
-| VHF–6 GHz path | ~65 MHz – 6 GHz | AD9361 spec starts at 70 MHz |
+| HF path usable range | 1 kHz – ~49 MHz at ≤ 1 dB diplexer loss | Diplexer crossover ~57 MHz (~4 dB); 150 Msps ADC |
+| VHF–6 GHz path | ~67 MHz – 6 GHz | Diplexer HP 1 dB edge 67 MHz; AD9361 spec starts at 70 MHz |
 | TX output, VHF–6 GHz | ≥ +10 dBm where possible | AD9361 alone falls short at the top of the band |
 | TX output, HF | ~0 dBm | HF power amplifier is out of scope |
 | Frequency reference | 40 MHz VCTCXO, optional 10 MHz lock | |

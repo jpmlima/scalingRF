@@ -1,0 +1,74 @@
+[
+ {
+  "L": [
+   "0805HP-271",
+   "0805HP-271",
+   "0805HP-56N",
+   "0805HP-82N",
+   "0805HP-101"
+  ],
+  "C_pF": [
+   82.0,
+   62.0,
+   33.0,
+   30.0,
+   110.0
+  ],
+  "lp_1dB_edge_MHz": 49.8,
+  "hp_1dB_edge_MHz": 65.9,
+  "crossover_MHz": 57.0,
+  "loss_at_crossover_dB": 4.05,
+  "mc_lp_1dB_edge_p1_MHz": 49.2,
+  "mc_hp_1dB_edge_p99_MHz": 66.5,
+  "mc_rl_worst_p1_dB": 11.3,
+  "mc_hp_il_100M_6G_p99_dB": 0.75
+ },
+ {
+  "L": [
+   "0805HP-221",
+   "0805HP-271",
+   "0805HP-56N",
+   "0805HP-56N",
+   "0805HP-82N"
+  ],
+  "C_pF": [
+   91.0,
+   62.0,
+   39.0,
+   36.0,
+   120.0
+  ],
+  "lp_1dB_edge_MHz": 50.8,
+  "hp_1dB_edge_MHz": 70.6,
+  "crossover_MHz": 59.5,
+  "loss_at_crossover_dB": 4.43,
+  "mc_lp_1dB_edge_p1_MHz": 50.1,
+  "mc_hp_1dB_edge_p99_MHz": 71.2,
+  "mc_rl_worst_p1_dB": 11.4,
+  "mc_hp_il_100M_6G_p99_dB": 0.62
+ },
+ {
+  "L": [
+   "0805HP-221",
+   "0805HP-271",
+   "0805HP-82N",
+   "0805HP-56N",
+   "0805HP-82N"
+  ],
+  "C_pF": [
+   91.0,
+   68.0,
+   39.0,
+   36.0,
+   110.0
+  ],
+  "lp_1dB_edge_MHz": 51.2,
+  "hp_1dB_edge_MHz": 70.6,
+  "crossover_MHz": 59.9,
+  "loss_at_crossover_dB": 4.37,
+  "mc_lp_1dB_edge_p1_MHz": 50.6,
+  "mc_hp_1dB_edge_p99_MHz": 71.2,
+  "mc_rl_worst_p1_dB": 11.5,
+  "mc_hp_il_100M_6G_p99_dB": 0.66
+ }
+]
