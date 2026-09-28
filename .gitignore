@@ -1,0 +1,28 @@
+# KiCad
+*.bak
+*-bak
+*.kicad_prl
+*-backups/
+fp-info-cache
+_autosave-*
+~*.lck
+*.lck
+# Fabrication outputs (regenerate from source)
+hardware/**/gerbers/
+hardware/**/production/
+# Vivado / Vitis
+*.jou
+*.log
+.Xil/
+*.cache/
+*.runs/
+*.hw/
+*.ip_user_files/
+*.sim/
+# Python
+__pycache__/
+*.pyc
+.venv/
+# OS
+.DS_Store
+Thumbs.db

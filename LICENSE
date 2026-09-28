@@ -1,0 +1,13 @@
+SPDX-License-Identifier: CERN-OHL-P-2.0
+
+Copyright (c) 2026 João Lima
+
+The hardware design files in this repository are licensed under the
+CERN Open Hardware Licence Version 2 - Permissive (CERN-OHL-P v2).
+
+The full licence text is available at:
+https://ohwr.org/cern_ohl_p_v2.txt
+
+TODO: replace this notice with the full official licence text before the
+first hardware release. Software and gateware may carry their own licences,
+declared in their respective directories.
