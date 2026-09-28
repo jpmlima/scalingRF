@@ -69,13 +69,14 @@ docs/               Design documentation
 hardware/
   pinmap/           Bank/signal allocation (CSV)
   kicad/            Carrier board (not started)
+sim/                Simulations (diplexer done; see docs/07 for the plan)
 gateware/           Zynq PL design (not started)
 software/           Yocto layer, drivers, host tools (not started)
 ```
 
 ## Development plan
 
-1. Close the open items (parts availability, reference designs, diplexer simulation).
+1. Simulate and verify every block before buying anything (plan in docs/07-open-items.md). Diplexer: done, rev 1.
 2. Bring up gateware and software on an off-the-shelf AD936x + Zynq board (Pluto+/LibreSDR class) while hardware is designed.
 3. Prototype the diplexer and the HF front end as separate small boards.
 4. Carrier board rev A.

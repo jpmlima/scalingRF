@@ -1,0 +1,110 @@
+{
+  "A0_butterworth_start": {
+    "lp_il_worst_db": 21.891744278230256,
+    "hp_il_worst_db": 23.46259745517001,
+    "rl_lp_worst_db": 0.5290634442016959,
+    "rl_hp_worst_db": 0.5286856676747324,
+    "hp_rej_at_30MHz_db": 33.609716287152025,
+    "lp_rej_at_120MHz_db": 33.609716287152025,
+    "pass": false
+  },
+  "A_ideal_optimised": {
+    "lp_il_worst_db": 0.28998990137796016,
+    "hp_il_worst_db": 0.28652461529804263,
+    "rl_lp_worst_db": 17.638587230783422,
+    "rl_hp_worst_db": 18.150563839480668,
+    "hp_rej_at_30MHz_db": 40.71288811174237,
+    "lp_rej_at_120MHz_db": 36.805636611329255,
+    "pass": true
+  },
+  "B_snapped_ideal": {
+    "lp_il_worst_db": 0.23519854110854993,
+    "hp_il_worst_db": 0.4129033287630662,
+    "rl_lp_worst_db": 20.39202217322629,
+    "rl_hp_worst_db": 18.96093226765559,
+    "hp_rej_at_30MHz_db": 40.749611762265836,
+    "lp_rej_at_120MHz_db": 35.29368388311448,
+    "pass": true
+  },
+  "C_snapped_parasitic_wirewound": {
+    "lp_il_worst_db": 0.801785089143645,
+    "hp_il_worst_db": 0.8802970395603875,
+    "rl_lp_worst_db": 20.13127234332412,
+    "rl_hp_worst_db": 13.43240135619748,
+    "hp_rej_at_30MHz_db": 40.66774132055898,
+    "lp_rej_at_120MHz_db": 36.59052520142303,
+    "pass": true
+  },
+  "D_snapped_parasitic_conical_L1": {
+    "lp_il_worst_db": 1.1749899406464717,
+    "hp_il_worst_db": 1.0208915756331152,
+    "rl_lp_worst_db": 19.203763532806118,
+    "rl_hp_worst_db": 15.412809856480063,
+    "hp_rej_at_30MHz_db": 40.57465976261503,
+    "lp_rej_at_120MHz_db": 36.53004508516175,
+    "pass": false
+  },
+  "E_monte_carlo_C_wirewound": {
+    "runs": 500,
+    "fail_rate": 0.0,
+    "lp_il_p99_db": 0.7385761341881879,
+    "hp_il_p99_db": 0.8172567048466409,
+    "rl_min_p1_db": 11.632417922862235
+  },
+  "values": {
+    "LP_ideal": [
+      2.260212255758435e-07,
+      9.410952992788507e-11,
+      2.425116806144882e-07,
+      4.898727828469986e-11,
+      6.6064810143037e-08
+    ],
+    "HP_ideal": [
+      3.922857647217175e-11,
+      6.461912068042313e-08,
+      3.2750250616954985e-11,
+      8.70270124621987e-08,
+      8.041659712430245e-11
+    ],
+    "LP_snapped": [
+      2.2e-07,
+      9.1e-11,
+      2.2e-07,
+      5.099999999999999e-11,
+      6.8e-08
+    ],
+    "HP_snapped": [
+      3.8999999999999995e-11,
+      6.8e-08,
+      3.2999999999999996e-11,
+      8.199999999999999e-08,
+      8.199999999999999e-11
+    ]
+  },
+  "spec": {
+    "lp_pass_max_hz": 50000000.0,
+    "lp_il_max_db": 1.0,
+    "hp_pass_min_hz": 70000000.0,
+    "hp_pass_max_hz": 6000000000.0,
+    "hp_il_max_db": 1.0,
+    "rl_min_db": 10.0,
+    "hp_rej_hz": 30000000.0,
+    "hp_rej_min_db": 30.0,
+    "lp_rej_hz": 120000000.0,
+    "lp_rej_min_db": 30.0
+  },
+  "parasitics": {
+    "L_Q": 60.0,
+    "L_Cp": 1.2e-13,
+    "L_Rdc": 0.1,
+    "C_ESL": 3.5e-10,
+    "C_ESR": 0.15,
+    "pad_C": 5e-14,
+    "tl_len": 0.0015,
+    "tl_eeff": 3.3,
+    "tl_Z": 50.0,
+    "conical_Cp": 2e-14,
+    "conical_Q": 20.0,
+    "via_L": 4e-10
+  }
+}

@@ -1,0 +1,179 @@
+{
+  "baseline_wirewound": {
+    "lp_il_worst_db": 0.7034304544527394,
+    "hp_il_worst_db": 0.8317233439427025,
+    "rl_lp_worst_db": 20.13238125638445,
+    "rl_hp_worst_db": 13.432328898256475,
+    "hp_rej_at_30MHz_db": 40.66774132055898,
+    "lp_rej_at_120MHz_db": 36.59052520142303,
+    "pass": true
+  },
+  "baseline_conical": {
+    "lp_il_worst_db": 1.0613164692027541,
+    "hp_il_worst_db": 0.9703864313044981,
+    "rl_lp_worst_db": 19.204295808648858,
+    "rl_hp_worst_db": 15.41360006813549,
+    "hp_rej_at_30MHz_db": 40.57465976261503,
+    "lp_rej_at_120MHz_db": 36.53004508516175,
+    "pass": false
+  },
+  "sweep_L_Cp": [
+    {
+      "L_Cp_pF": 0.05,
+      "lp_il_worst_db": 0.7005773326778209,
+      "hp_il_worst_db": 0.8379213048973684,
+      "rl_lp_worst_db": 20.13994304651653,
+      "rl_hp_worst_db": 14.243936828002628,
+      "hp_rej_at_30MHz_db": 40.673610286202944,
+      "lp_rej_at_120MHz_db": 36.40078665458387,
+      "pass": true
+    },
+    {
+      "L_Cp_pF": 0.1,
+      "lp_il_worst_db": 0.7026125067346235,
+      "hp_il_worst_db": 0.8334864486939613,
+      "rl_lp_worst_db": 20.134546795925964,
+      "rl_hp_worst_db": 14.046109472769261,
+      "hp_rej_at_30MHz_db": 40.66941824066465,
+      "lp_rej_at_120MHz_db": 36.536186943396224,
+      "pass": true
+    },
+    {
+      "L_Cp_pF": 0.15,
+      "lp_il_worst_db": 0.7046615577743215,
+      "hp_il_worst_db": 0.8290903050338267,
+      "rl_lp_worst_db": 20.129125426425336,
+      "rl_hp_worst_db": 12.548923415461823,
+      "hp_rej_at_30MHz_db": 40.66522583143619,
+      "lp_rej_at_120MHz_db": 36.67222530434086,
+      "pass": true
+    },
+    {
+      "L_Cp_pF": 0.2,
+      "lp_il_worst_db": 0.7067246196051291,
+      "hp_il_worst_db": 0.8247329035325883,
+      "rl_lp_worst_db": 20.123679045491055,
+      "rl_hp_worst_db": 9.836511240885411,
+      "hp_rej_at_30MHz_db": 40.66103305953678,
+      "lp_rej_at_120MHz_db": 36.80891105235873,
+      "pass": false
+    },
+    {
+      "L_Cp_pF": 0.3,
+      "lp_il_worst_db": 0.7108933183954425,
+      "hp_il_worst_db": 9.447408202771943,
+      "rl_lp_worst_db": 20.112703791350214,
+      "rl_hp_worst_db": 3.330022865422753,
+      "hp_rej_at_30MHz_db": 40.65264643180629,
+      "lp_rej_at_120MHz_db": 37.08426286495583,
+      "pass": false
+    },
+    {
+      "L_Cp_pF": 0.4,
+      "lp_il_worst_db": 0.7151197038800479,
+      "hp_il_worst_db": 10.049661755501734,
+      "rl_lp_worst_db": 20.100978687498696,
+      "rl_hp_worst_db": 3.096240615423741,
+      "hp_rej_at_30MHz_db": 40.64425836566163,
+      "lp_rej_at_120MHz_db": 37.36232054615529,
+      "pass": false
+    },
+    {
+      "L_Cp_pF": 0.6,
+      "lp_il_worst_db": 0.7237500624311201,
+      "hp_il_worst_db": 10.617327646515744,
+      "rl_lp_worst_db": 20.077252220001114,
+      "rl_hp_worst_db": 2.5971254364795113,
+      "hp_rej_at_30MHz_db": 40.627477951058324,
+      "lp_rej_at_120MHz_db": 37.9268816976154,
+      "pass": false
+    }
+  ],
+  "sweep_via": [
+    {
+      "via_nH": 0.2,
+      "lp_il_worst_db": 0.6975966444957913,
+      "hp_il_worst_db": 0.838325991525839,
+      "rl_lp_worst_db": 20.1178737601713,
+      "rl_hp_worst_db": 13.474232578130527,
+      "hp_rej_at_30MHz_db": 40.723501773960805,
+      "lp_rej_at_120MHz_db": 36.41321434891607,
+      "pass": true
+    },
+    {
+      "via_nH": 0.4,
+      "lp_il_worst_db": 0.7034304544527394,
+      "hp_il_worst_db": 0.8317233439427025,
+      "rl_lp_worst_db": 20.13238125638445,
+      "rl_hp_worst_db": 13.432328898256475,
+      "hp_rej_at_30MHz_db": 40.66774132055898,
+      "lp_rej_at_120MHz_db": 36.59052520142303,
+      "pass": true
+    },
+    {
+      "via_nH": 0.8,
+      "lp_il_worst_db": 0.7154084822706261,
+      "hp_il_worst_db": 0.8187121920092656,
+      "rl_lp_worst_db": 20.161190329095238,
+      "rl_hp_worst_db": 12.105106872201226,
+      "hp_rej_at_30MHz_db": 40.55657892704903,
+      "lp_rej_at_120MHz_db": 36.94899494600748,
+      "pass": true
+    },
+    {
+      "via_nH": 1.2,
+      "lp_il_worst_db": 0.7278124485171416,
+      "hp_il_worst_db": 4.1997152189069,
+      "rl_lp_worst_db": 20.18932338981466,
+      "rl_hp_worst_db": 5.872254017453194,
+      "hp_rej_at_30MHz_db": 40.44589001611865,
+      "lp_rej_at_120MHz_db": 37.312768246487494,
+      "pass": false
+    }
+  ],
+  "sweep_trace": [
+    {
+      "trace_mm": 0.5,
+      "lp_il_worst_db": 0.6977690851717945,
+      "hp_il_worst_db": 0.835214224897272,
+      "rl_lp_worst_db": 20.221330602301244,
+      "rl_hp_worst_db": 10.99223294888085,
+      "hp_rej_at_30MHz_db": 40.688414966768335,
+      "lp_rej_at_120MHz_db": 36.540017479336925,
+      "pass": true
+    },
+    {
+      "trace_mm": 1.5,
+      "lp_il_worst_db": 0.7034304544527394,
+      "hp_il_worst_db": 0.8317233439427025,
+      "rl_lp_worst_db": 20.13238125638445,
+      "rl_hp_worst_db": 13.432328898256475,
+      "hp_rej_at_30MHz_db": 40.66774132055898,
+      "lp_rej_at_120MHz_db": 36.59052520142303,
+      "pass": true
+    },
+    {
+      "trace_mm": 3.0,
+      "lp_il_worst_db": 0.7124398648086117,
+      "hp_il_worst_db": 2.6914893190064335,
+      "rl_lp_worst_db": 19.99995770482333,
+      "rl_hp_worst_db": 3.424089227241556,
+      "hp_rej_at_30MHz_db": 40.636651834030545,
+      "lp_rej_at_120MHz_db": 36.66387294666645,
+      "pass": false
+    },
+    {
+      "trace_mm": 5.0,
+      "lp_il_worst_db": 0.7254512141695452,
+      "hp_il_worst_db": 28.243692950655813,
+      "rl_lp_worst_db": 19.82574972679248,
+      "rl_hp_worst_db": 0.019619385166023653,
+      "hp_rej_at_30MHz_db": 40.595051404377394,
+      "lp_rej_at_120MHz_db": 36.7567676162776,
+      "pass": false
+    }
+  ],
+  "lp_leak_min_rejection_100M_6G_db_parasitic": 27.783910196964207,
+  "lp_leak_freq_of_worst_hz": 101191253.53291324,
+  "lp_leak_min_rejection_100M_6G_db_ideal": 26.652111035795162
+}

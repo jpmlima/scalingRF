@@ -63,12 +63,19 @@ flowchart LR
 
 ## Diplexer — highest-risk block
 
-A 60 MHz crossover whose HP arm stays well-behaved to 6 GHz spans two decades. HP shunt inductors of hundreds of nH self-resonate below 6 GHz and start loading the line.
+Simulated in [`sim/diplexer/`](../sim/diplexer/README.md). 5th-order LP + 5th-order HP, 10 parts:
+LP 220n / 91p / 220n / 51p / 68n, HP 39p / 68n / 33p / 82n / 82p.
 
-Approach:
-1. Broadband (conical) inductors, or a sectioned HP arm.
-2. Simulate with manufacturer S-parameter models (Qucs-S) before layout.
-3. Prototype it as a standalone board and measure with a VNA before committing to the carrier.
+With realistic parasitics it meets spec (LP ≤ 0.8 dB to 50 MHz, HP ≤ 0.9 dB from 70 MHz to 6 GHz, RL ≥ 13 dB; Monte Carlo 0 % fail), **provided**:
+
+- inductor Q ≥ 60 at 50–70 MHz;
+- inductor parasitic C ≤ 0.15 pF (SRF ≥ 876 MHz for 220 nH, ≥ 1.44 GHz for 82 nH, ≥ 1.58 GHz for 68 nH);
+- ≤ 0.8 nH to ground per shunt part (two vias);
+- 0.5–1.5 mm between HP-arm parts.
+
+The 50–70 MHz crossover zone carries 1–3 dB extra loss around 60 MHz; that is inherent to sharing one port.
+
+Conical inductors turned out unnecessary. Still to do: manufacturer S-parameters, layout extraction and re-tune, EM check.
 
 ## Bias-tee
 

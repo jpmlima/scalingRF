@@ -27,7 +27,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 
 ## Design risks
 
-- [ ] Diplexer: simulate with S-parameters, then standalone prototype
+- [x] Diplexer: ideal + parasitic simulation, sensitivity, Monte Carlo (sim/diplexer rev 1)
+- [ ] Diplexer: select inductors (Q ≥ 60 @ 50–70 MHz, SRF limits), re-simulate with manufacturer S2P files
+- [ ] Diplexer: layout, parasitic extraction, re-tune, openEMS on HP arm
 - [ ] Single-ended 1.8 V CMOS through the SoM connector: SI check at the chosen DATA_CLK
 - [ ] TX→RX isolation on the board
 
@@ -36,3 +38,15 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] Get a Pluto+/LibreSDR-class board (AD936x + Zynq + Ethernet)
 - [ ] Build ADI HDL for it; build Linux with meta-adi / Yocto
 - [ ] Measure streaming performance over Ethernet, both directions simultaneously
+
+## Simulation plan (before any purchase)
+
+- [x] Diplexer (sim/diplexer)
+- [ ] HF RX lineup: gain, noise, full-scale and overload levels from antenna to LTC2262-14; anti-alias filter
+- [ ] HF TX lineup: AD9707 → amplifier → reconstruction filter → port; images, sinc, output level
+- [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)
+- [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
+- [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
+- [ ] Digital timing: AD9361 CMOS interface and HF converter interfaces vs. Zynq HR bank timing
+- [ ] Power tree: budget, sequencing, regulator noise vs. AD9361 and converter requirements
+- [ ] Throughput model: Ethernet + DMA + libiio (analysis; final number needs hardware)
