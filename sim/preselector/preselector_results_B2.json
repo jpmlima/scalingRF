@@ -1,0 +1,77 @@
+{
+ "results": {
+  "B2": {
+   "band_MHz": [
+    17.0,
+    29.0
+   ],
+   "IL_worst_dB": 4.14,
+   "IL_mid_dB": 2.43,
+   "RL_worst_dB": 10.66,
+   "rej_at_fh_minus_fl_dB": 31.11,
+   "rej_at_2fl_dB": 19.54,
+   "rej_at_fl_over_2_dB": 51.2,
+   "rej_at_2fh_dB": 54.13,
+   "IIP2": {
+    "sum": {
+     "IIP2_eff_dBm": 64.5,
+     "worst_pair_MHz": [
+      14.5,
+      14.5,
+      29.0
+     ],
+     "P_max_each_dBm": -33.2,
+     "P_max_S9_plus_dB": 39.8
+    },
+    "diff": {
+     "IIP2_eff_dBm": 56.8,
+     "worst_pair_MHz": [
+      33.09,
+      16.09,
+      17.0
+     ],
+     "P_max_each_dBm": -37.1,
+     "P_max_S9_plus_dB": 35.9
+    }
+   }
+  }
+ },
+ "designs": {
+  "B2": {
+   "inductors": [
+    "0805HP-271",
+    "0805HP-271",
+    "0805HP-681",
+    "0805HP-821"
+   ],
+   "caps_pF": {
+    "C1": 200.0,
+    "C3": 430.0,
+    "C5": 240.0,
+    "C6": 75.0,
+    "C8": 30.0,
+    "C10": 62.0
+   },
+   "values": [
+    2e-10,
+    2.6610000000000003e-07,
+    4.3e-10,
+    2.6610000000000003e-07,
+    2.4e-10,
+    7.5e-11,
+    6.785e-07,
+    3e-11,
+    8.178e-07,
+    6.199999999999999e-11
+   ]
+  }
+ },
+ "spec": {
+  "IL_MAX": 1.0,
+  "RL_MIN": 14.0,
+  "REJ_TARGET": 25.0,
+  "IIP2_LNA": 38.0,
+  "MDS": -131.0,
+  "IIP2_EFF_TARGET": 60.0
+ }
+}
