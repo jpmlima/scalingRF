@@ -2,6 +2,8 @@
 
 Three sub-octave band-pass filters in front of the LTC6433-15 LNA (HF LNA path, 10–49 MHz): **B1 10–17, B2 17–29, B3 29–49 MHz**, 50 Ω. Purpose: stop 2nd-order intermodulation in the LNA (IIP2 ≈ +38 dBm) from strong out-of-band stations (sim/hf_rx rev 2, decision D12).
 
+> **Update 2:** the noise model behind these results counted only one 0.3 dB switch before the LNA; the band-select switches were missing. With real SOI switches B2/B3 fail; relays (≤ ~0.2 dB/pass) are required — see [`sim/system/`](../system/README.md) rev 3.
+>
 > **Update:** B3 is superseded by a re-design done inside the real diplexer + preselector chain — see [`sim/system/`](../system/README.md). The product-of-blocks IIP2 figures below are optimistic for B3.
 
 **Status (rev 1):** elliptic designs with real Coilcraft 0805HP models, board parasitics and Monte Carlo. All three bands meet the IIP2 target in 100 % of Monte Carlo runs (preselector + diplexer LP arm). Sensitivity loss meets its limit in B1; B2 and B3 exceed it by ≤ 0.06 / 0.15 dB at the top edge in part of the runs — accepted as documented deviations (below). **Open:** poor out-of-band match and its interaction with the diplexer.

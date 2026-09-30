@@ -1,4 +1,4 @@
-# System — diplexer + preselector as one network (rev 2)
+# System — diplexer + preselector as one network (rev 3)
 
 The diplexer (rev 2) and the HF preselector (rev 1) were designed as separate 50 Ω blocks. In LNA mode the selected preselector band **is the load of the diplexer's LP port**, and out of its band it is almost fully reflective. This checks what that does, with both filters in a single nodal network (ports: antenna, LNA input, HP/AD9361 port).
 
@@ -57,6 +57,24 @@ The B3 sensitivity loss was set by 0805HP inductor Q (~45 at 30–50 MHz). Coilc
 - **Size**: 2222SQ-271 is 11.7 mm long, 2929SQ-431 13.2 mm; the B3 section grows accordingly.
 - **Mechanical**: air coils can be deformed by handling (inductance shifts); no rework without re-measuring.
 - The Coilcraft model is valid from 10 MHz; below that (only low-frequency interfering tones) it is extrapolated — physically benign for air-core parts.
+
+## Rev 3 — switch losses in the HF LNA path (audit)
+
+Selecting the VHF filter-bank switch (sim/vhf_rx rev 1) showed that a SOI switch of that class has ~0.7 dB below 100 MHz, against the 0.3 dB assumed here. Auditing the noise model (`hf_rx/modes.py`, `preselector/noise_budget.py`) found a bigger gap: **only one switch before the LNA was ever counted** (the LNA/bypass selector). The preselector's band-select switches (in and out) were never added when the preselector was introduced. The signal actually crosses three switches before the LNA.
+
+`switch_recheck.py`: desense on the real chain (100-run MC), extra pre-LNA loss vs the model:
+
+| Scenario | B1 p99 / fails | B2 p99 / fails | B3 p99 / fails |
+|---|---|---|---|
+| S0 as modelled (1 × 0.3 dB) | 0.28 / 0 % | 0.89 / 0 % | 1.46 / 0 % |
+| **S1 current topology, SOI switches (3 × 0.7 dB)** | 0.42 / 0 % | **1.30 / 95 %** | **2.11 / 100 %** |
+| S2 bypass merged into an SP4T (2 × 0.7 dB) | 0.36 / 0 % | 1.12 / 31 % | 1.83 / 97 % |
+| **S3 signal relays (2 × 0.1 dB, assumed)** | 0.27 / 0 % | 0.87 / 0 % | 1.43 / 0 % |
+
+- With real semiconductor switches the preselector **fails in B2 and B3**, even with the merged topology.
+- Interpolating S2/S3: the pre-LNA path tolerates **≤ ~0.2 dB per pass** (two passes) at 29–49 MHz; B2 allows ~0.4 dB.
+- **Decision (D20): relays (or equivalent ≤ 0.2 dB/pass parts) for the pre-LNA switching in the HF LNA path**, topology S2/S3: one SP4T-equivalent in (bypass + 3 bands), one SP3T-equivalent out into the LNA. This is how HF receivers usually build filter banks. The bypass/attenuator path after the LNA is noise-insensitive and can stay on semiconductor switches.
+- The previous "B3 passes, 0 % fails" result was conditional on an incomplete model; it holds again only if the relay loss is confirmed ≤ ~0.2 dB/pass with real data.
 
 ## Assessment
 
