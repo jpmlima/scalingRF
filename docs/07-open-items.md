@@ -85,7 +85,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] Power tree: −3 V rail for PE42582 VSS_EXT (spur-free mode)
 - [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
-- [ ] Clock (sim/clock rev 0): VCTCXO requirement provisional — need the FMCOMMS3 BOM oscillator (design-support zip) and the UG-570 reference phase-noise mask
+- [x] Clock rev 1: UG-570 reference mask captured (ref_mask.py); ADI eval uses Epson TSX-3225 crystal + DCXO
+- [ ] Clock: select a 40 MHz VCTCXO meeting the UG-570 mask (fallback: crystal + DCXO, option B)
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
 - [ ] Digital timing: AD9361 CMOS interface and HF converter interfaces vs. Zynq HR bank timing
 - [ ] Power tree: budget, sequencing, regulator noise vs. AD9361 and converter requirements

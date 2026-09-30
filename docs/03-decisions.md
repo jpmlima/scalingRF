@@ -231,3 +231,9 @@ With no AD9361 ripple-sensitivity figure available, the criterion is to stay far
 ## D27 — Switchers synchronised at 1.25 MHz; "≥ 2 MHz" rule withdrawn
 
 The ADP2164 synchronises only from 0.5 to 1.4 MHz. The earlier "≥ 2 MHz" requirement had no basis (spurs at either offset fall inside AD9361 channel bandwidths); synchronisation and ripple attenuation are what matter. Sync clock: 150 MHz / 120 = 1.25 MHz from the PL. Consequence to analyse: the 1.25 MHz harmonic comb lands in the HF band.
+
+---
+
+## D28 — Reference: external VCTCXO held to the UG-570 mask; DCXO + crystal as fallback
+
+ADI's datasheet phase noise was measured with a crystal and the AD9361 DCXO (FMCOMMS3: Epson TSX-3225). With an external reference, the requirement is ADI's UG-570 mask (−137 dBc/Hz at 1 kHz, −145.5 at 10 kHz, −150 at 100 kHz). The external VCTCXO is kept for phase-coherent locking to an external 10 MHz; if no reasonable part meets the mask, fall back to crystal + DCXO with a software frequency lock.

@@ -1,6 +1,29 @@
-# Clock — reference and phase noise (rev 0, in progress)
+# Clock — reference and phase noise (rev 1, in progress)
 
-**Status:** requirements collected from ADI documentation; VCTCXO **not chosen**. The ADI reference phase-noise specification exists only as a plot in UG-570 (not readable from here) and the oscillator used on ADI's eval board is only in the design-support zip. A provisional VCTCXO requirement is stated below and marked as such.
+**Status (rev 1):** UG-570 reference mask and the ADI eval-board reference now known (read by J. Lima from the UG-570 plot and the FMCOMMS3 BOM). The rev 0 provisional estimate is **superseded** — it would have failed the mask by 2 dB at 1 kHz. VCTCXO not chosen yet.
+
+## Rev 1 — ADI data
+
+**The ADI eval board does not use an external oscillator.** AD-FMCOMMS3-EBZ BOM, Y101: **Epson TSX-3225 40.000 MHz crystal** (MFG PN OUTD-2B-0166, 3.2 × 2.5 mm) driving the **AD9361's internal DCXO**. So the datasheet LO phase-noise figures were measured in DCXO mode, not with an external reference.
+
+**UG-570 p. 15, Fig. 2 — recommended phase-noise mask for an external 40 MHz reference** (read from the plot, ≈ ±1 dB; `ref_mask.py`):
+
+| Offset | 10 Hz | 100 Hz | 1 kHz | 10 kHz | 100 kHz | 1 MHz |
+|---|---|---|---|---|---|---|
+| dBc/Hz | −87.5 | −115 | −137 | −145.5 | −150 | −152.75 |
+
+(also 20 Hz −97, 50 Hz −108, 200 Hz −122, 500 Hz −131, 2 kHz −140.5, 5 kHz −143.5, 20 kHz −147, 50 kHz −148.5.)
+
+`ref_mask.check()` compares any candidate's datasheet points against it. Translated to a 6 GHz LO (in-band, +43.5 dB), the mask at 1 kHz corresponds to −93.5 dBc/Hz.
+
+**Architecture options:**
+- **A (baseline): external VCTCXO meeting the mask**, feeding the AD9361 and the LMK03328 directly; hardware phase lock to an external 10 MHz (ADF4002).
+- **B (fallback): crystal + AD9361 DCXO** — exactly ADI's measured configuration. The LMK03328 would take the reference from the AD9361 CLK_OUT (its quality to be checked), and external-reference lock becomes a software loop tuning the DCXO over SPI (frequency lock, not phase lock).
+- A is kept for phase-coherent external locking; B if no VCTCXO at a reasonable cost meets the mask.
+
+---
+
+## Rev 0
 
 ## Confirmed (ADI documentation)
 
@@ -11,7 +34,7 @@
 - UG-570: "it is extremely critical that the crystal or clock source have very low phase noise"; a recommended phase-noise mask is given at 40 MHz (plot only).
 - AD9361 LO phase noise also depends on supply noise (handled in sim/power).
 
-## Provisional VCTCXO requirement (ESTIMATE — not an ADI figure)
+## ~~Provisional VCTCXO requirement~~ (superseded in rev 1 by the UG-570 mask)
 
 Typical of good 40 MHz VCTCXOs; to be replaced by the UG-570 mask and/or the eval-board oscillator's data:
 
