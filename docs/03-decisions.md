@@ -201,3 +201,9 @@ Single-winding latching DPDT RF relay, one per branch (bypass, B1, B2, B3); its 
 ## D22 — VHF–6 GHz RX: HMC8410 always on + step attenuator (no LNA bypass)
 
 LNA HMC8410 (one part, 0.01–10 GHz, NF 1.1–1.4 dB) and balun TCM1-63AX+. Counting every pass showed the LNA-bypass SPDT before the LNA had been omitted. Replacing the bypass with a digital step attenuator after the LNA removes that SPDT: 0.3–0.7 dB better NF in normal mode (4.2 dB at 435 MHz, 6.4 dB at 5.8 GHz, typical), 6 dB higher IIP3 in strong-signal mode with the same SFDR, continuous gain control, two parts fewer.
+
+---
+
+## D23 — HMC8410 bias network copied from the ADI evaluation board
+
+The bias tees (0402DF-591 chokes, ATC 531Z104 broadband DC blocks) are the ones the datasheet performance was measured with, 10 MHz–10 GHz. An independent simulation was attempted but the Coilcraft lumped model could not be reconstructed from the text (≈52 % error vs datasheet) and was not force-fitted; S-parameter verification is pending. The part needs a per-device negative gate bias and strict sequencing, implemented as a DAC + current sense with firmware calibration and hardware-safe defaults.

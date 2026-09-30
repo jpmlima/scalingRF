@@ -1,4 +1,4 @@
-# VHF–6 GHz RX lineup — analysis report (rev 2)
+# VHF–6 GHz RX lineup — analysis report (rev 3)
 
 RX port → limiter → diplexer HP arm → switch → band filter → switch → LNA (or bypass) → balun → AD9361.
 
@@ -102,6 +102,29 @@ Below 1 GHz the real switch costs ~0.8 dB more NF than the rev 0 assumption (0.7
 - D strong (+20 dB): IIP3 6 dB above the bypass mode; SFDR about the same (~62 dB in 1 MHz at 435 MHz for both) — and D is continuous, not two-state, matching the AD9361 AGC.
 - Two SPDTs fewer. Cost: the LNA always sees the selected band; its input P1dB (~+1.5 dBm) is close to the AD9361 max input (+4 dBm), so little is lost. The limiter now protects the LNA in all modes.
 - **Decision D22: option D.** The fixed 6 dB pad becomes the DSA's minimum setting.
+
+## Rev 3 — HMC8410 bias network and bias requirements
+
+**Bias tees: copy the ADI evaluation board (EV1HMC8410LP2F), which is measured 10 MHz–10 GHz** — the datasheet curves were taken with it, so adopting it inherits a measured network covering our whole band:
+
+| Ref (ADI) | Part | Role |
+|---|---|---|
+| L1, L2 | Coilcraft **0402DF-591XJRW** (590 nH, ferrite, 0402) | RF chokes on RFIN (VGG1) and RFOUT (VDD) |
+| C1, C2 | ATC **531Z104KT16T** (100 nF, 0502, 160 kHz–40 GHz broadband) | DC blocks |
+| C15, C16 | 20 pF 0402 | decoupling at the chokes' DC side |
+| R2 | 15 Ω 0402 | series in the bias feed (damping) |
+| C4, C13 / C5 / C14 | 100 nF 0402 / 2.2 µF tant. / 4.7 µF tant. | supply decoupling |
+
+0402DF-591 datasheet: |Z| 4770 Ω @ 900 MHz, 3090 Ω @ 1.7 GHz, SRF 960 MHz (ferrite losses keep |Z| high above SRF), DCR 0.78 Ω (≈ 50 mV at 65 mA), Irms 320 mA.
+
+**Attempted independent check — failed, recorded honestly.** Coilcraft's lumped model (Doc 267, valid only to 3 GHz) gives its schematic and one resistor formula as figures that did not survive text extraction. Three plausible topologies with RVAR = k·√f all miss the datasheet by ~52 % at 1.7 GHz and put the SRF at ~1230 MHz instead of 960 MHz → my reading of the model is wrong. **Not force-fitted.** To do on a machine with direct access: simulate with Coilcraft's S-parameter file (0402df.zip), keeping in mind it also stops at 3 GHz; above that the ADI measurement is the evidence.
+
+**Bias requirements from the datasheet (new):**
+- **Negative gate bias** VGG1 −2 V … 0 V, **adjusted per device** for IDQ = 65 mA (drain 5 V). Plan: VGG1 from a DAC referenced to the −3 V rail (already needed for the PE42582), drain current measured by a current-sense amplifier → **automatic IDQ calibration at boot in firmware**.
+- **Sequencing**: power-up GND → VGG1 = −2 V → VDD = 5 V → raise VGG1 to IDQ → RF; power-down in reverse. Must be enforced by hardware defaults (VGG1 pulled to −2 V until the firmware takes over) so a crashed/unconfigured system cannot bias the part wrongly.
+- **Absolute max RF input +20 dBm** → limiter requirement: ≤ +20 dBm at the LNA input, with margin.
+- Thermal: 0.33 W, θ 129 °C/W → ~+42 °C rise; exposed pad with low-inductance ground vias (datasheet: critical for stability).
+- Eval board is Rogers 4350 → input for the stackup decision on the RF sections.
 
 ## Next
 

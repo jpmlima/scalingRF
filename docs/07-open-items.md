@@ -64,7 +64,11 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] VHF–6 GHz RX cascade (sim/vhf_rx rev 0): LNA after filter bank confirmed; net LNA gain ~12 dB; pre-LNA loss budget
 - [x] VHF RX: filter-bank switch selected — pSemi PE42582 SP8T (sim/vhf_rx rev 1); highest bands on RF1/RF8
 - [x] VHF RX: LNA HMC8410, balun TCM1-63AX+ (sim/vhf_rx rev 2); LNA bypass replaced by DSA after the LNA (D22)
-- [ ] VHF RX: HMC8410 broadband bias tees (67 MHz–6 GHz) on RFIN and RFOUT
+- [x] VHF RX: HMC8410 bias tees — ADI eval network adopted (0402DF-591 + ATC 531Z104), measured to 10 GHz
+- [ ] VHF RX: verify 0402DF-591 with Coilcraft S2P (model reconstruction from Doc 267 failed; don't force-fit)
+- [ ] HMC8410 gate bias: −2…0 V DAC from −3 V rail, drain current sense, boot-time IDQ calibration, hardware-safe sequencing
+- [ ] Limiter: keep LNA input ≤ +20 dBm (abs. max) with margin
+- [ ] Stackup: RF sections to 6 GHz (ADI eval uses Rogers 4350) — FR-4 vs hybrid decision
 - [ ] VHF RX: select the step attenuator (≥ 20 dB range, IL ≤ 2 dB at 6 GHz) and the limiter
 - [ ] Power tree: +5 V / 65 mA for the HMC8410
 - [x] HF preselector switch re-check (sim/system rev 3): band-select switches were missing from the noise model; with SOI switches B2/B3 fail → relays required
