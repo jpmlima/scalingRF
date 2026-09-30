@@ -1,6 +1,27 @@
-# Clock — reference and phase noise (rev 1, in progress)
+# Clock — reference and phase noise (rev 2)
 
-**Status (rev 1):** UG-570 reference mask and the ADI eval-board reference now known (read by J. Lima from the UG-570 plot and the FMCOMMS3 BOM). The rev 0 provisional estimate is **superseded** — it would have failed the mask by 2 dB at 1 kHz. VCTCXO not chosen yet.
+**Status (rev 2):** reference oscillator selected — **Microchip TX-803, 40 MHz, with EFC** — against the UG-570 mask (rev 1). Open: ordering code with EFC, and the CMOS → XTALN level/buffer design.
+
+## Rev 2 — VCTCXO selection (`ref_mask.check`)
+
+| Candidate | Data | Result vs UG-570 mask |
+|---|---|---|
+| **Microchip TX-803** (5 × 3.2 mm, EFC 0.5–2.5 V, ≤ 9 mA) | **40 MHz, CMOS, typ**: −92 / −123 / −146 / −158 / −160 dBc/Hz at 10 Hz / 100 Hz / 1 kHz / 10 kHz / 100 kHz | **PASS, worst margin +4.5 dB** (10 Hz); +8 to +12.5 dB elsewhere |
+| Abracon AVTXLG-11 (3225, VC, ±0.1 ppm) | only 1 kHz −145, 10 kHz −156; carrier frequency not stated | PASS in both readings (+8 dB if at 40 MHz, +2 dB if at 20 MHz) — too few points to select |
+| Abracon AST3TDA (7050, VC option) | 38.88 MHz typ / max | **FAIL**: −2.2 dB typ, −7.2 dB max |
+| Taitien TP (3225, VC) | only 1 kHz −145 | not enough data |
+| Microchip VT-803 (older VCTCXO) | — | **End of Life** — excluded |
+
+**Selected: TX-803 at 40 MHz with the EFC (voltage-control) option** — the only candidate with complete 40 MHz data that passes.
+
+Caveats:
+- Phase-noise figures are **typical**; no maximum is given. The ≥ 4.5 dB margin is what covers unit-to-unit spread.
+- The 40 MHz data is for the **CMOS (3.3 V) output**; clipped-sine data only exists at 20 MHz. The fan-out buffer must deliver **0.8–1.3 V pp, AC-coupled** to XTALN from a CMOS source (and suitable levels to the LMK03328 and ADF4002).
+- Confirm the ordering code that includes EFC, and availability.
+
+---
+
+## Rev 1
 
 ## Rev 1 — ADI data
 

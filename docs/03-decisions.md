@@ -237,3 +237,9 @@ The ADP2164 synchronises only from 0.5 to 1.4 MHz. The earlier "≥ 2 MHz" requi
 ## D28 — Reference: external VCTCXO held to the UG-570 mask; DCXO + crystal as fallback
 
 ADI's datasheet phase noise was measured with a crystal and the AD9361 DCXO (FMCOMMS3: Epson TSX-3225). With an external reference, the requirement is ADI's UG-570 mask (−137 dBc/Hz at 1 kHz, −145.5 at 10 kHz, −150 at 100 kHz). The external VCTCXO is kept for phase-coherent locking to an external 10 MHz; if no reasonable part meets the mask, fall back to crystal + DCXO with a software frequency lock.
+
+---
+
+## D29 — Reference oscillator: Microchip TX-803, 40 MHz, with EFC
+
+The only candidate with complete 40 MHz phase-noise data that meets the UG-570 mask, with ≥ 4.5 dB margin (typical values; no maximum published). Abracon AST3TDA fails the mask; Microchip VT-803 is end of life; others lack data. The CMOS output needs a buffer delivering 0.8–1.3 V pp AC-coupled to the AD9361.

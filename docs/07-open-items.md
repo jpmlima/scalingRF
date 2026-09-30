@@ -86,7 +86,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
 - [x] Clock rev 1: UG-570 reference mask captured (ref_mask.py); ADI eval uses Epson TSX-3225 crystal + DCXO
-- [ ] Clock: select a 40 MHz VCTCXO meeting the UG-570 mask (fallback: crystal + DCXO, option B)
+- [x] Clock: VCTCXO = Microchip TX-803 40 MHz with EFC (≥ 4.5 dB margin to UG-570 mask, typical data)
+- [ ] Clock: TX-803 ordering code with EFC + availability; CMOS → XTALN (0.8–1.3 V pp AC) fan-out buffer design
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
 - [ ] Digital timing: AD9361 CMOS interface and HF converter interfaces vs. Zynq HR bank timing
 - [ ] Power tree: budget, sequencing, regulator noise vs. AD9361 and converter requirements
