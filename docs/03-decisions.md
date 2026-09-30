@@ -207,3 +207,9 @@ LNA HMC8410 (one part, 0.01–10 GHz, NF 1.1–1.4 dB) and balun TCM1-63AX+. Cou
 ## D23 — HMC8410 bias network copied from the ADI evaluation board
 
 The bias tees (0402DF-591 chokes, ATC 531Z104 broadband DC blocks) are the ones the datasheet performance was measured with, 10 MHz–10 GHz. An independent simulation was attempted but the Coilcraft lumped model could not be reconstructed from the text (≈52 % error vs datasheet) and was not force-fitted; S-parameter verification is pending. The part needs a per-device negative gate bias and strict sequencing, implemented as a DAC + current sense with firmware calibration and hardware-safe defaults.
+
+---
+
+## D24 — Power architecture: switchers + low-noise LDO post-regulation, 9–15 V input
+
+Every RF, converter and clock rail is LDO post-regulated after a switcher set just above it; digital loads (TE0720) run directly from a 3.3 V buck. Budget: 7.2 W at the loads, ~9.1 W in (79 %). Input 9–15 V DC; if PoE is added it must be 802.3at (PoE+). Switchers ≥ 2 MHz, synchronised to a reference-derived clock.

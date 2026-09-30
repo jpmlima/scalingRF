@@ -1,0 +1,128 @@
+{
+ "nodes": [
+  {
+   "node": "BUCK_5V6",
+   "type": "buck",
+   "Vout": 5.6,
+   "P_out_W": 1.894,
+   "P_in_W": 2.152,
+   "loss_W": 0.258
+  },
+  {
+   "node": "LDO_5V0_RF",
+   "type": "ldo",
+   "Vout": 5.0,
+   "P_out_W": 1.613,
+   "P_in_W": 1.806,
+   "loss_W": 0.193
+  },
+  {
+   "node": "RELAYS_5V6",
+   "type": "direct",
+   "Vout": 5.6,
+   "P_out_W": 0.0,
+   "P_in_W": 0.0,
+   "loss_W": 0.0
+  },
+  {
+   "node": "BUCK_3V3_DIG",
+   "type": "buck",
+   "Vout": 3.3,
+   "P_out_W": 3.069,
+   "P_in_W": 3.487,
+   "loss_W": 0.418
+  },
+  {
+   "node": "BUCK_3V8",
+   "type": "buck",
+   "Vout": 3.8,
+   "P_out_W": 1.05,
+   "P_in_W": 1.194,
+   "loss_W": 0.143
+  },
+  {
+   "node": "LDO_3V3_CLK",
+   "type": "ldo",
+   "Vout": 3.3,
+   "P_out_W": 0.874,
+   "P_in_W": 1.007,
+   "loss_W": 0.132
+  },
+  {
+   "node": "LDO_3V3_CLEAN",
+   "type": "ldo",
+   "Vout": 3.3,
+   "P_out_W": 0.038,
+   "P_in_W": 0.043,
+   "loss_W": 0.006
+  },
+  {
+   "node": "BUCK_1V7",
+   "type": "buck",
+   "Vout": 1.7,
+   "P_out_W": 1.7,
+   "P_in_W": 1.932,
+   "loss_W": 0.232
+  },
+  {
+   "node": "LDO_1V3_AD9361",
+   "type": "ldo",
+   "Vout": 1.3,
+   "P_out_W": 1.3,
+   "P_in_W": 1.7,
+   "loss_W": 0.4
+  },
+  {
+   "node": "BUCK_2V3",
+   "type": "buck",
+   "Vout": 2.3,
+   "P_out_W": 0.306,
+   "P_in_W": 0.348,
+   "loss_W": 0.042
+  },
+  {
+   "node": "LDO_1V8_CONV",
+   "type": "ldo",
+   "Vout": 1.8,
+   "P_out_W": 0.203,
+   "P_in_W": 0.26,
+   "loss_W": 0.056
+  },
+  {
+   "node": "LDO_1V8_IO",
+   "type": "ldo",
+   "Vout": 1.8,
+   "P_out_W": 0.036,
+   "P_in_W": 0.046,
+   "loss_W": 0.01
+  },
+  {
+   "node": "CP_NEG5V5",
+   "type": "cp",
+   "Vout": -5.5,
+   "P_out_W": 0.075,
+   "P_in_W": 0.088,
+   "loss_W": 0.013
+  },
+  {
+   "node": "LDO_NEG5V0",
+   "type": "ldo",
+   "Vout": -5.0,
+   "P_out_W": 0.062,
+   "P_in_W": 0.069,
+   "loss_W": 0.006
+  },
+  {
+   "node": "LDO_NEG3V0",
+   "type": "ldo",
+   "Vout": -3.0,
+   "P_out_W": 0.003,
+   "P_in_W": 0.006,
+   "loss_W": 0.003
+  }
+ ],
+ "P_loads_W": 7.2,
+ "P_in_W": 9.11,
+ "efficiency": 0.79,
+ "input_current_at_12V_A": 0.76
+}
