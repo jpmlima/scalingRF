@@ -3,7 +3,7 @@ so every harmonic is <= -60 dBc at the TX port. Reconstruction filter = placehol
 5th-order Chebyshev 0.1 dB, fc 50 MHz (the minimum order found by hand for 23 dB @ 101 MHz)."""
 import os, json
 import numpy as np
-import lineup as L
+import tx_lineup as L
 from netsolve import db
 
 EPS = np.sqrt(10 ** (0.1 / 10) - 1)

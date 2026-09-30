@@ -59,7 +59,7 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] HF TX: DAC → amplifier network (sim/hf_tx rev 2): IFS 5 mA, E96 133/412/392/10/DNP/383 Ω, 0.1 % resistors, digital DC trim
 - [ ] HF TX: AD9707 SFDR vs IOUTFS (5 mA = top of range)
 - [ ] Power tree: add ±5 V rails for the LMH6702
-- [ ] HF TX: design reconstruction filter (≥ 23 dB @ 101 MHz, ≥ 5th order) and verify in the chain with the diplexer
+- [x] HF TX: reconstruction filter designed in the chain (sim/hf_tx rev 3): 5 parts, images ≤ −69.9 dBc, loss ≤ 0.81 dB (MC)
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
 - [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power

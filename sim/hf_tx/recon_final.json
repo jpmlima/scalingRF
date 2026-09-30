@@ -1,0 +1,33 @@
+{
+ "inductors": [
+  "0805HP-121",
+  "0805HP-221"
+ ],
+ "C1": "DNP",
+ "Cz4": "DNP",
+ "caps_pF": {
+  "Cz2": 18.0,
+  "C3": 75.0,
+  "C5": 16.0
+ },
+ "nominal": {
+  "image_worst_dBc": -72.15,
+  "image_worst_tone_MHz": 49.0,
+  "filter_loss_worst_dB": 0.59,
+  "filter_loss_min_dB": 0.07,
+  "input_RL_worst_dB": 14.85
+ },
+ "HP_arm": {
+  "worst_loss_with_filter_dB": 1.29,
+  "worst_loss_diplexer_alone_dB": 0.9,
+  "max_change_dB": 0.39,
+  "antenna_RL_worst_dB": 12.8
+ },
+ "MC_200": {
+  "image_worst_dBc_max": -69.9,
+  "fail_image_%": 0.0,
+  "filter_loss_worst_dB_max": 0.81,
+  "fail_loss_%": 0.0,
+  "input_RL_min_dB": 12.6
+ }
+}

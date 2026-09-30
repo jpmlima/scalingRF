@@ -1,8 +1,8 @@
-# HF TX lineup — analysis report (rev 2)
+# HF TX lineup — analysis report (rev 3)
 
 AD9707 (150 MSPS) → DC-coupled differential-to-single-ended amplifier (back-terminated) → reconstruction low-pass filter (50 Ω) → switch → diplexer LP arm → TX port.
 
-**Status (rev 2):** budgets (rev 0), amplifier LMH6702 SOT-23 ±5 V (rev 1), **DAC-to-amplifier network designed and verified** (rev 2). Open: reconstruction filter; AD9707 SFDR at IOUTFS = 5 mA.
+**Status (rev 3):** budgets (rev 0), LMH6702 (rev 1), DAC-to-amplifier network (rev 2), **reconstruction filter designed inside the TX chain and verified** (rev 3). The HF TX path is complete in simulation. Open: AD9707 SFDR at IOUTFS = 5 mA.
 
 ## Target
 
@@ -142,8 +142,31 @@ Nominal: 0.98 V amplitude (−0.16 dB, trimmed digitally), CM offset 0.23 mV, im
 
 **Still open**: AD9707 at IOUTFS = 5 mA is the top of its range; SFDR vs IOUTFS is not in the data used so far → check.
 
+## Rev 3 — reconstruction filter, designed inside the chain
+
+Designed with the diplexer LP arm in the same network (`recon.py`; lesson D14): ports = filter input (back-terminated LMH6702, 50 Ω), TX antenna port, diplexer HP port. Topology: 5th-order elliptic, minimum-inductor form (C1 ⏚ | L2 ∥ Cz2 | C3 ⏚ | L4 ∥ Cz4 | C5 ⏚), 0805HP models + board parasitics.
+
+The optimiser drove **C1 → 1.8 pF and Cz4 → 0.7 pF** (pad-parasitic level): the diplexer LP arm already does part of the job. Removing them (`recon_verify.py`) is **slightly better**, so the final filter has 5 parts:
+
+| L2 | Cz2 (∥ L2) | C3 ⏚ | L4 | C5 ⏚ | C1, Cz4 |
+|---|---|---|---|---|---|
+| 0805HP-121 | 18 pF | 75 pF | 0805HP-221 | 16 pF | DNP |
+
+L2 ∥ Cz2 puts a transmission zero near 108 MHz (image of a 42 MHz tone).
+
+| On the real chain | Nominal | Monte Carlo (200) |
+|---|---|---|
+| Image at the port (worst, tone 49 MHz) | −72.2 dBc | ≤ −69.9 dBc, 0 % > −60 |
+| Filter share of passband loss | ≤ 0.59 dB | ≤ 0.81 dB, 0 % > 1 dB |
+| Input RL | 14.9 dB | ≥ 12.6 dB |
+
+- Input RL requirement relaxed to ≥ 12 dB: the amplifier is exactly back-terminated (50 Ω), so there is no second reflection; the mismatch loss is already inside the simulated S21.
+- **AD9361 TX path (diplexer HP arm):** unchanged from 70 MHz to 6 GHz (≤ 0.04 dB), but degraded **between 60 and 69 MHz** (up to −1.0 dB at 64 MHz): the HP 1 dB edge on the TX port moves from 65.9 MHz (RX side) to **68.1 MHz**. The AD9361 is specified from 70 MHz, so no specified coverage is lost; the docs' "67 MHz" now applies to RX only.
+- A re-tune after removing C1/Cz4 made the image margin worse (−67.4 dBc): the optimiser trades image margin for loss/RL. Kept the un-tuned version.
+
 ## Engineering log
 
+- rev 3: two modules were both named `lineup.py` (hf_rx and hf_tx); importing one through another module picked up the wrong one (caught as an AttributeError — could have been silent). hf_tx's renamed to `tx_lineup.py`, all imports checked.
 - rev 2: independent E96 rounding destroyed the balance the network depends on (3.3 % / 11 mV); replaced by a joint discrete search (0.21 % / 0.23 mV).
 
 - rev 0: the first harmonic table required the amplifier to be cleaner where filtering is strongest (−123 dBc at 49 MHz) — sign error (HD − filtering at the port → requirement is target **+** filtering). Fixed; an assertion now checks the requirement never gets stricter with more filtering.
@@ -152,10 +175,12 @@ Nominal: 0.98 V amplitude (−0.16 dB, trimmed digitally), CM offset 0.23 mV, im
 ## Reproduce
 
 ```
-python3 lineup.py          # images, level plan
+python3 tx_lineup.py       # images, level plan
 python3 harmonics.py       # harmonic filtering and HD requirements
 python3 dac_amp_net.py     # network feasibility over IFS x Rf
 python3 dac_amp_select.py  # noise / distortion / offset of feasible designs
 python3 dac_amp_e96.py     # joint E96 choice
 python3 dac_amp_final.py   # tolerance Monte Carlo
+python3 recon.py           # reconstruction filter design in the chain
+python3 recon_verify.py    # final filter: AD9361 path check + Monte Carlo
 ```

@@ -1,0 +1,27 @@
+{
+ "inductors": [
+  "0805HP-121",
+  "0805HP-221"
+ ],
+ "caps_pF": {
+  "C1": 1.8,
+  "Cz2": 18.0,
+  "C3": 75.0,
+  "Cz4": 0.7,
+  "C5": 16.0
+ },
+ "values": [
+  1.8e-12,
+  1.1830000000000001e-07,
+  1.8e-11,
+  7.5e-11,
+  2.175e-07,
+  6.8e-13,
+  1.6e-11
+ ],
+ "image_worst_dBc": -72.68,
+ "image_worst_tone_MHz": 49.0,
+ "filter_loss_worst_dB": 0.63,
+ "filter_loss_min_dB": 0.07,
+ "input_RL_worst_dB": 13.95
+}

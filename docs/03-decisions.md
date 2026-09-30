@@ -171,3 +171,9 @@ Best published distortion among the candidates at our conditions (HD2/HD3 −79/
 ## D17 — HF TX DAC-to-amplifier network: 5 mA, Rf ≈ 400 Ω, 0.1 % resistors
 
 Balanced DAC loading with the LMH6702's optimum Rf (237 Ω) is impossible at any IOUTFS ≤ 5 mA; at 2 mA no Rf ≤ 750 Ω works. Among feasible designs, 5 mA / ~400 Ω gives the best estimated distortion and lowest noise; Rf = 750 Ω is excluded (inverting noise current × Rf, and loop-gain distortion estimate). Values chosen jointly in E96 (133 / 412 / 392 / 10 / DNP / 383 Ω); the four balance-critical resistors must be 0.1 %. DC offset trimmed digitally.
+
+---
+
+## D18 — HF TX reconstruction filter: 5 parts, designed in the chain
+
+Designed with the diplexer LP arm in the same network. The optimiser removed two capacitors (pad-parasitic values); the diplexer provides part of the image rejection. Result: images ≤ −69.9 dBc and filter loss ≤ 0.81 dB over Monte Carlo. Side effect accepted: the TX-side diplexer HP 1 dB edge moves from 65.9 to 68.1 MHz, below the AD9361's 70 MHz specified start.

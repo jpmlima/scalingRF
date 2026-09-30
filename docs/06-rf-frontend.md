@@ -59,7 +59,7 @@ Analysed in [`sim/hf_tx/`](../sim/hf_tx/README.md) (rev 0).
 
 - AD9707 at 150 MSPS → DC-coupled diff-to-SE amplifier (back-terminated) → reconstruction LPF → diplexer LP arm. No transformer anywhere (it would not reach 1 kHz).
 - ~0 dBm at the port; the amplifier delivers +2.2 dBm into the filter.
-- Images: the diplexer LP arm already gives ~31 dB at 101 MHz; the reconstruction filter must add ≥ 23 dB (≥ 5th order).
+- Reconstruction filter designed inside the chain: 0805HP-121 ∥ 18 pF, 75 pF ⏚, 0805HP-221, 16 pF ⏚ (5 parts). Images ≤ −69.9 dBc (Monte Carlo), filter loss ≤ 0.81 dB. It shifts the TX-side HP 1 dB edge from 65.9 to 68.1 MHz (AD9361 spec starts at 70 MHz).
 - Harmonics of tones up to ~26 MHz cannot be filtered: DAC + amplifier HD2/HD3 ≤ −60 dBc (AD9707 specified only to 20 MHz).
 - sinc droop (1.6 dB at 49 MHz) compensated in the PL. No HF PA in scope.
 
