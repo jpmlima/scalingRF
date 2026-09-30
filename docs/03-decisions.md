@@ -159,3 +159,9 @@ Simulating diplexer + preselector as one network showed the product-of-blocks es
 ## D15 — B3 preselector uses air-core inductors
 
 0805HP Q (~45 at 30–50 MHz) left B3 at 1.70 dB sensitivity loss vs a 1.5 dB limit, failing in 82 % of builds on the real chain. Coilcraft 2222SQ/2929SQ air-core parts (Q ≈ 100–180, manufacturer transmission-line model, datasheet-checked) bring it to 1.46 dB worst case, 0 % fails. B1/B2 keep 0805HP: their noise budget is large. Cost: larger parts (up to 13 mm) and a layout requirement to control mutual coupling between coils.
+
+---
+
+## D16 — HF TX amplifier: LMH6702 (SOT-23) on ±5 V
+
+Best published distortion among the candidates at our conditions (HD2/HD3 −79/−88 dBc at 20 MHz, 2 Vpp, 100 Ω), ~8 dB margin to the −65 dBc requirement at 28 MHz by pessimistic extrapolation. SOT-23 specified (SOIC is 6–7 dB worse). ±5 V rails give a ground-referenced DC-coupled output. The DAC-to-amplifier network is still open (equal loading with the optimum feedback resistor does not close at 2 mA).

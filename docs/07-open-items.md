@@ -55,7 +55,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
 - [x] HF TX lineup (sim/hf_tx rev 0): level plan, image and harmonic budgets → requirements
-- [ ] HF TX: select diff→SE amplifier (DC–49 MHz, ≥ 1.63 Vpp, HD2/HD3 ≤ −65 dBc to 28 MHz); decide DAC load (50 vs 200 Ω)
+- [x] HF TX: amplifier selected — LMH6702 SOT-23, ±5 V (sim/hf_tx rev 1)
+- [ ] HF TX: DAC → amplifier resistor network (balanced loading, compliance, transimpedance) — needs an op-amp model in netsolve
+- [ ] Power tree: add ±5 V rails for the LMH6702
 - [ ] HF TX: design reconstruction filter (≥ 23 dB @ 101 MHz, ≥ 5th order) and verify in the chain with the diplexer
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
 - [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)

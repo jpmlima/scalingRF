@@ -1,8 +1,8 @@
-# HF TX lineup — analysis report (rev 0)
+# HF TX lineup — analysis report (rev 1)
 
 AD9707 (150 MSPS) → DC-coupled differential-to-single-ended amplifier (back-terminated) → reconstruction low-pass filter (50 Ω) → switch → diplexer LP arm → TX port.
 
-**Status:** level plan, image and harmonic budgets done; they turn into requirements for the amplifier and the reconstruction filter (neither selected/designed yet).
+**Status (rev 1):** budgets done (rev 0); amplifier selected (**LMH6702, SOT-23, ±5 V**). Open: the DAC-to-amplifier resistor network (see below — the obvious design does not close), reconstruction filter.
 
 ## Target
 
@@ -68,6 +68,30 @@ A higher DAC load cuts the amplifier gain by 12 dB (less noise gain, easier dist
 - **≥ 23 dB at 101 MHz** relative to 49 MHz (the rest comes from the diplexer);
 - ≥ 5th order: a 5th-order 0.1 dB Chebyshev gives 36.5 dB at 2.06·fc (hand-checked, 13.6 dB margin); 3rd order gives only ~13 dB.
 - Must be verified **inside the chain** with the diplexer LP arm (same lesson as the RX preselector, D14).
+
+## Rev 1 — amplifier selection
+
+Requirement (rev 0): DC-coupled diff→SE, DC–49 MHz, ≥ 1.63 Vpp, HD2/HD3 ≤ −65 dBc up to 28 MHz.
+
+| Part | Conditions (datasheet) | HD2 / HD3 | Verdict |
+|---|---|---|---|
+| **LMH6702 (SOT-23)** | ±5 V, G +2, 100 Ω, 2 Vpp | −100/−96 dBc @ 5 MHz; **−79/−88 dBc @ 20 MHz** | **Selected** |
+| LMH6702 (SOIC) | same | −72/−82 dBc @ 20 MHz | 6–7 dB worse: package matters → SOT-23 specified |
+| OPA695 | ±5 V, G +8, 100 Ω, 2 Vpp | ≈ −69/−62 dBc @ 20 MHz (read from curves) | worse |
+| THS3091 | 100 Ω, 2 Vpp | −70…−74 dBc @ 10 MHz | worse |
+
+- The datasheet stops at 20 MHz. Extrapolated to 28 MHz with a pessimistic 12 dB/octave: HD2 ≈ −73 dBc → **8 dB margin** to −65 dBc. TI also lists it as a D/A buffer and quotes "10-bit distortion through 60 MHz" into 100 Ω.
+- Datasheet conditions are a non-inverting G = +2 stage; ours is a difference amplifier. Distortion is expected to be similar (same output swing and load) but is not guaranteed by the datasheet → flagged.
+- **±5 V rails** are needed for a ground-referenced, truly DC-coupled output → added to the power tree. (Alternative: single supply + ≥ 10 µF output coupling, corner ~320 Hz, still reaches 1 kHz.)
+
+### Open — the DAC-to-amplifier network does not close by hand
+
+Target: 2.0 Vpp full scale at the amplifier (1.63 Vpp + room for the PL sinc pre-emphasis), both DAC outputs equally loaded (so even-order products and the DC common mode cancel), each output within its +1.25 V compliance.
+
+With the LMH6702's optimum feedback resistor (237 Ω) and IOUTFS = 2 mA, the required transimpedance (1 kΩ per mA of differential current) cannot be reached with equal loading: the balance equations ask for a divider ratio above 1. Options, to be evaluated with an op-amp model in the solver (not by hand):
+- raise IOUTFS towards 5 mA (check SFDR vs current);
+- higher feedback resistor (CFB: lower loop gain, more distortion) — quantify;
+- DAC loads large relative to a high-impedance difference stage, gain < 2.
 
 ## Engineering log
 
