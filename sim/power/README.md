@@ -2,6 +2,29 @@
 
 **Status (rev 3):** AD9361 1.3 V regulators chosen and ripple-budgeted; two-stage bus introduced. Loads 7.7 W, input **10.2 W (0.85 A at 12 V), 75 %**. 9 loads still unverified; other regulators not chosen.
 
+## Switcher spurs into the HF path — tolerable coupling (`hf_spur_coupling.py`)
+
+Coupled spur at the HF LNA input must be ≥ 6 dB below the 2.4 kHz MDS in LNA mode: **−137 dBm = 31.6 nV rms**. With V = 2π·f·M·I, for a buck inductor with 0.3 A pp triangular ripple (harmonics ∝ 1/n²):
+
+| Harmonic of 1.25 MHz | Frequency | Max mutual inductance |
+|---|---|---|
+| 1 | 1.25 MHz | 47 fH (but the HF path is in bypass below 10 MHz, much higher MDS → relaxed) |
+| 9 | 11.25 MHz | 421 fH |
+| 21 | 26.25 MHz | 982 fH |
+| 39 | 48.75 MHz | 1824 fH |
+
+Scale: two 5 mm unshielded loops, coaxial, 20 mm apart ≈ 9600 fH; 50 mm apart ≈ 620 fH.
+
+**Worse source not in that table: the buck's input hot loop.** It carries the full load current as pulses with ns edges, harmonics ∝ 1/n: at 11 MHz roughly 40 mA against ~1 mA in the inductor → ~30 dB stricter.
+
+**Layout requirements derived:**
+- Switchers in their own shielded compartment; HF RX front end (preselector, relays, LNA, FDA) in its own can.
+- ≥ 50 mm from any switcher to the HF LNA / preselector, inductor axes orthogonal to HF input loops.
+- Magnetically shielded inductors only.
+- Minimum hot-loop area (input caps tight on VIN/PGND; Silent-Switcher-style layouts preferred).
+- Continuous ground plane under the HF path, no switcher return currents crossing it.
+- **Verification by measurement on the first prototype** (spur comb at the HF input, LNA mode, antenna port terminated): these geometries cannot be closed by simulation here.
+
 ## Rev 3 — AD9361 1.3 V: regulators and ripple budget
 
 **No AD9361 supply-ripple sensitivity figure** (spur dBc per mV) was found in accessible ADI material; UG-570 discusses supply-induced phase noise with plots, not a number. **Not invented.** Criterion anchored on what ADI validated instead: LO phase noise was measured with the ADP1755, whose own output noise is ~23 µV rms → the switching ripple reaching the AD9361 must sit far below that (target ≤ 2 µV pp).
