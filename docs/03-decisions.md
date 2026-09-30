@@ -212,7 +212,7 @@ The bias tees (0402DF-591 chokes, ATC 531Z104 broadband DC blocks) are the ones 
 
 ## D24 — Power architecture: switchers + low-noise LDO post-regulation, 9–15 V input
 
-Every RF, converter and clock rail is LDO post-regulated after a switcher set just above it; digital loads (TE0720) run directly from a 3.3 V buck. Budget: 7.2 W at the loads, ~9.1 W in (79 %). Input 9–15 V DC; if PoE is added it must be 802.3at (PoE+). Switchers ≥ 2 MHz, synchronised to a reference-derived clock.
+Every RF, converter and clock rail is LDO post-regulated after a switcher set just above it; digital loads (TE0720) run directly from a 3.3 V buck. Budget: 7.2 W at the loads, ~9.1 W in (79 %). Input 9–15 V DC; if PoE is added it must be 802.3at (PoE+). Switchers synchronised to a reference-derived clock (the original "≥ 2 MHz" was withdrawn — see D27).
 
 ---
 
@@ -225,3 +225,9 @@ Replaces the rev-1 "buck directly on 1.3 V" (a misreading of the datasheet figur
 ## D26 — AD9361 1.3 V: ADP2164 + LC post-filter + 2× ADP1762; 5.6 V intermediate bus
 
 With no AD9361 ripple-sensitivity figure available, the criterion is to stay far below the noise of the LDO ADI validated (ADP1755, ~23 µV rms). The ADP1762 replaces the ADP1755 (rated for the low input voltage, ~10× lower noise, PSRR specified at 1 MHz). A damped LC post-filter (≈120 kHz) brings the switching ripple at the AD9361 to ~1.1 µV pp. PoL bucks run from a 5.6 V bus; the SoM buck runs directly from the 9–15 V input.
+
+---
+
+## D27 — Switchers synchronised at 1.25 MHz; "≥ 2 MHz" rule withdrawn
+
+The ADP2164 synchronises only from 0.5 to 1.4 MHz. The earlier "≥ 2 MHz" requirement had no basis (spurs at either offset fall inside AD9361 channel bandwidths); synchronisation and ripple attenuation are what matter. Sync clock: 150 MHz / 120 = 1.25 MHz from the PL. Consequence to analyse: the 1.25 MHz harmonic comb lands in the HF band.

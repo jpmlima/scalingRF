@@ -26,7 +26,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] Power rev 1: LMK03328 (2× the estimate) and AD9361 2R2T FDD (1.02 A) verified; ADI 1.2 A buck + 300 mA LDO split adopted; 8.9 W in
 - [x] Power rev 2: AD9361 supply corrected to ADI low-noise reference (ADP2164 + 2× ADP1755); VDD_GPO tied to 1.3 V; 9.7 W in
 - [x] Power rev 3: AD9361 1.3 V = ADP2164 → LC post-filter (≈120 kHz) → 2× ADP1762; ripple 1.1 µV pp; 5.6 V intermediate bus; 10.2 W in
-- [ ] Power: ADP2164 f_sw / sync capability vs the synchronised-switcher requirement
+- [x] Power: ADP2164 syncs 0.5–1.4 MHz → sync at 1.25 MHz (150 MHz / 120 from the PL); unjustified "≥ 2 MHz" rule withdrawn
+- [ ] Switcher spurs (1.25 MHz comb) coupling into the HF direct-sampling path: layout/shielding analysis vs HF noise floor
 - [ ] Power: verify 9 remaining loads; choose remaining regulators; ripple budget for the other sensitive rails (clock, converters, LNAs); sequencer
 - [ ] Ethernet throughput measured on real hardware (Pluto+/LibreSDR) with libiio
 

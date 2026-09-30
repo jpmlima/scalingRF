@@ -20,7 +20,13 @@
 
 **Two-stage bus.** The ADP2164 accepts ≤ 6.5 V, so it cannot sit on the 9–15 V input: point-of-load bucks now run from the **5.6 V intermediate bus**. The largest load (TE0720, 3 W) gets a **wide-input buck directly from VIN** to avoid double conversion there (10.7 W → 10.2 W).
 
-**To verify:** ADP2164 switching frequency and whether it can be synchronised — the tree's "≥ 2 MHz, synchronised to a reference-derived clock" requirement may conflict with it; if so, pick a synchronisable buck or re-run the ripple budget at its frequency.
+**Verified (ADP2164 datasheet):** fixed 600 kHz / 1.2 MHz, adjustable 0.5–1.4 MHz, **SYNC input 0.5–1.4 MHz**; 2.7–6.5 V input.
+
+**Requirement corrected.** Rev 0 required switchers "≥ 2 MHz and synchronised". The ≥ 2 MHz part had no justification: with AD9361 channel bandwidths up to 56 MHz, a spur at a 1.2 MHz or a 2 MHz offset is in band either way. What matters is **synchronisation** (spurs at known, fixed frequencies) and **ripple attenuation** (handled by the LC + LDO budget above). The ≥ 2 MHz rule is withdrawn; synchronisation stays.
+
+**Sync clock:** 150 MHz / 120 = **1.25 MHz**, generated in the PL from the 150 MHz HF converter clock (reference-coherent), inside the ADP2164 range. Until the PL is configured the buck free-runs at its RT setting. At 1.25 MHz the LC post-filter attenuates slightly more than at 1.2 MHz; the ripple budget holds.
+
+**New open issue:** harmonics of 1.25 MHz fall **inside the HF band** every 1.25 MHz. The HF path is direct-sampling and DC-coupled, so it is the most exposed. Its rails are LDO post-regulated, but magnetic/radiated coupling from buck inductors into the HF front end is a layout and shielding matter → needs its own analysis (spur level at the HF input vs the HF noise floor).
 
 ---
 
