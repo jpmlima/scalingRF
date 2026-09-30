@@ -1,0 +1,15 @@
+{
+ "values_ohm": {
+  "RdA": 133.0,
+  "RdB": 412.0,
+  "Rg": 392.0,
+  "R3": 10.0,
+  "R4": "DNP",
+  "Rf": 383.0
+ },
+ "vout_ampl_V": 0.9816,
+ "cm_offset_mV": 0.23,
+ "balance_error_%": 0.21,
+ "peak_DAC_node_V": 1.004,
+ "noise_gain": 1.48
+}

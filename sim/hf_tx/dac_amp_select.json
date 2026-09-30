@@ -1,0 +1,116 @@
+[
+ {
+  "IFS_mA": 3.0,
+  "Rf": 750.0,
+  "noise_gain": 1.62,
+  "peak_DAC_node_V": 0.89,
+  "amp_out_noise_nV": 15.2,
+  "amp_noise_dBc_Hz": -153.4,
+  "HD2_28MHz_est_dBc": -63.0,
+  "HD3_28MHz_est_dBc": -72.0,
+  "meets_HD_req": false,
+  "dc_offset_out_worst_mV": 35.0,
+  "R": [
+   216.0,
+   534.7,
+   668.4,
+   10.0,
+   4331.0
+  ]
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 500.0,
+  "noise_gain": 1.5,
+  "peak_DAC_node_V": 1.0,
+  "amp_out_noise_nV": 10.59,
+  "amp_noise_dBc_Hz": -156.5,
+  "HD2_28MHz_est_dBc": -66.5,
+  "HD3_28MHz_est_dBc": -75.5,
+  "meets_HD_req": true,
+  "dc_offset_out_worst_mV": 25.7,
+  "R": [
+   172.6,
+   499.7,
+   500.4,
+   10.0,
+   5000.0
+  ]
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 750.0,
+  "noise_gain": 2.0,
+  "peak_DAC_node_V": 0.67,
+  "amp_out_noise_nV": 15.46,
+  "amp_noise_dBc_Hz": -153.2,
+  "HD2_28MHz_est_dBc": -63.0,
+  "HD3_28MHz_est_dBc": -72.0,
+  "meets_HD_req": false,
+  "dc_offset_out_worst_mV": 35.5,
+  "R": [
+   130.3,
+   251.1,
+   502.1,
+   10.0,
+   3499.0
+  ]
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 400.0,
+  "noise_gain": 1.5,
+  "peak_DAC_node_V": 1.0,
+  "amp_out_noise_nV": 8.8,
+  "amp_noise_dBc_Hz": -158.1,
+  "HD2_28MHz_est_dBc": -68.5,
+  "HD3_28MHz_est_dBc": -77.5,
+  "meets_HD_req": true,
+  "dc_offset_out_worst_mV": 22.0,
+  "R": [
+   137.2,
+   399.7,
+   400.3,
+   10.0,
+   5000.0
+  ]
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 500.0,
+  "noise_gain": 1.75,
+  "peak_DAC_node_V": 0.8,
+  "amp_out_noise_nV": 10.78,
+  "amp_noise_dBc_Hz": -156.3,
+  "HD2_28MHz_est_dBc": -66.5,
+  "HD3_28MHz_est_dBc": -75.5,
+  "meets_HD_req": true,
+  "dc_offset_out_worst_mV": 26.1,
+  "R": [
+   117.9,
+   267.5,
+   401.2,
+   10.0,
+   4171.3
+  ]
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 750.0,
+  "noise_gain": 2.0,
+  "peak_DAC_node_V": 0.73,
+  "amp_out_noise_nV": 15.56,
+  "amp_noise_dBc_Hz": -153.1,
+  "HD2_28MHz_est_dBc": -63.0,
+  "HD3_28MHz_est_dBc": -72.0,
+  "meets_HD_req": false,
+  "dc_offset_out_worst_mV": 36.7,
+  "R": [
+   146.9,
+   200.0,
+   550.0,
+   109.2,
+   546.1
+  ]
+ }
+]

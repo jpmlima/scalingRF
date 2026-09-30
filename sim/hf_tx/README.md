@@ -1,8 +1,8 @@
-# HF TX lineup — analysis report (rev 1)
+# HF TX lineup — analysis report (rev 2)
 
 AD9707 (150 MSPS) → DC-coupled differential-to-single-ended amplifier (back-terminated) → reconstruction low-pass filter (50 Ω) → switch → diplexer LP arm → TX port.
 
-**Status (rev 1):** budgets done (rev 0); amplifier selected (**LMH6702, SOT-23, ±5 V**). Open: the DAC-to-amplifier resistor network (see below — the obvious design does not close), reconstruction filter.
+**Status (rev 2):** budgets (rev 0), amplifier LMH6702 SOT-23 ±5 V (rev 1), **DAC-to-amplifier network designed and verified** (rev 2). Open: reconstruction filter; AD9707 SFDR at IOUTFS = 5 mA.
 
 ## Target
 
@@ -93,7 +93,58 @@ With the LMH6702's optimum feedback resistor (237 Ω) and IOUTFS = 2 mA, the req
 - higher feedback resistor (CFB: lower loop gain, more distortion) — quantify;
 - DAC loads large relative to a high-impedance difference stage, gain < 2.
 
+## Rev 2 — DAC-to-amplifier network
+
+Solved with an op-amp model added to `netsolve.py` (VCCS + output resistance, open-loop gain 1e6; tested against the textbook inverting, non-inverting and difference amplifiers) and current injection at nodes (`node_voltages`).
+
+```
+IOUTA ─┬─ RdA ─ gnd            IOUTB ─┬─ RdB ─ gnd
+       └─ R3 ─ (+)                    └─ Rg ─ (−) ─ Rf ─ OUT ─ 50 Ω ─ filter (50 Ω)
+               R4 (DNP)
+```
+
+**Feasibility sweep** (`dac_amp_net.py`): targets 2.0 Vpp at the output, common mode cancelled, both DAC outputs with equal swing (≤ 1 %), DAC nodes ≤ 1.0 V (compliance 1.25 V).
+- **No solution at 2 mA for any Rf up to 750 Ω, and none at Rf = 237 Ω (the LMH6702 optimum) for any current up to 5 mA** — confirms and extends the rev 1 hand result.
+- Feasible: 3 mA/750 Ω, 4 mA/500–750 Ω, 5 mA/400–750 Ω. The optimiser drives R3 → 10 Ω and R4 → open: the non-inverting divider is not needed.
+
+**Selection** (`dac_amp_select.py`). The datasheet has no distortion-vs-Rf data; first-order CFB estimate HD(Rf) ≈ HD(237) + 20·log(Rf/237) (loop gain ~ Z/Rf) — an approximation, stated as such.
+
+| IFS / Rf | HD2 @ 28 MHz (est.) | Amp noise at output | DAC node peak |
+|---|---|---|---|
+| any / 750 Ω | −63 dBc ✘ | −153 dBc/Hz | 0.67–0.89 V |
+| 4 mA / 500 Ω | −66.5 dBc | −156.5 dBc/Hz | 1.00 V |
+| **5 mA / 400 Ω** | **−68.5 dBc** | **−158.1 dBc/Hz** | 1.00 V |
+| 5 mA / 500 Ω | −66.5 dBc | −156.3 dBc/Hz | 0.80 V |
+
+Amplifier noise is 6–8 dB below the AD9707's own NSD (−150 dBc/Hz) in all viable cases; the high inverting noise current (18.5 pA/√Hz × Rf) is what rules out large Rf. Chosen: 5 mA / ~400 Ω (best distortion and noise; 1.0 V peak is within the 1.25 V compliance — the 1.0 V limit was a self-imposed margin).
+
+**E96 values — must be chosen jointly** (`dac_amp_e96.py`). Rounding each resistor independently gave 3.3 % imbalance and 11 mV common-mode offset. A joint search over E96 neighbours:
+
+| RdA | RdB | Rg | R3 | R4 | Rf |
+|---|---|---|---|---|---|
+| 133 Ω | 412 Ω | 392 Ω | 10 Ω | DNP | 383 Ω |
+
+Nominal: 0.98 V amplitude (−0.16 dB, trimmed digitally), CM offset 0.23 mV, imbalance 0.21 %, DAC node peak 1.004 V, noise gain 1.48.
+
+**Tolerance** (`dac_amp_final.py`, 2000 runs):
+
+| | 0.1 % resistors | 1 % resistors |
+|---|---|---|
+| Gain spread | ±0.012 dB | ±0.12 dB |
+| CM offset (max) | 1.3 mV | 11.4 mV |
+| Imbalance (max) | 0.5 % | 3.0 % ✘ |
+
+→ **RdA, RdB, Rg, Rf: 0.1 % thin film.** R3 can be 1 %.
+
+**DC offset**: datasheet worst case (VIO 4.5 mV, IBI 30 µA × Rf) ≈ 22 mV at the amplifier output → removed with a **digital offset code in the PL** (calibration), no hardware needed.
+
+**Layout requirements from the LMH6702 datasheet**: 0.1 µF directly across V+ to V− (critical for HD2); supply-decoupling ground returns kept separate from the input-network grounds (star return); ground/power planes opened under the inverting input and output; Rf/Rg connected at the summing-junction pin with minimal trace.
+
+**Still open**: AD9707 at IOUTFS = 5 mA is the top of its range; SFDR vs IOUTFS is not in the data used so far → check.
+
 ## Engineering log
+
+- rev 2: independent E96 rounding destroyed the balance the network depends on (3.3 % / 11 mV); replaced by a joint discrete search (0.21 % / 0.23 mV).
 
 - rev 0: the first harmonic table required the amplifier to be cleaner where filtering is strongest (−123 dBc at 49 MHz) — sign error (HD − filtering at the port → requirement is target **+** filtering). Fixed; an assertion now checks the requirement never gets stricter with more filtering.
 - rev 0: an early note claimed harmonics of tones above 24.5 MHz are "filtered because they land above 50 MHz". Wrong near the band edge: 2·26 MHz = 52 MHz is barely attenuated. Replaced by the computed table.
@@ -101,6 +152,10 @@ With the LMH6702's optimum feedback resistor (237 Ω) and IOUTFS = 2 mA, the req
 ## Reproduce
 
 ```
-python3 lineup.py      # images, level plan
-python3 harmonics.py   # harmonic filtering and HD requirements
+python3 lineup.py          # images, level plan
+python3 harmonics.py       # harmonic filtering and HD requirements
+python3 dac_amp_net.py     # network feasibility over IFS x Rf
+python3 dac_amp_select.py  # noise / distortion / offset of feasible designs
+python3 dac_amp_e96.py     # joint E96 choice
+python3 dac_amp_final.py   # tolerance Monte Carlo
 ```

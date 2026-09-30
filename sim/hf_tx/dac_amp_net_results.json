@@ -1,0 +1,402 @@
+[
+ {
+  "IFS_mA": 2.0,
+  "Rf": 237.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   242.6,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.4784,
+  "cm_to_out_V_per_mA": 0.0053,
+  "dc_offset_out_V": 0.0053,
+  "swing_A_V": 0.2314,
+  "swing_B_V": 0.2205,
+  "peak_A_V": 0.4627,
+  "peak_B_V": 0.4609,
+  "noise_gain": 1.0473
+ },
+ {
+  "IFS_mA": 2.0,
+  "Rf": 300.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   304.3,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.6028,
+  "cm_to_out_V_per_mA": 0.004,
+  "dc_offset_out_V": 0.004,
+  "swing_A_V": 0.2868,
+  "swing_B_V": 0.2757,
+  "peak_A_V": 0.5737,
+  "peak_B_V": 0.5714,
+  "noise_gain": 1.0599
+ },
+ {
+  "IFS_mA": 2.0,
+  "Rf": 400.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   402.2,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.8004,
+  "cm_to_out_V_per_mA": 0.002,
+  "dc_offset_out_V": 0.002,
+  "swing_A_V": 0.3723,
+  "swing_B_V": 0.3608,
+  "peak_A_V": 0.7446,
+  "peak_B_V": 0.7416,
+  "noise_gain": 1.0798
+ },
+ {
+  "IFS_mA": 2.0,
+  "Rf": 500.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   500.0,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.998,
+  "cm_to_out_V_per_mA": 0.0,
+  "dc_offset_out_V": 0.0,
+  "swing_A_V": 0.4547,
+  "swing_B_V": 0.4429,
+  "peak_A_V": 0.9093,
+  "peak_B_V": 0.9057,
+  "noise_gain": 1.0998
+ },
+ {
+  "IFS_mA": 2.0,
+  "Rf": 750.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   349.9,
+   1239.1,
+   855.4,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.887,
+  "cm_to_out_V_per_mA": -0.0004,
+  "dc_offset_out_V": -0.0004,
+  "swing_A_V": 0.3271,
+  "swing_B_V": 0.313,
+  "peak_A_V": 0.6542,
+  "peak_B_V": 1.0121,
+  "noise_gain": 1.3581
+ },
+ {
+  "IFS_mA": 3.0,
+  "Rf": 237.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   239.1,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.7125,
+  "cm_to_out_V_per_mA": 0.002,
+  "dc_offset_out_V": 0.0029,
+  "swing_A_V": 0.3422,
+  "swing_B_V": 0.3259,
+  "peak_A_V": 0.6845,
+  "peak_B_V": 0.6818,
+  "noise_gain": 1.0473
+ },
+ {
+  "IFS_mA": 3.0,
+  "Rf": 300.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   300.7,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.8992,
+  "cm_to_out_V_per_mA": 0.0007,
+  "dc_offset_out_V": 0.001,
+  "swing_A_V": 0.4256,
+  "swing_B_V": 0.4089,
+  "peak_A_V": 0.8511,
+  "peak_B_V": 0.8477,
+  "noise_gain": 1.0599
+ },
+ {
+  "IFS_mA": 3.0,
+  "Rf": 400.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   169.7,
+   285.6,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 1.1579,
+  "cm_to_out_V_per_mA": -0.001,
+  "dc_offset_out_V": -0.0015,
+  "swing_A_V": 0.2462,
+  "swing_B_V": 0.2229,
+  "peak_A_V": 0.4924,
+  "peak_B_V": 0.4748,
+  "noise_gain": 2.3533
+ },
+ {
+  "IFS_mA": 3.0,
+  "Rf": 500.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   228.0,
+   826.1,
+   570.3,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.887,
+  "cm_to_out_V_per_mA": -0.0003,
+  "dc_offset_out_V": -0.0004,
+  "swing_A_V": 0.3271,
+  "swing_B_V": 0.313,
+  "peak_A_V": 0.6542,
+  "peak_B_V": 1.0121,
+  "noise_gain": 1.3581
+ },
+ {
+  "IFS_mA": 3.0,
+  "Rf": 750.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   216.0,
+   534.7,
+   668.4,
+   10.0,
+   4331.0
+  ],
+  "vout_ampl_V": 1.0,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.3087,
+  "swing_B_V": 0.3087,
+  "peak_A_V": 0.6174,
+  "peak_B_V": 0.8912,
+  "noise_gain": 1.6234
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 237.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   237.3,
+   5000.0,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.9467,
+  "cm_to_out_V_per_mA": 0.0003,
+  "dc_offset_out_V": 0.0006,
+  "swing_A_V": 0.4531,
+  "swing_B_V": 0.4314,
+  "peak_A_V": 0.9063,
+  "peak_B_V": 0.9027,
+  "noise_gain": 1.0473
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 300.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   155.6,
+   314.3,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 1.1615,
+  "cm_to_out_V_per_mA": -0.0008,
+  "dc_offset_out_V": -0.0015,
+  "swing_A_V": 0.3019,
+  "swing_B_V": 0.2726,
+  "peak_A_V": 0.6038,
+  "peak_B_V": 0.584,
+  "noise_gain": 1.9251
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 400.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   170.2,
+   587.7,
+   442.5,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.9125,
+  "cm_to_out_V_per_mA": -0.0002,
+  "dc_offset_out_V": -0.0003,
+  "swing_A_V": 0.3292,
+  "swing_B_V": 0.3175,
+  "peak_A_V": 0.6583,
+  "peak_B_V": 1.0097,
+  "noise_gain": 1.3883
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 500.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   172.6,
+   499.7,
+   500.4,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.9992,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.3338,
+  "swing_B_V": 0.3336,
+  "peak_A_V": 0.6675,
+  "peak_B_V": 1.0001,
+  "noise_gain": 1.5
+ },
+ {
+  "IFS_mA": 4.0,
+  "Rf": 750.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   130.3,
+   251.1,
+   502.1,
+   10.0,
+   3499.0
+  ],
+  "vout_ampl_V": 1.0,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.2513,
+  "swing_B_V": 0.2513,
+  "peak_A_V": 0.5025,
+  "peak_B_V": 0.6695,
+  "noise_gain": 1.9957
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 237.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   151.9,
+   407.2,
+   10.0,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 1.1552,
+  "cm_to_out_V_per_mA": -0.0006,
+  "dc_offset_out_V": -0.0014,
+  "swing_A_V": 0.3686,
+  "swing_B_V": 0.3347,
+  "peak_A_V": 0.7372,
+  "peak_B_V": 0.7181,
+  "noise_gain": 1.568
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 300.0,
+  "feasible": false,
+  "RdA RdB Rg R3 R4": [
+   134.3,
+   495.7,
+   342.2,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.887,
+  "cm_to_out_V_per_mA": -0.0002,
+  "dc_offset_out_V": -0.0004,
+  "swing_A_V": 0.3271,
+  "swing_B_V": 0.313,
+  "peak_A_V": 0.6542,
+  "peak_B_V": 1.0121,
+  "noise_gain": 1.3581
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 400.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   137.2,
+   399.7,
+   400.3,
+   10.0,
+   5000.0
+  ],
+  "vout_ampl_V": 0.9992,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.3338,
+  "swing_B_V": 0.3336,
+  "peak_A_V": 0.6675,
+  "peak_B_V": 1.0001,
+  "noise_gain": 1.5
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 500.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   117.9,
+   267.5,
+   401.2,
+   10.0,
+   4171.3
+  ],
+  "vout_ampl_V": 1.0,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.2868,
+  "swing_B_V": 0.2868,
+  "peak_A_V": 0.5735,
+  "peak_B_V": 0.8024,
+  "noise_gain": 1.7478
+ },
+ {
+  "IFS_mA": 5.0,
+  "Rf": 750.0,
+  "feasible": true,
+  "RdA RdB Rg R3 R4": [
+   146.9,
+   200.0,
+   550.0,
+   109.2,
+   546.1
+  ],
+  "vout_ampl_V": 1.0,
+  "cm_to_out_V_per_mA": -0.0,
+  "dc_offset_out_V": -0.0,
+  "swing_A_V": 0.3,
+  "swing_B_V": 0.3,
+  "peak_A_V": 0.6,
+  "peak_B_V": 0.7333,
+  "noise_gain": 2.0
+ }
+]

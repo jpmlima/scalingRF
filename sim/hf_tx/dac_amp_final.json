@@ -1,0 +1,38 @@
+{
+ "values_ohm": {
+  "RdA": 133.0,
+  "RdB": 412.0,
+  "Rg": 392.0,
+  "R3": 10.0,
+  "R4": "DNP",
+  "Rf": 383.0
+ },
+ "nominal": {
+  "vout_ampl_V": 0.9816,
+  "cm_to_out_V_per_mA": 0.0001,
+  "dc_offset_out_V": 0.0002,
+  "swing_A_V": 0.3325,
+  "swing_B_V": 0.3318,
+  "peak_A_V": 0.665,
+  "peak_B_V": 1.0044,
+  "noise_gain": 1.4764
+ },
+ "MC_tol_0.1%": {
+  "gain_spread_dB": [
+   -0.012,
+   0.012
+  ],
+  "cm_offset_out_mV_max_abs": 1.33,
+  "balance_error_max_%": 0.5,
+  "peak_DAC_node_max_V": 1.005
+ },
+ "MC_tol_1%": {
+  "gain_spread_dB": [
+   -0.122,
+   0.113
+  ],
+  "cm_offset_out_mV_max_abs": 11.39,
+  "balance_error_max_%": 3.03,
+  "peak_DAC_node_max_V": 1.014
+ }
+}

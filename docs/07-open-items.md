@@ -56,7 +56,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
 - [x] HF TX lineup (sim/hf_tx rev 0): level plan, image and harmonic budgets → requirements
 - [x] HF TX: amplifier selected — LMH6702 SOT-23, ±5 V (sim/hf_tx rev 1)
-- [ ] HF TX: DAC → amplifier resistor network (balanced loading, compliance, transimpedance) — needs an op-amp model in netsolve
+- [x] HF TX: DAC → amplifier network (sim/hf_tx rev 2): IFS 5 mA, E96 133/412/392/10/DNP/383 Ω, 0.1 % resistors, digital DC trim
+- [ ] HF TX: AD9707 SFDR vs IOUTFS (5 mA = top of range)
 - [ ] Power tree: add ±5 V rails for the LMH6702
 - [ ] HF TX: design reconstruction filter (≥ 23 dB @ 101 MHz, ≥ 5th order) and verify in the chain with the diplexer
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
