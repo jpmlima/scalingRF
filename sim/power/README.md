@@ -1,6 +1,30 @@
-# Power tree — rev 2
+# Power tree — rev 3
 
-**Status (rev 2):** AD9361 supply **corrected** to ADI's documented low-noise solution (rev 1 misread the datasheet figure). Loads 7.7 W, input **9.7 W (0.81 A at 12 V), 79 %**. 9 loads still unverified; other regulators not chosen.
+**Status (rev 3):** AD9361 1.3 V regulators chosen and ripple-budgeted; two-stage bus introduced. Loads 7.7 W, input **10.2 W (0.85 A at 12 V), 75 %**. 9 loads still unverified; other regulators not chosen.
+
+## Rev 3 — AD9361 1.3 V: regulators and ripple budget
+
+**No AD9361 supply-ripple sensitivity figure** (spur dBc per mV) was found in accessible ADI material; UG-570 discusses supply-induced phase noise with plots, not a number. **Not invented.** Criterion anchored on what ADI validated instead: LO phase noise was measured with the ADP1755, whose own output noise is ~23 µV rms → the switching ripple reaching the AD9361 must sit far below that (target ≤ 2 µV pp).
+
+**LDO: ADP1762 ×2 instead of ADP1755.** The ADP1755 (ADP1754/1755 datasheet: 1.2 A, VIN 1.6–3.6 V) would run at its **minimum input** from a 1.6 V buck, and its datasheet gives no PSRR at 1 MHz or at low headroom. The ADP1762 (2 A, VIN 1.10–1.98 V, designed for low headroom) has **~2 µV rms noise (~10× lower)** and specifies **39 dB at 1 MHz** with 1.6 V in / 1.3 V out at 2 A. (An aggregator page labels ADP1762-like specs as "ADP1755"; the official ADP1754/1755 datasheet is used here.)
+
+**Ripple** (`ripple_ad9361.py`; buck 10 mV pp at 1.2 MHz — both ASSUMED, to verify on the ADP2164 datasheet):
+
+| Filtering | Ripple at AD9361 | vs 23 µV rms |
+|---|---|---|
+| LDO only (39 dB) | 112 µV pp | ✘ |
+| + LC post-filter, fc 300 kHz (24 dB) | 7.0 µV pp | ✘ |
+| **+ LC post-filter, fc 120 kHz (40 dB)** | **1.1 µV pp** | ✔ |
+
+→ **ADP2164 → damped LC post-filter (fc ≈ 120 kHz) → 2× ADP1762 → AD9361 1.3 V.**
+
+**Two-stage bus.** The ADP2164 accepts ≤ 6.5 V, so it cannot sit on the 9–15 V input: point-of-load bucks now run from the **5.6 V intermediate bus**. The largest load (TE0720, 3 W) gets a **wide-input buck directly from VIN** to avoid double conversion there (10.7 W → 10.2 W).
+
+**To verify:** ADP2164 switching frequency and whether it can be synchronised — the tree's "≥ 2 MHz, synchronised to a reference-derived clock" requirement may conflict with it; if so, pick a synchronisable buck or re-run the ripple budget at its frequency.
+
+---
+
+# Rev 2
 
 ## Rev 2 — correction: the whole AD9361 1.3 V goes through LDOs
 

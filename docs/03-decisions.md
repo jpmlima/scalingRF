@@ -219,3 +219,9 @@ Every RF, converter and clock rail is LDO post-regulated after a switcher set ju
 ## D25 — AD9361 supply: ADI low-noise reference (ADP2164 + 2× ADP1755), VDD_GPO tied to 1.3 V
 
 Replaces the rev-1 "buck directly on 1.3 V" (a misreading of the datasheet figure). The full 1.3 V is LDO-regulated by two ADP1755 fed from an ADP2164 buck, per ADI's low-noise solution; ADI shows the ADP1755 gives the best LO phase noise. GPO and AuxDAC are unused, so VDD_GPO is tied to 1.3 V (ADI's guidance), which removes the only sequencing rule of the part.
+
+---
+
+## D26 — AD9361 1.3 V: ADP2164 + LC post-filter + 2× ADP1762; 5.6 V intermediate bus
+
+With no AD9361 ripple-sensitivity figure available, the criterion is to stay far below the noise of the LDO ADI validated (ADP1755, ~23 µV rms). The ADP1762 replaces the ADP1755 (rated for the low input voltage, ~10× lower noise, PSRR specified at 1 MHz). A damped LC post-filter (≈120 kHz) brings the switching ripple at the AD9361 to ~1.1 µV pp. PoL bucks run from a 5.6 V bus; the SoM buck runs directly from the 9–15 V input.

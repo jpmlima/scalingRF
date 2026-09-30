@@ -6,16 +6,16 @@ import loads as L
 BUCK_EFF, CP_EFF = 0.88, 0.85
 # name, source, Vout, loads [(rail V, class)], type, Vin (for LDOs)
 TREE = [
-    ("BUCK_5V6", "VIN", 5.6, [], "buck", None),
+    ("BUCK_5V6", "VIN", 5.6, [], "buck", None),               # intermediate bus: ADP2164-class PoL bucks need <= 6.5 V in
     ("LDO_5V0_RF", "BUCK_5V6", 5.0, [(5.0, "rf-clean")], "ldo", 5.6),
     ("RELAYS_5V6", "BUCK_5V6", 5.6, [(5.0, "digital")], "direct", None),
-    ("BUCK_3V3_DIG", "VIN", 3.3, [(3.3, "digital")], "buck", None),
-    ("BUCK_3V8", "VIN", 3.8, [], "buck", None),
+    ("BUCK_3V3_DIG", "VIN", 3.3, [(3.3, "digital")], "buck", None),        # wide-input buck (9-15 V) for the SoM: avoids double conversion on the largest load
+    ("BUCK_3V8", "BUCK_5V6", 3.8, [], "buck", None),
     ("LDO_3V3_CLK", "BUCK_3V8", 3.3, [(3.3, "rf-clean")], "ldo", 3.8),
     ("LDO_3V3_CLEAN", "BUCK_3V8", 3.3, [(3.3, "clean")], "ldo", 3.8),
-    ("BUCK_1V6_AD9361", "VIN", 1.6, [], "buck", None),                    # ADI Fig. 74: ADP2164
-    ("LDO_1V3_AD9361_AB", "BUCK_1V6_AD9361", 1.3, [(1.3, "rf-clean")], "ldo", 1.6),  # 2x ADP1755 (sum)
-    ("BUCK_2V3", "VIN", 2.3, [], "buck", None),
+    ("BUCK_1V6_AD9361", "BUCK_5V6", 1.6, [], "buck", None),                    # ADP2164 + LC post-filter
+    ("LDO_1V3_AD9361_AB", "BUCK_1V6_AD9361", 1.3, [(1.3, "rf-clean")], "ldo", 1.6),  # 2x ADP1762 (sum) — lower noise than ADP1755, rated for 1.1-1.98 V in
+    ("BUCK_2V3", "BUCK_5V6", 2.3, [], "buck", None),
     ("LDO_1V8_CONV", "BUCK_2V3", 1.8, [(1.8, "rf-clean")], "ldo", 2.3),
     ("LDO_1V8_IO", "BUCK_2V3", 1.8, [(1.8, "clean")], "ldo", 2.3),
     ("CP_NEG5V5", "BUCK_5V6", -5.5, [], "cp", None),
