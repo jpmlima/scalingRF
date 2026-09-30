@@ -153,3 +153,9 @@ Analysis (sim/hf_rx, validated against datasheet measurement): without an LNA th
 ## D14 — Preselector is designed inside the chain, not in isolation
 
 Simulating diplexer + preselector as one network showed the product-of-blocks estimate is optimistic for B3 (IIP2_eff +60.9 vs +64.5 dBm): near the diplexer crossover its LP response depends on the load, and the preselector is reactive there. B3 was re-optimised with every metric computed on the real chain (IIP2 +62.9 dBm nominal, antenna RL 9.6 → 12.4 dB). The AD9361 path is unaffected. Remaining B3 issue (sensitivity loss) is set by inductor Q.
+
+---
+
+## D15 — B3 preselector uses air-core inductors
+
+0805HP Q (~45 at 30–50 MHz) left B3 at 1.70 dB sensitivity loss vs a 1.5 dB limit, failing in 82 % of builds on the real chain. Coilcraft 2222SQ/2929SQ air-core parts (Q ≈ 100–180, manufacturer transmission-line model, datasheet-checked) bring it to 1.46 dB worst case, 0 % fails. B1/B2 keep 0805HP: their noise budget is large. Cost: larger parts (up to 13 mm) and a layout requirement to control mutual coupling between coils.

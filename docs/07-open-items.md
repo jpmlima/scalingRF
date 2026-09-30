@@ -49,7 +49,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] HF RX: LTC6433-15 price/availability; add 475 mW to power budget; bias choke network per datasheet Table 1
 - [x] HF RX: 3-band preselector, elliptic, 0805HP (sim/preselector rev 1): IIP2_eff ≥ +60 dBm in 100 % of Monte Carlo runs; desense deviations B2/B3 ≤ 0.15 dB accepted
 - [x] HF RX: diplexer + preselector as one network (sim/system rev 1): AD9361 path not degraded; B3 re-optimised in the chain; B2 passes all; B1/B3 IIP2 ≤ 0.6 dB short in 3 % (accepted)
-- [ ] HF RX: B3 sensitivity loss is inductor-Q-limited (1.70 vs 1.5 dB) → evaluate higher-Q inductors for the 4 B3 parts
+- [x] HF RX: B3 with air-core inductors (2222SQ/2929SQ): desense 0 % fails on the chain (sim/system rev 2)
+- [ ] Layout: air-core coils in B3 — orthogonal axes / spacing / shield; EM check of mutual coupling
 - [ ] Refactor sim/hf_rx/modes.py so importing it has no side effects
 - [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC

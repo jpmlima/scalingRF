@@ -11,12 +11,16 @@ from netsolve import sparams, db, rl_worst
 from noise_budget import budget_curve, desense, DESENSE_MAX
 
 band = sys.argv[1]; GOAL = float(sys.argv[2]) if len(sys.argv) > 2 else 63.0
+LIB = sys.argv[3] if len(sys.argv) > 3 else "0805HP"          # inductor family: 0805HP or SQ
+from coilcraft_sq import SQ
 fl, fh = P.BANDS[band]
 F_OPT = np.logspace(np.log10(0.3e6), np.log10(200e6), 280)
 inb = (F_OPT >= fl) & (F_OPT <= fh)
 DIP_IN = D.DIP.sim(D.DIP_L, D.DIP_C, F_OPT)[:, 1, 0]
 BUD = budget_curve(F_OPT[inb], DESENSE_MAX[band])
-j0 = json.load(open(os.path.join(D.HERE, "..", "preselector", f"ell_{band}.json")))
+_src = os.path.join(D.HERE, f"chain_{band}.json")
+if not os.path.exists(_src): _src = os.path.join(D.HERE, "..", "preselector", f"ell_{band}.json")
+j0 = json.load(open(_src))
 v0 = np.array(j0["values"]); parts0 = j0["inductors"]
 
 
@@ -32,7 +36,7 @@ def chain(v, parts, F):
 
 
 def resid(x, parts):
-    v = v0.copy(); v[~E.IS_L] = np.exp(x); v[E.IS_L] = [P.PARTS[n][0] for n in parts]
+    v = v0.copy(); v[~E.IS_L] = np.exp(x); v[E.IS_L] = [E.Lval(n) for n in parts]
     S = chain(v, parts, F_OPT)
     A = -db(S[:, 1, 0]); presel = A - (-db(DIP_IN))
     r = list(1.0 * np.maximum(0, presel[inb] - (BUD - 0.2))) + list(0.1 * presel[inb])
@@ -59,12 +63,13 @@ def score(v, parts):
 
 
 lo = np.log(np.full((~E.IS_L).sum(), 1e-12)); hi = np.log(np.full((~E.IS_L).sum(), 2.2e-9))
-cands = [sorted(P.L_AVAIL, key=lambda n: abs(np.log(P.PARTS[n][0] / P.PARTS[p][0])))[:2] for p in parts0]
+pool = list(SQ) if LIB == "SQ" else list(P.L_AVAIL)
+cands = [sorted(pool, key=lambda n: abs(np.log(E.Lval(n) / E.Lval(p))))[:2] for p in parts0]
 best = None
 for combo in itertools.product(*cands):
     x0 = np.clip(np.log(v0[~E.IS_L]), lo + 1e-6, hi - 1e-6)
     sol = least_squares(resid, x0, args=(combo,), bounds=(lo, hi), max_nfev=10)
-    v = v0.copy(); v[~E.IS_L] = [P.snapE24(c) for c in np.exp(sol.x)]; v[E.IS_L] = [P.PARTS[n][0] for n in combo]
+    v = v0.copy(); v[~E.IS_L] = [P.snapE24(c) for c in np.exp(sol.x)]; v[E.IS_L] = [E.Lval(n) for n in combo]
     ip, ds, rl, m = score(v, combo)
     s = ip - 5 * max(0, ds - DESENSE_MAX[band]) - 0.5 * max(0, 12 - rl)
     if best is None or s > best[0]: best = (s, combo, v, ip, ds, rl, m)
@@ -73,5 +78,5 @@ out = {"band": band, "goal": GOAL, "IIP2_eff_chain": ip, "desense_chain": round(
        "worst_pairs": m, "inductors": list(combo),
        "caps_pF": {n: round(float(c) * 1e12, 1) for n, c in zip(E.NAMES, v) if not n.startswith("L")},
        "values": [float(x) for x in v]}
-json.dump(out, open(os.path.join(D.HERE, f"chain_{band}.json"), "w"), indent=1)
+json.dump(out, open(os.path.join(D.HERE, f"chain_{band}{'_SQ' if LIB == 'SQ' else ''}.json"), "w"), indent=1)
 print(json.dumps({k: out[k] for k in out if k not in ("values", "worst_pairs")}))

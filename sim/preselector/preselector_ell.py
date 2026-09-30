@@ -16,6 +16,7 @@ import numpy as np
 from scipy.optimize import least_squares
 import preselector as P                     # rev 0 helpers: Net, PAR, sim tools, iip2_map, PARTS
 from netsolve import sparams, db
+from coilcraft_sq import SQ
 from noise_budget import budget_curve, DESENSE_MAX
 
 LOSS_BUDGET = {"B1": 6.0, "B2": 4.0, "B3": 2.0}
@@ -38,6 +39,11 @@ def build(v, lmodel, parasitic=True):
     def ind(a, b, L):
         i = next(li)
         if lmodel[0] == "Q": net.add("Lreal", a, b, (L, lmodel[1], 0.0, 0.0))
+        elif lmodel[1][i] in SQ:                  # air-core, transmission-line model (Doc 836-2)
+            p = SQ[lmodel[1][i]]
+            m1 = net.node(); m2 = net.node()
+            net.add("R", a, m1, p["R2"]); net.add("TL2", m1, b, (p["Z0"], p["EL"], p["F0"]), pads=False)
+            net.add("R", a, m2, p["R1"], pads=False); net.add("C", m2, b, p["C"], pads=False)
         else:
             Lp, R1, R2, C, k, _ = P.PARTS[lmodel[1][i]]; net.add("Lcc", a, b, (Lp, R1, R2, C, k))
     C1, L2, Cz2, C3, L4, Cz4, C5, C6, L7, Cz7, C8, L9, Cz9, C10 = v
@@ -136,3 +142,8 @@ def run(band):
 if __name__ == "__main__":
     o = run(sys.argv[1])
     print(json.dumps({k: o[k] for k in o if k != "values"}))
+
+
+def Lval(name):
+    """Nominal inductance of a part from either library."""
+    return SQ[name]["L"] if name in SQ else P.PARTS[name][0]

@@ -21,6 +21,11 @@ def perturb(el, rng):
             C, esl, esr = v
             C = C + max(abs(C * rng.uniform(-.02, .02)), abs(rng.uniform(-.1e-12, .1e-12))) * rng.choice([-1, 1])
             v = (C, esl * (1 + rng.uniform(-.2, .2)), esr)
+        elif k == "TL2":                                  # air-core inductor: L tolerance via Z0 (G = 2 %)
+            Zc, el_, f0 = v
+            v = (Zc * (1 + rng.uniform(-.02, .02)), el_, f0)
+        elif k == "R" and v < 5.0:                        # air-core series loss R2
+            v = v * (1 + rng.uniform(-.1, .1))
         elif k == "C" and v < 2e-12:                      # pads / trace sections
             v = v * (1 + rng.uniform(-.2, .2))
         elif k == "L" and v < 2e-9:                       # vias / trace sections
@@ -52,5 +57,5 @@ if __name__ == "__main__":
            "fail_iip2_%": round(100 * float(np.mean(iip2[1:] < 60)), 1),
            "desense_p99": round(float(np.percentile(des[1:], 99)), 2),
            "fail_desense_%": round(100 * float(np.mean(des[1:] > DESENSE_MAX[band])), 1)}
-    json.dump(out, open(os.path.join(D.HERE, f"mc_chain_{band}{'_redesign' if src else ''}.json"), "w"), indent=1)
+    json.dump(out, open(os.path.join(D.HERE, f"mc_chain_{band}" + ('_' + os.path.splitext(os.path.basename(src))[0] if src else '') + '.json'), "w"), indent=1)
     print(json.dumps(out))

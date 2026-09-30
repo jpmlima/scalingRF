@@ -44,6 +44,12 @@ def sparams(elements, ports, freqs, n_nodes):
         w = 2 * np.pi * f
         Y = np.zeros((n_nodes, n_nodes), dtype=complex)   # includes ground row/col 0
         for kind, a, b, val in elements:
+            if kind == "TL2":                       # ideal TEM line, 2-port referenced to ground
+                Zc, el_deg, f0 = val
+                th = np.deg2rad(el_deg) * f / f0
+                y11 = -1j / np.tan(th) / Zc; y12 = 1j / np.sin(th) / Zc
+                Y[a, a] += y11; Y[b, b] += y11; Y[a, b] += y12; Y[b, a] += y12
+                continue
             y = _elem_admittance(kind, val, w)
             Y[a, a] += y
             Y[b, b] += y
@@ -83,6 +89,16 @@ def rl_worst(s11):
 
 
 if __name__ == "__main__":
+    # TL2: a short high-impedance line must look like L = Zc*tau in series (low f)
+    Zc, el, f0 = 1230.0, 49.2, 1040e6
+    tau = el / 360 / f0
+    for f in (1e6, 30e6):
+        Sl = sparams([("TL2", 1, 2, (Zc, el, f0))], [(1, 50.0), (2, 50.0)], [f], 3)
+        Si = sparams([("L", 1, 2, Zc * tau)], [(1, 50.0), (2, 50.0)], [f], 3)
+        assert abs(Sl[0, 1, 0] - Si[0, 1, 0]) < 2e-3, (f, Sl[0, 1, 0], Si[0, 1, 0])
+    # a quarter-wave 50-ohm line is matched and gives -90 degrees
+    Sq = sparams([("TL2", 1, 2, (50.0, 90.0, 100e6))], [(1, 50.0), (2, 50.0)], [100e6], 3)
+    assert abs(Sq[0, 0, 0]) < 1e-9 and abs(Sq[0, 1, 0] - (-1j)) < 1e-9, Sq
     x = np.array([1.0, 10 ** (-1 / 20), 10 ** (-3 / 20)])
     assert abs(loss_worst(x) - 3.0) < 1e-9 and abs(loss_best(x) - 0.0) < 1e-9
     g = np.array([0.1, 0.5])
