@@ -13,8 +13,8 @@ TREE = [
     ("BUCK_3V8", "VIN", 3.8, [], "buck", None),
     ("LDO_3V3_CLK", "BUCK_3V8", 3.3, [(3.3, "rf-clean")], "ldo", 3.8),
     ("LDO_3V3_CLEAN", "BUCK_3V8", 3.3, [(3.3, "clean")], "ldo", 3.8),
-    ("BUCK_1V3_AD9361", "VIN", 1.3, [(1.3, "clean")], "buck", None),      # ADI reference: 1.2 A buck
-    ("LDO_1V3_SYNTH", "BUCK_2V3", 1.3, [(1.3, "rf-clean")], "ldo", 2.3),  # ADI reference: 300 mA LDO
+    ("BUCK_1V6_AD9361", "VIN", 1.6, [], "buck", None),                    # ADI Fig. 74: ADP2164
+    ("LDO_1V3_AD9361_AB", "BUCK_1V6_AD9361", 1.3, [(1.3, "rf-clean")], "ldo", 1.6),  # 2x ADP1755 (sum)
     ("BUCK_2V3", "VIN", 2.3, [], "buck", None),
     ("LDO_1V8_CONV", "BUCK_2V3", 1.8, [(1.8, "rf-clean")], "ldo", 2.3),
     ("LDO_1V8_IO", "BUCK_2V3", 1.8, [(1.8, "clean")], "ldo", 2.3),

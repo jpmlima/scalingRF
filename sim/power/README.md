@@ -1,12 +1,28 @@
-# Power tree — rev 1
+# Power tree — rev 2
 
-**Status (rev 1):** the two largest estimated loads verified in datasheets and the AD9361 1.3 V supply changed to ADI's reference split. **9 loads still unverified** (`loads.json → unverified`); regulators not chosen; efficiencies assumed.
+**Status (rev 2):** AD9361 supply **corrected** to ADI's documented low-noise solution (rev 1 misread the datasheet figure). Loads 7.7 W, input **9.7 W (0.81 A at 12 V), 79 %**. 9 loads still unverified; other regulators not chosen.
+
+## Rev 2 — correction: the whole AD9361 1.3 V goes through LDOs
+
+Rev 1 adopted "a 1.2 A buck directly for the main 1.3 V + a 300 mA LDO for the synth nets", read from a text-extracted datasheet figure. **That was a misreading.** ADI documents two solutions, and in both the entire 1.3 V is LDO-regulated:
+- **Low-noise (datasheet Fig. 74):** ADP2164 buck → **two ADP1755 LDOs** with the 1.3 V split between them. **Adopted.**
+- Space-optimised: ADP5040 (1.2 A buck + two 300 mA LDOs, PSRR > 60 dB) + ADP1755; the ADP5040 LDOs feed VDD_INTERFACE and VDD_GPO, the ADP1755 feeds the 1.3 V.
+
+Also from ADI:
+- UG-570 ("phase noise effects from power supply variations"): ADP1755 gives the best LO phase noise; **the highest LO frequencies are the most sensitive** (smallest VCO divide ratios).
+- Sequencing: only VDD_GPO has a rule (≥ the 1.3 V rail, rising as fast). **GPO and AuxDAC are unused here (control is via I²C expanders) → VDD_GPO tied to 1.3 V**, removing that rule and the 3.3 V GPO load.
+
+Effect: the 86 % of rev 1 came from the misreading. Correct figure: 9.7 W in, 79 %. The ADP1755 LDOs (1.6 → 1.3 V) dissipate 0.31 W; their PSRR at 0.3 V headroom must be checked against the ADP2164 switching frequency.
+
+---
+
+# Rev 1 **9 loads still unverified** (`loads.json → unverified`); regulators not chosen; efficiencies assumed.
 
 ## Rev 1 — verified loads
 
 - **LMK03328** was estimated at 200 mA for the whole part: the datasheet gives IDD-IN 61, PLL1 144, PLL2 110, DIG 41 mA (typ), and 60–92 mA per output group. With PLL2 off and two output groups: **~246 mA core at 3.3 V + ~184 mA outputs** (VDDO can be 1.8 V → used here; check that the chosen output formats are valid at 1.8 V). About **2× the estimate**. Supply-noise rejection is good (PSNR −80 dBc).
 - **AD9361 1.3 V**, FDD 800 MHz, 2R2T, 20 MHz BW: **1020 mA** with TX at +7 dBm, 730 mA at −27 dBm (datasheet table) → the 1.0 A budget was right, barely; wider bandwidths draw more.
-- The AD9361 datasheet shows ADI's supply reference: **a 1.2 A buck for the main 1.3 V and a 300 mA LDO for the sensitive SYNTH/LO/VCO nets** → adopted, instead of one LDO for the full ampere (which wasted 0.4 W).
+- ~~The AD9361 datasheet shows ADI's supply reference: a 1.2 A buck for the main 1.3 V and a 300 mA LDO for the sensitive nets~~ — **misreading, corrected in rev 2.**
 
 Result: loads **7.7 W**, input **8.9 W (0.74 A at 12 V), 86 %**.
 

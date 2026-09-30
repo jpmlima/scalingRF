@@ -6,10 +6,10 @@ import json, os
 LOADS = [
     # name, rail_V, current_A (typ, design), source, noise class, note
     ("TE0720 SoM (Zynq-7020, DDR3, GbE PHY)", 3.3, 0.9, "DS: 2-3 W typ; 3 A start-up capability recommended (family TRMs)", "digital", "VIN and 3.3VIN tied (single-supply mode)"),
-    ("AD9361 1.3 V main (RX/TX/BB/DIG)", 1.3, 0.72, "DS: 2R2T FDD 800 MHz 20 MHz BW: 1020 mA @ +7 dBm TX (730 mA @ -27 dBm); minus the 0.3 A synth share", "clean", "ADI reference: 1.2 A buck directly"),
-    ("AD9361 1.3 V SYNTH/LO/VCO nets", 1.3, 0.30, "DS: ADI reference design uses a 300 mA LDO for these nets", "rf-clean", "separate low-noise LDO (UG-673)"),
+    ("AD9361 1.3 V, LDO A (split per ADI Fig. 74)", 1.3, 0.51, "DS: 2R2T FDD 800 MHz 20 MHz BW: 1020 mA @ +7 dBm TX; split in two", "rf-clean", "ADP1755 (ADI low-noise reference)"),
+    ("AD9361 1.3 V, LDO B (split per ADI Fig. 74)", 1.3, 0.51, "DS: as above", "rf-clean", "ADP1755; SYNTH/LO/VCO nets here"),
     ("AD9361 VDD_INTERFACE", 1.8, 0.02, "DS: ~4-8 mA CMOS FDD", "clean", "same rail as Zynq banks 13/35 (1.8 V)"),
-    ("AD9361 VDD_GPO", 3.3, 0.01, "DS: GPO outputs 10 mA max each", "digital", ""),
+    ("AD9361 VDD_GPO (tied to 1.3 V: GPO/AuxDAC unused)", 1.3, 0.0001, "DS/ADI EZ: GPO >= 1.3 V rail and as fast; tie to 1.3 V if unused", "rf-clean", "removes a sequencing rule"),
     ("LTC2262-14 HF ADC", 1.8, 0.083, "DS: 149 mW", "rf-clean", ""),
     ("AD9707 HF DAC (IOUTFS 5 mA)", 1.8, 0.03, "EST", "rf-clean", ""),
     ("LTC6409 HF RX FDA", 3.3, 0.055, "EST (~50 mA class)", "rf-clean", "3.3 V as in datasheet front-page circuit"),

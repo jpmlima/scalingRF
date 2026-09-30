@@ -28,9 +28,9 @@
    "node": "BUCK_3V3_DIG",
    "type": "buck",
    "Vout": 3.3,
-   "P_out_W": 3.069,
-   "P_in_W": 3.487,
-   "loss_W": 0.418
+   "P_out_W": 3.036,
+   "P_in_W": 3.45,
+   "loss_W": 0.414
   },
   {
    "node": "BUCK_3V8",
@@ -57,20 +57,20 @@
    "loss_W": 0.006
   },
   {
-   "node": "BUCK_1V3_AD9361",
+   "node": "BUCK_1V6_AD9361",
    "type": "buck",
-   "Vout": 1.3,
-   "P_out_W": 0.936,
-   "P_in_W": 1.064,
-   "loss_W": 0.128
+   "Vout": 1.6,
+   "P_out_W": 1.632,
+   "P_in_W": 1.855,
+   "loss_W": 0.223
   },
   {
-   "node": "LDO_1V3_SYNTH",
+   "node": "LDO_1V3_AD9361_AB",
    "type": "ldo",
    "Vout": 1.3,
-   "P_out_W": 0.39,
-   "P_in_W": 0.69,
-   "loss_W": 0.3
+   "P_out_W": 1.326,
+   "P_in_W": 1.632,
+   "loss_W": 0.306
   },
   {
    "node": "BUCK_2V3",
@@ -121,8 +121,8 @@
    "loss_W": 0.003
   }
  ],
- "P_loads_W": 7.71,
- "P_in_W": 8.92,
- "efficiency": 0.864,
- "input_current_at_12V_A": 0.74
+ "P_loads_W": 7.67,
+ "P_in_W": 9.68,
+ "efficiency": 0.793,
+ "input_current_at_12V_A": 0.81
 }

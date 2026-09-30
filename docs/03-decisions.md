@@ -213,3 +213,9 @@ The bias tees (0402DF-591 chokes, ATC 531Z104 broadband DC blocks) are the ones 
 ## D24 — Power architecture: switchers + low-noise LDO post-regulation, 9–15 V input
 
 Every RF, converter and clock rail is LDO post-regulated after a switcher set just above it; digital loads (TE0720) run directly from a 3.3 V buck. Budget: 7.2 W at the loads, ~9.1 W in (79 %). Input 9–15 V DC; if PoE is added it must be 802.3at (PoE+). Switchers ≥ 2 MHz, synchronised to a reference-derived clock.
+
+---
+
+## D25 — AD9361 supply: ADI low-noise reference (ADP2164 + 2× ADP1755), VDD_GPO tied to 1.3 V
+
+Replaces the rev-1 "buck directly on 1.3 V" (a misreading of the datasheet figure). The full 1.3 V is LDO-regulated by two ADP1755 fed from an ADP2164 buck, per ADI's low-noise solution; ADI shows the ADP1755 gives the best LO phase noise. GPO and AuxDAC are unused, so VDD_GPO is tied to 1.3 V (ADI's guidance), which removes the only sequencing rule of the part.
