@@ -75,7 +75,7 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] VHF RX: verify 0402DF-591 with Coilcraft S2P (model reconstruction from Doc 267 failed; don't force-fit)
 - [ ] HMC8410 gate bias: −2…0 V DAC from −3 V rail, drain current sense, boot-time IDQ calibration, hardware-safe sequencing
 - [ ] Limiter: keep LNA input ≤ +20 dBm (abs. max) with margin
-- [ ] Stackup: RF sections to 6 GHz (ADI eval uses Rogers 4350) — FR-4 vs hybrid decision
+- [ ] Stackup: RF sections to 6 GHz — HMC8410 eval on Rogers 4350; FMCOMMS3 is 10 layers with Dk 3.38 outer dielectrics (RO4003C-like, hybrid) — decide FR-4 vs hybrid
 - [ ] VHF RX: select the step attenuator (≥ 20 dB range, IL ≤ 2 dB at 6 GHz) and the limiter
 - [ ] Power tree: +5 V / 65 mA for the HMC8410
 - [x] HF preselector switch re-check (sim/system rev 3): band-select switches were missing from the noise model; with SOI switches B2/B3 fail → relays required
@@ -85,6 +85,7 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] Power tree: −3 V rail for PE42582 VSS_EXT (spur-free mode)
 - [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
+- [ ] Clock (sim/clock rev 0): VCTCXO requirement provisional — need the FMCOMMS3 BOM oscillator (design-support zip) and the UG-570 reference phase-noise mask
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
 - [ ] Digital timing: AD9361 CMOS interface and HF converter interfaces vs. Zynq HR bank timing
 - [ ] Power tree: budget, sequencing, regulator noise vs. AD9361 and converter requirements
