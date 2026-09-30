@@ -61,7 +61,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] Power tree: add ±5 V rails for the LMH6702
 - [x] HF TX: reconstruction filter designed in the chain (sim/hf_tx rev 3): 5 parts, images ≤ −69.9 dBc, loss ≤ 0.81 dB (MC)
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
-- [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)
+- [x] VHF–6 GHz RX cascade (sim/vhf_rx rev 0): LNA after filter bank confirmed; net LNA gain ~12 dB; pre-LNA loss budget
+- [ ] VHF RX: select SP6T/SP8T switches, LNA (NF ≤ 1.5 dB, net ~12 dB), balun — with real data
+- [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
 - [ ] Digital timing: AD9361 CMOS interface and HF converter interfaces vs. Zynq HR bank timing

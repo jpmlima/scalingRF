@@ -1,0 +1,184 @@
+{
+ "assumptions": {
+  "switch": "0.4-1.2 dB",
+  "filter": "1.0-1.5 dB",
+  "balun": "0.8-1.5 dB",
+  "limiter": 0.2,
+  "LNA_target": {
+   "G": 18.0,
+   "NF": 1.5,
+   "OIP3": 33.0
+  },
+  "AD9361": "datasheet max-gain NF/IIP3"
+ },
+ "rows": [
+  {
+   "f_MHz": 100.0,
+   "diplexer_dB": 0.31,
+   "A_filter_then_LNA": {
+    "NF": 3.9,
+    "IIP3": -32.9,
+    "SFDR_1MHz": 51.5
+   },
+   "B_LNA_then_filter": {
+    "NF": 2.1,
+    "IIP3": -32.9,
+    "SFDR_1MHz": 52.7
+   },
+   "C_LNA_bypass": {
+    "NF": 5.1,
+    "IIP3": -14.9,
+    "SFDR_1MHz": 62.7
+   },
+   "Fa_rural_dB": 11.8,
+   "Fa_galactic_dB": 6.0
+  },
+  {
+   "f_MHz": 145.0,
+   "diplexer_dB": 0.18,
+   "A_filter_then_LNA": {
+    "NF": 3.7,
+    "IIP3": -33.0,
+    "SFDR_1MHz": 51.5
+   },
+   "B_LNA_then_filter": {
+    "NF": 2.0,
+    "IIP3": -33.0,
+    "SFDR_1MHz": 52.7
+   },
+   "C_LNA_bypass": {
+    "NF": 5.0,
+    "IIP3": -15.0,
+    "SFDR_1MHz": 62.7
+   },
+   "Fa_rural_dB": 7.3,
+   "Fa_galactic_dB": 2.3
+  },
+  {
+   "f_MHz": 435.0,
+   "diplexer_dB": 0.08,
+   "A_filter_then_LNA": {
+    "NF": 3.7,
+    "IIP3": -33.0,
+    "SFDR_1MHz": 51.5
+   },
+   "B_LNA_then_filter": {
+    "NF": 1.9,
+    "IIP3": -33.0,
+    "SFDR_1MHz": 52.7
+   },
+   "C_LNA_bypass": {
+    "NF": 5.0,
+    "IIP3": -15.0,
+    "SFDR_1MHz": 62.7
+   },
+   "Fa_rural_dB": -5.9,
+   "Fa_galactic_dB": -8.7
+  },
+  {
+   "f_MHz": 900.0,
+   "diplexer_dB": 0.09,
+   "A_filter_then_LNA": {
+    "NF": 3.8,
+    "IIP3": -32.7,
+    "SFDR_1MHz": 51.7
+   },
+   "B_LNA_then_filter": {
+    "NF": 1.9,
+    "IIP3": -32.7,
+    "SFDR_1MHz": 53.0
+   },
+   "C_LNA_bypass": {
+    "NF": 5.1,
+    "IIP3": -14.7,
+    "SFDR_1MHz": 62.8
+   },
+   "Fa_rural_dB": -14.6,
+   "Fa_galactic_dB": -15.9
+  },
+  {
+   "f_MHz": 1300.0,
+   "diplexer_dB": 0.13,
+   "A_filter_then_LNA": {
+    "NF": 3.9,
+    "IIP3": -31.6,
+    "SFDR_1MHz": 52.3
+   },
+   "B_LNA_then_filter": {
+    "NF": 1.9,
+    "IIP3": -31.6,
+    "SFDR_1MHz": 53.7
+   },
+   "C_LNA_bypass": {
+    "NF": 5.5,
+    "IIP3": -13.6,
+    "SFDR_1MHz": 63.3
+   },
+   "Fa_rural_dB": -19.1,
+   "Fa_galactic_dB": -19.6
+  },
+  {
+   "f_MHz": 2400.0,
+   "diplexer_dB": 0.25,
+   "A_filter_then_LNA": {
+    "NF": 4.3,
+    "IIP3": -28.5,
+    "SFDR_1MHz": 54.2
+   },
+   "B_LNA_then_filter": {
+    "NF": 2.1,
+    "IIP3": -28.5,
+    "SFDR_1MHz": 55.6
+   },
+   "C_LNA_bypass": {
+    "NF": 6.5,
+    "IIP3": -10.5,
+    "SFDR_1MHz": 64.7
+   },
+   "Fa_rural_dB": -26.4,
+   "Fa_galactic_dB": -25.7
+  },
+  {
+   "f_MHz": 3500.0,
+   "diplexer_dB": 0.34,
+   "A_filter_then_LNA": {
+    "NF": 4.8,
+    "IIP3": -29.0,
+    "SFDR_1MHz": 53.5
+   },
+   "B_LNA_then_filter": {
+    "NF": 2.2,
+    "IIP3": -29.0,
+    "SFDR_1MHz": 55.2
+   },
+   "C_LNA_bypass": {
+    "NF": 7.4,
+    "IIP3": -11.0,
+    "SFDR_1MHz": 63.8
+   },
+   "Fa_rural_dB": -31.0,
+   "Fa_galactic_dB": -29.5
+  },
+  {
+   "f_MHz": 5800.0,
+   "diplexer_dB": 0.5,
+   "A_filter_then_LNA": {
+    "NF": 6.1,
+    "IIP3": -29.0,
+    "SFDR_1MHz": 52.6
+   },
+   "B_LNA_then_filter": {
+    "NF": 2.5,
+    "IIP3": -29.0,
+    "SFDR_1MHz": 54.9
+   },
+   "C_LNA_bypass": {
+    "NF": 9.8,
+    "IIP3": -11.0,
+    "SFDR_1MHz": 62.1
+   },
+   "Fa_rural_dB": -37.0,
+   "Fa_galactic_dB": -34.6
+  }
+ ]
+}
