@@ -1,0 +1,141 @@
+{
+ "pad_dB": 6.0,
+ "rows": [
+  {
+   "f_MHz": 100.0,
+   "typ": {
+    "NF_LNA": 4.6,
+    "IIP3_LNA": -26.3,
+    "NF_bypass": 7.2,
+    "IIP3_bypass": -12.8,
+    "pre_LNA_loss": 3.21
+   },
+   "max": {
+    "NF_LNA": 5.8,
+    "IIP3_LNA": -23.1,
+    "NF_bypass": 8.4,
+    "IIP3_bypass": -11.6,
+    "pre_LNA_loss": 3.61
+   }
+  },
+  {
+   "f_MHz": 145.0,
+   "typ": {
+    "NF_LNA": 4.5,
+    "IIP3_LNA": -26.4,
+    "NF_bypass": 7.1,
+    "IIP3_bypass": -12.9,
+    "pre_LNA_loss": 3.11
+   },
+   "max": {
+    "NF_LNA": 5.7,
+    "IIP3_LNA": -23.2,
+    "NF_bypass": 8.3,
+    "IIP3_bypass": -11.7,
+    "pre_LNA_loss": 3.51
+   }
+  },
+  {
+   "f_MHz": 435.0,
+   "typ": {
+    "NF_LNA": 4.6,
+    "IIP3_LNA": -26.4,
+    "NF_bypass": 7.1,
+    "IIP3_bypass": -12.9,
+    "pre_LNA_loss": 3.14
+   },
+   "max": {
+    "NF_LNA": 5.7,
+    "IIP3_LNA": -23.1,
+    "NF_bypass": 8.4,
+    "IIP3_bypass": -11.6,
+    "pre_LNA_loss": 3.54
+   }
+  },
+  {
+   "f_MHz": 900.0,
+   "typ": {
+    "NF_LNA": 4.7,
+    "IIP3_LNA": -26.1,
+    "NF_bypass": 7.2,
+    "IIP3_bypass": -12.6,
+    "pre_LNA_loss": 3.31
+   },
+   "max": {
+    "NF_LNA": 6.0,
+    "IIP3_LNA": -22.6,
+    "NF_bypass": 8.7,
+    "IIP3_bypass": -11.1,
+    "pre_LNA_loss": 3.78
+   }
+  },
+  {
+   "f_MHz": 1300.0,
+   "typ": {
+    "NF_LNA": 4.9,
+    "IIP3_LNA": -25.0,
+    "NF_bypass": 7.6,
+    "IIP3_bypass": -11.5,
+    "pre_LNA_loss": 3.45
+   },
+   "max": {
+    "NF_LNA": 6.2,
+    "IIP3_LNA": -21.4,
+    "NF_bypass": 9.2,
+    "IIP3_bypass": -9.9,
+    "pre_LNA_loss": 4.01
+   }
+  },
+  {
+   "f_MHz": 2400.0,
+   "typ": {
+    "NF_LNA": 5.2,
+    "IIP3_LNA": -22.0,
+    "NF_bypass": 8.5,
+    "IIP3_bypass": -8.5,
+    "pre_LNA_loss": 3.67
+   },
+   "max": {
+    "NF_LNA": 6.9,
+    "IIP3_LNA": -17.9,
+    "NF_bypass": 10.6,
+    "IIP3_bypass": -6.4,
+    "pre_LNA_loss": 4.63
+   }
+  },
+  {
+   "f_MHz": 3500.0,
+   "typ": {
+    "NF_LNA": 6.0,
+    "IIP3_LNA": -21.0,
+    "NF_bypass": 9.3,
+    "IIP3_bypass": -9.0,
+    "pre_LNA_loss": 4.0
+   },
+   "max": {
+    "NF_LNA": 8.3,
+    "IIP3_LNA": -16.3,
+    "NF_bypass": 11.6,
+    "IIP3_bypass": -6.8,
+    "pre_LNA_loss": 5.3
+   }
+  },
+  {
+   "f_MHz": 5800.0,
+   "typ": {
+    "NF_LNA": 7.1,
+    "IIP3_LNA": -21.7,
+    "NF_bypass": 11.1,
+    "IIP3_bypass": -9.7,
+    "pre_LNA_loss": 4.96
+   },
+   "max": {
+    "NF_LNA": 9.7,
+    "IIP3_LNA": -16.9,
+    "NF_bypass": 13.4,
+    "IIP3_bypass": -7.4,
+    "pre_LNA_loss": 6.56
+   }
+  }
+ ]
+}

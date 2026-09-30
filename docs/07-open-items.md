@@ -63,7 +63,10 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
 - [x] VHF–6 GHz RX cascade (sim/vhf_rx rev 0): LNA after filter bank confirmed; net LNA gain ~12 dB; pre-LNA loss budget
 - [x] VHF RX: filter-bank switch selected — pSemi PE42582 SP8T (sim/vhf_rx rev 1); highest bands on RF1/RF8
-- [ ] VHF RX: select LNA (NF ≤ 1.5 dB, net ~12 dB) and balun with real data
+- [x] VHF RX: LNA HMC8410, balun TCM1-63AX+ (sim/vhf_rx rev 2); LNA bypass replaced by DSA after the LNA (D22)
+- [ ] VHF RX: HMC8410 broadband bias tees (67 MHz–6 GHz) on RFIN and RFOUT
+- [ ] VHF RX: select the step attenuator (≥ 20 dB range, IL ≤ 2 dB at 6 GHz) and the limiter
+- [ ] Power tree: +5 V / 65 mA for the HMC8410
 - [x] HF preselector switch re-check (sim/system rev 3): band-select switches were missing from the noise model; with SOI switches B2/B3 fail → relays required
 - [x] HF LNA path relays: Omron G6KU-2F-RF (latching DPDT), one per branch; passes with the 1 GHz max loss (B3 p99 1.49 dB)
 - [ ] Relay: actual loss at 30–50 MHz (graphs/measurement); H-bridge coil drivers for single-winding latching

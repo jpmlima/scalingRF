@@ -1,8 +1,8 @@
-# VHF–6 GHz RX lineup — analysis report (rev 1)
+# VHF–6 GHz RX lineup — analysis report (rev 2)
 
 RX port → limiter → diplexer HP arm → switch → band filter → switch → LNA (or bypass) → balun → AD9361.
 
-**Status (rev 1):** cascade (rev 0) + **filter-bank switch selected: pSemi PE42582** with datasheet data. Filter, LNA and balun losses are still assumptions.
+**Status (rev 2):** switch PE42582 (rev 1), **LNA HMC8410 and balun TCM1-63AX+ selected**, every pass listed explicitly, **LNA bypass replaced by a step attenuator after the LNA** (D22). Still assumed: limiter, filters, step-attenuator loss.
 
 ## Data used
 
@@ -72,6 +72,36 @@ Absorptive SP8T, 9 kHz–8 GHz, SOI, in production, 4 × 4 mm QFN. Datasheet (re
 Below 1 GHz the real switch costs ~0.8 dB more NF than the rev 0 assumption (0.7–0.8 vs 0.4–0.5 dB per switch); at 6 GHz the assumption held.
 
 **Cross-block issue found**: the HF preselector (sim/preselector, sim/system) assumed **0.3 dB per switch**. A switch of this class has ~0.7 dB below 100 MHz. B3 has 1.46 dB desense vs a 1.5 dB limit — no margin for that. → The HF LNA-path switches must be chosen and B3 re-checked.
+
+## Rev 2 — LNA, balun, explicit passes, bypass vs step attenuator
+
+**LNA: ADI HMC8410** (GaAs pHEMT, 0.01–10 GHz, one part for the whole band). Datasheet: 0.01–3 GHz gain 19.5 dB (min 17.5), NF 1.1 dB (max 1.6, specified from 0.3 GHz); 3–8 GHz gain 18 dB (min 15.5), NF 1.4 dB (max 1.9); OIP3 33 dBm; P1dB ≈ 21 dBm; 5 V, 65 mA; 2 × 2 mm. Below 300 MHz the NF is only in a graph (external noise masks it there). **Bias is fed through RFIN/RFOUT → two broadband bias tees (67 MHz–6 GHz) are required** — open item.
+
+**Balun: Mini-Circuits TCM1-63AX+** (what ADI uses on its AD936x boards). Insertion loss typ 1.70 / 1.29 / 1.49 / 1.80 dB at 10 / 2000 / 3000 / 6000 MHz, **max 2.5 dB** (worse than the 0.8–1.5 dB assumed); amplitude imbalance up to 1.4 dB, phase up to ~11°. ~$19 (1 pc, DigiKey); also at LCSC.
+
+**Explicit passes (lesson D20).** Preparing this cascade I found the LNA-bypass SPDT **before the LNA** was not counted in rev 0/1 either — the same omission as in the HF path. `vhf_lineup_parts.py` lists every element. With the bypass architecture (option C):
+
+| f | Pre-LNA loss typ / max | NF, LNA on, typ / max | NF bypass typ / max |
+|---|---|---|---|
+| 145 MHz | 3.1 / 3.5 dB | 4.5 / 5.7 dB | 7.1 / 8.3 dB |
+| 900 MHz | 3.3 / 3.8 | 4.7 / 6.0 | 7.2 / 8.7 |
+| 2.4 GHz | 3.7 / 4.6 | 5.2 / 6.9 | 8.5 / 10.6 |
+| 5.8 GHz | 5.0 / 6.6 | 7.1 / 9.7 | 11.1 / 13.4 |
+
+**Option D — LNA always on + digital step attenuator (DSA) after it** (`bypass_vs_dsa.py`; DSA insertion loss assumed 1.0–2.0 dB):
+
+| f | C: LNA on | C: bypass | **D: normal** | **D: +20 dB** |
+|---|---|---|---|---|
+| 435 MHz | 4.6 dB / −26.4 dBm | 7.1 / −12.9 | **4.2 / −27.1** | 13.4 / −7.1 |
+| 2.4 GHz | 5.2 / −22.0 | 8.5 / −8.5 | **4.7 / −22.9** | 14.6 / −2.9 |
+| 5.8 GHz | 7.1 / −21.7 | 11.1 / −9.7 | **6.4 / −22.9** | 18.2 / −2.9 |
+
+(NF / in-band IIP3, typical parts.)
+
+- D normal: **0.3–0.7 dB better NF** (no SPDT before the LNA).
+- D strong (+20 dB): IIP3 6 dB above the bypass mode; SFDR about the same (~62 dB in 1 MHz at 435 MHz for both) — and D is continuous, not two-state, matching the AD9361 AGC.
+- Two SPDTs fewer. Cost: the LNA always sees the selected band; its input P1dB (~+1.5 dBm) is close to the AD9361 max input (+4 dBm), so little is lost. The limiter now protects the LNA in all modes.
+- **Decision D22: option D.** The fixed 6 dB pad becomes the DSA's minimum setting.
 
 ## Next
 

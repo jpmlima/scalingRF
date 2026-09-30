@@ -195,3 +195,9 @@ Audit: the HF noise model counted one 0.3 dB switch before the LNA; the preselec
 ## D21 — HF LNA-path relay: Omron G6KU-2F-RF
 
 Single-winding latching DPDT RF relay, one per branch (bypass, B1, B2, B3); its two poles switch the branch input and output together. Insertion loss ≤ 0.2 dB max at 1 GHz; with that bound (conservative at 29–49 MHz) B3 reaches 1.49 dB desense at the 99th percentile (limit 1.5). Needs polarity-reversing coil drive.
+
+---
+
+## D22 — VHF–6 GHz RX: HMC8410 always on + step attenuator (no LNA bypass)
+
+LNA HMC8410 (one part, 0.01–10 GHz, NF 1.1–1.4 dB) and balun TCM1-63AX+. Counting every pass showed the LNA-bypass SPDT before the LNA had been omitted. Replacing the bypass with a digital step attenuator after the LNA removes that SPDT: 0.3–0.7 dB better NF in normal mode (4.2 dB at 435 MHz, 6.4 dB at 5.8 GHz, typical), 6 dB higher IIP3 in strong-signal mode with the same SFDR, continuous gain control, two parts fewer.
