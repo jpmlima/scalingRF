@@ -1,6 +1,25 @@
-# Clock — reference and phase noise (rev 2)
+# Clock — reference and phase noise (rev 3)
 
-**Status (rev 2):** reference oscillator selected — **Microchip TX-803, 40 MHz, with EFC** — against the UG-570 mask (rev 1). Open: ordering code with EFC, and the CMOS → XTALN level/buffer design.
+**Status (rev 3):** reference selected (TX-803, rev 2); **jitter budget to the HF converters closes with 3.2× margin** (rev 3). Open: EFC ordering code, CMOS → XTALN buffer, LMK in-band noise from TICS Pro.
+
+## Rev 3 — jitter budget to the HF ADC clock (`jitter.py`)
+
+TX-803 (40 MHz CMOS typical data, floor held at −160 dBc/Hz beyond 100 kHz) → LMK03328 PLL (×3.75 to 150 MHz, reference noise +11.5 dB in-band, 2nd-order roll-off, **loop bandwidth assumed 400 kHz** = datasheet PSNR test condition) → ADC. Integrator checked against a flat −150 dBc/Hz analytic case.
+
+| Contribution (12 kHz–20 MHz) | Jitter |
+|---|---|
+| TX-803 through the LMK PLL | 37.6 fs (hand estimate ≈ 39 fs) |
+| LMK03328 own (datasheet typ) | 100 fs |
+| ADC aperture | 170 fs |
+| **Total (RSS)** | **201 fs** — budget 650 fs, **3.2× margin** |
+
+Jitter-limited SNR at 60 MHz input: **82.4 dB**, ~10 dB above the ADC's own 72.8 dB → the clock does not limit the HF path.
+
+Clock phase noise transferred to HF signals (reciprocal-mixing view): ≤ −144 dBc/Hz at 1 kHz even at 49 MHz (−148.5 at 30 MHz, −161 at 7 MHz). **Caveat:** these close-in numbers include only the reference; the LMK's own in-band noise (phase detector) can dominate at small offsets → take it from TICS Pro with the real configuration.
+
+---
+
+## Rev 2
 
 ## Rev 2 — VCTCXO selection (`ref_mask.check`)
 
