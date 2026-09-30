@@ -76,6 +76,20 @@ Selecting the VHF filter-bank switch (sim/vhf_rx rev 1) showed that a SOI switch
 - **Decision (D20): relays (or equivalent ≤ 0.2 dB/pass parts) for the pre-LNA switching in the HF LNA path**, topology S2/S3: one SP4T-equivalent in (bypass + 3 bands), one SP3T-equivalent out into the LNA. This is how HF receivers usually build filter banks. The bypass/attenuator path after the LNA is noise-insensitive and can stay on semiconductor switches.
 - The previous "B3 passes, 0 % fails" result was conditional on an incomplete model; it holds again only if the relay loss is confirmed ≤ ~0.2 dB/pass with real data.
 
+### Relay selected: Omron G6KU-2F-RF (single-winding latching, DPDT)
+
+Datasheet: insertion loss ≤ 0.2 dB max and isolation ≥ 20 / 30 dB at **1 GHz** (much better at 50 MHz, shown only in graphs), 1 W at 1 GHz, 10.3 × 6.9 × 5.4 mm, latching (no holding current).
+
+Topology: **one relay per branch** (bypass, B1, B2, B3). Pole A connects the branch input, pole B the branch output, switched together → exactly one contact at the filter input and one at its output (the two passes in `noise_budget.PRE_LNA`). Unselected branches are open at both ends (≥ 2 open contacts in any leakage path).
+
+Check with the datasheet **maximum at 1 GHz** (2 × 0.2 dB — conservative for 29–49 MHz):
+
+| | B1 p99 / fails | B2 p99 / fails | B3 p99 / fails |
+|---|---|---|---|
+| S4 G6KU-2F-RF, 2 × 0.2 dB | 0.29 dB / 0 % | 0.91 dB / 0 % | 1.49 dB / 1 % |
+
+Passes even at a bound that overstates the HF loss. Remaining: read the actual 30–50 MHz loss from the datasheet graphs (or measure); coil driver for a single-winding latching relay needs polarity reversal (H-bridge per relay or equivalent) — driven from the I²C expanders.
+
 ## Assessment
 
 - IIP2 misses (≤ 0.6 dB, 3 % of builds) are well inside the uncertainty of the LNA's own IIP2 (+38 dBm estimated from HD2, ± several dB). Not worth chasing by simulation; accepted.

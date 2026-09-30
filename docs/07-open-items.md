@@ -65,8 +65,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] VHF RX: filter-bank switch selected — pSemi PE42582 SP8T (sim/vhf_rx rev 1); highest bands on RF1/RF8
 - [ ] VHF RX: select LNA (NF ≤ 1.5 dB, net ~12 dB) and balun with real data
 - [x] HF preselector switch re-check (sim/system rev 3): band-select switches were missing from the noise model; with SOI switches B2/B3 fail → relays required
-- [ ] HF LNA path: select relays (≤ 0.2 dB per pass at 29–49 MHz, isolation, life, latching) for SP4T-in / SP3T-out; re-run switch_recheck with their data
-- [ ] Update hf_rx/modes.py and noise_budget.py to count every switch pass explicitly (per path)
+- [x] HF LNA path relays: Omron G6KU-2F-RF (latching DPDT), one per branch; passes with the 1 GHz max loss (B3 p99 1.49 dB)
+- [ ] Relay: actual loss at 30–50 MHz (graphs/measurement); H-bridge coil drivers for single-winding latching
+- [x] noise_budget.py counts every pass explicitly (PRE_LNA / POST_LNA), regression-tested
 - [ ] Power tree: −3 V rail for PE42582 VSS_EXT (spur-free mode)
 - [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power

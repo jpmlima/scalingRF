@@ -189,3 +189,9 @@ SP8T, 9 kHz–8 GHz, 0.7–1.1 dB typical (RF1/RF8), IIP3 53–60 dBm, isolation
 ## D20 — HF LNA path: relays for the pre-LNA switching
 
 Audit: the HF noise model counted one 0.3 dB switch before the LNA; the preselector's band-select switches were never included, and a real SOI switch has ~0.7 dB at HF. With real switches, B2 fails the desense limit in 95 % of builds and B3 in 100 %; merging the bypass into an SP4T is not enough (31 % / 97 %). Relays (~0.1 dB/pass, assumed pending part data) restore the design (0 % fails). Requirement: ≤ ~0.2 dB per pass at 29–49 MHz, two passes (SP4T in: bypass + 3 bands; SP3T out to the LNA).
+
+---
+
+## D21 — HF LNA-path relay: Omron G6KU-2F-RF
+
+Single-winding latching DPDT RF relay, one per branch (bypass, B1, B2, B3); its two poles switch the branch input and output together. Insertion loss ≤ 0.2 dB max at 1 GHz; with that bound (conservative at 29–49 MHz) B3 reaches 1.49 dB desense at the 99th percentile (limit 1.5). Needs polarity-reversing coil drive.

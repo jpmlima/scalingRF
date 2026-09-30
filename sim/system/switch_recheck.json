@@ -19,6 +19,11 @@
    "nominal": 0.24,
    "p99": 0.27,
    "fail_%": 0.0
+  },
+  "S4 Omron G6KU-2F-RF, datasheet MAX @1 GHz (2 x 0.2 dB)": {
+   "nominal": 0.25,
+   "p99": 0.29,
+   "fail_%": 0.0
   }
  },
  "B2": {
@@ -40,6 +45,11 @@
   "S3 signal relays (2 x 0.1 dB, ASSUMED)": {
    "nominal": 0.74,
    "p99": 0.87,
+   "fail_%": 0.0
+  },
+  "S4 Omron G6KU-2F-RF, datasheet MAX @1 GHz (2 x 0.2 dB)": {
+   "nominal": 0.77,
+   "p99": 0.91,
    "fail_%": 0.0
   }
  },
@@ -63,6 +73,11 @@
    "nominal": 1.23,
    "p99": 1.43,
    "fail_%": 0.0
+  },
+  "S4 Omron G6KU-2F-RF, datasheet MAX @1 GHz (2 x 0.2 dB)": {
+   "nominal": 1.28,
+   "p99": 1.49,
+   "fail_%": 1.0
   }
  }
 }
