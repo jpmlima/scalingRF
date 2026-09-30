@@ -177,3 +177,9 @@ Balanced DAC loading with the LMH6702's optimum Rf (237 Ω) is impossible at any
 ## D18 — HF TX reconstruction filter: 5 parts, designed in the chain
 
 Designed with the diplexer LP arm in the same network. The optimiser removed two capacitors (pad-parasitic values); the diplexer provides part of the image rejection. Result: images ≤ −69.9 dBc and filter loss ≤ 0.81 dB over Monte Carlo. Side effect accepted: the TX-side diplexer HP 1 dB edge moves from 65.9 to 68.1 MHz, below the AD9361's 70 MHz specified start.
+
+---
+
+## D19 — VHF–6 GHz filter-bank switch: pSemi PE42582
+
+SP8T, 9 kHz–8 GHz, 0.7–1.1 dB typical (RF1/RF8), IIP3 53–60 dBm, isolation ≥ 29 dB to 6 GHz. Highest-frequency bands on the lowest-loss ports (RF1/RF8); external −3 V on VSS_EXT to avoid the internal generator's spurs. System NF with LNA: 4.5 dB (VHF/UHF) to 6.3 dB (5.8 GHz) typical, 7.9 dB worst case at 5.8 GHz.

@@ -13,7 +13,13 @@ DIP_L = ('0805HP-271', '0805HP-271', '0805HP-56N', '0805HP-82N', '0805HP-101')
 DIP_C = np.array([82, 62, 33, 30, 110]) * 1e-12
 
 # ---- ASSUMED passive losses vs frequency (dB) — to be replaced by chosen parts
-def switch_loss(f): return np.interp(f, [1e8, 1e9, 3e9, 6e9], [0.4, 0.5, 0.7, 1.2])      # SP6T/SP8T SOI
+# pSemi PE42582 SP8T, ports RF1/RF8 (lowest loss; highest bands go there). Datasheet Table 3,
+# band centres: <=0.1 / 0.1-1 / 1-2 / 2-4 / 4-6 GHz. SWITCH_CASE selects typical or maximum.
+SW_F = [0.1e9, 0.55e9, 1.5e9, 3e9, 5e9, 6e9]
+SW_TYP = [0.7, 0.8, 0.9, 0.9, 1.1, 1.1]
+SW_MAX = [0.9, 1.0, 1.2, 1.5, 1.9, 1.9]
+SWITCH_CASE = "typ"
+def switch_loss(f): return np.interp(f, SW_F, SW_TYP if SWITCH_CASE == "typ" else SW_MAX)
 def filter_loss(f): return np.interp(f, [1e8, 3e9, 6e9], [1.0, 1.0, 1.5])                 # bank passband
 def balun_loss(f): return np.interp(f, [1e8, 3e9, 6e9], [0.8, 0.8, 1.5])                  # 10-6000 MHz class
 LIMITER = 0.2
@@ -23,7 +29,7 @@ def ad_nf(f): return np.interp(f, [0.8e9, 2.4e9, 5.5e9], [2.0, 3.0, 3.8])
 def ad_ip3(f): return np.interp(f, [0.8e9, 2.4e9, 5.5e9], [-18.0, -14.0, -17.0])
 
 # ---- LNA: representative wideband target (to be confirmed/selected)
-LNA = {"G": 18.0, "NF": 1.5, "OIP3": 33.0}
+LNA = {"G": 12.0, "NF": 1.5, "OIP3": 33.0}          # net gain ~12 dB (rev 0 result)
 
 def lineup(f, arrangement, dip_loss):
     lna = {"name": "LNA", "G": LNA["G"], "NF": LNA["NF"], "IIP3": LNA["OIP3"] - LNA["G"]}

@@ -34,7 +34,7 @@ Analysed in [`sim/hf_rx/`](../sim/hf_rx/README.md) (model validated against the 
 
 ### VHF–6 GHz RX
 
-- **Filter bank:** 5–6 roughly octave bands plus bypass, e.g. 65–150 / 150–300 / 300–700 / 700–1500 / 1500–3000 / 3000–6000 MHz. Two SP6T/SP8T SOI switches rated to 6 GHz; budget ~1 dB loss per switch at the top of the band.
+- **Filter bank:** 5–6 roughly octave bands plus bypass, e.g. 65–150 / 150–300 / 300–700 / 700–1500 / 1500–3000 / 3000–6000 MHz. Two **pSemi PE42582** SP8T switches (0.7–1.1 dB typ, 1.9 dB max at 6 GHz; highest bands on RF1/RF8; VSS_EXT from −3 V for spur-free operation).
 - **LNA:** wideband, with bypass; **net gain ~12 dB** (sim/vhf_rx rev 0: the AD9361 limits linearity, so more LNA gain only costs IIP3). NF with LNA ≈ 3.8 dB (435 MHz) … 6.4 dB (5.8 GHz), set mostly by the filter-bank loss in front.
 - **Filter before LNA** (D10), confirmed with numbers: costs 1.8–3.6 dB NF vs LNA-first, buys protection from unfiltered out-of-band signals.
 - **One AD9361 input** with a 10–6000 MHz balun (TCM1-63AX+ class, as on ADI's FMCOMMS boards). Using RX B/C inputs as well is possible but adds complexity for little gain.

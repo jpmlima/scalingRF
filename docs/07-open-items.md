@@ -62,7 +62,10 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] HF TX: reconstruction filter designed in the chain (sim/hf_tx rev 3): 5 parts, images ≤ −69.9 dBc, loss ≤ 0.81 dB (MC)
 - [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
 - [x] VHF–6 GHz RX cascade (sim/vhf_rx rev 0): LNA after filter bank confirmed; net LNA gain ~12 dB; pre-LNA loss budget
-- [ ] VHF RX: select SP6T/SP8T switches, LNA (NF ≤ 1.5 dB, net ~12 dB), balun — with real data
+- [x] VHF RX: filter-bank switch selected — pSemi PE42582 SP8T (sim/vhf_rx rev 1); highest bands on RF1/RF8
+- [ ] VHF RX: select LNA (NF ≤ 1.5 dB, net ~12 dB) and balun with real data
+- [ ] HF preselector: real switch loss (~0.7 dB below 100 MHz vs 0.3 dB assumed) — re-check B3 desense (1.46 vs 1.5 dB)
+- [ ] Power tree: −3 V rail for PE42582 VSS_EXT (spur-free mode)
 - [ ] VHF RX: design filter bank in the chain; out-of-band blocker analysis
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)
