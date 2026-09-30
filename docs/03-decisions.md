@@ -147,3 +147,9 @@ Analysis (sim/hf_rx, validated against datasheet measurement): without an LNA th
 - Loss limit per band is a curve derived from the external noise floor, not a blanket figure: B1 tolerates > 5 dB, B3 only ~2 dB at 49 MHz.
 - The diplexer LP arm is part of the IM2 protection for tones above ~57 MHz (B3 would otherwise fail in 13 % of builds); its rejection must be preserved.
 - Top-edge desense deviations (B2 +0.06 dB, B3 +0.15 dB worst case) accepted: smaller than the uncertainty of the ITU-R P.372 medians the limit is based on.
+
+---
+
+## D14 — Preselector is designed inside the chain, not in isolation
+
+Simulating diplexer + preselector as one network showed the product-of-blocks estimate is optimistic for B3 (IIP2_eff +60.9 vs +64.5 dBm): near the diplexer crossover its LP response depends on the load, and the preselector is reactive there. B3 was re-optimised with every metric computed on the real chain (IIP2 +62.9 dBm nominal, antenna RL 9.6 → 12.4 dB). The AD9361 path is unaffected. Remaining B3 issue (sensitivity loss) is set by inductor Q.

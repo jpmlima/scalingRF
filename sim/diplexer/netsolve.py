@@ -63,3 +63,28 @@ def sparams(elements, ports, freqs, n_nodes):
 
 def db(x):
     return 20 * np.log10(np.maximum(np.abs(x), 1e-15))
+
+
+def loss_worst(s21):
+    """Worst-case (largest) insertion loss in dB over the given samples.
+    Use this instead of hand-writing -db(x).max()/min(): the '-db(x).max()' form
+    returns the BEST case and caused two bugs in this project."""
+    return float(-db(s21).min())
+
+
+def loss_best(s21):
+    """Best-case (smallest) insertion loss in dB."""
+    return float(-db(s21).max())
+
+
+def rl_worst(s11):
+    """Worst-case (smallest) return loss in dB."""
+    return float(-db(s11).max())
+
+
+if __name__ == "__main__":
+    x = np.array([1.0, 10 ** (-1 / 20), 10 ** (-3 / 20)])
+    assert abs(loss_worst(x) - 3.0) < 1e-9 and abs(loss_best(x) - 0.0) < 1e-9
+    g = np.array([0.1, 0.5])
+    assert abs(rl_worst(g) - 6.0206) < 1e-3
+    print("netsolve helper tests OK")

@@ -1,0 +1,44 @@
+{
+ "B1": {
+  "HP_arm_max_change_dB": 0.23,
+  "at_MHz": 67.2,
+  "HP_arm_worst_IL_67M_6G_dB": 0.66,
+  "HP_arm_worst_IL_ref_dB": 0.89,
+  "antenna_RL_HP_band_dB": 12.8,
+  "antenna_RL_HP_band_ref_dB": 12.8,
+  "antenna_RL_in_presel_band_dB": 11.7,
+  "HF_path_interaction_ripple_dB": [
+   -0.14,
+   0.36
+  ],
+  "IIP2_eff_true_chain_dBm": 62.3
+ },
+ "B2": {
+  "HP_arm_max_change_dB": 0.23,
+  "at_MHz": 67.2,
+  "HP_arm_worst_IL_67M_6G_dB": 0.66,
+  "HP_arm_worst_IL_ref_dB": 0.89,
+  "antenna_RL_HP_band_dB": 12.8,
+  "antenna_RL_HP_band_ref_dB": 12.8,
+  "antenna_RL_in_presel_band_dB": 9.9,
+  "HF_path_interaction_ripple_dB": [
+   -0.27,
+   0.35
+  ],
+  "IIP2_eff_true_chain_dBm": 65.3
+ },
+ "B3": {
+  "HP_arm_max_change_dB": 0.21,
+  "at_MHz": 67.2,
+  "HP_arm_worst_IL_67M_6G_dB": 0.67,
+  "HP_arm_worst_IL_ref_dB": 0.89,
+  "antenna_RL_HP_band_dB": 12.8,
+  "antenna_RL_HP_band_ref_dB": 12.8,
+  "antenna_RL_in_presel_band_dB": 9.6,
+  "HF_path_interaction_ripple_dB": [
+   -0.25,
+   0.15
+  ],
+  "IIP2_eff_true_chain_dBm": 60.9
+ }
+}

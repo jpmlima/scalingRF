@@ -1,0 +1,11 @@
+{
+ "band": "B3",
+ "runs": 100,
+ "nominal_iip2": 62.9,
+ "nominal_desense": 1.55,
+ "iip2_p1": 59.5,
+ "iip2_min": 59.4,
+ "fail_iip2_%": 3.0,
+ "desense_p99": 1.7,
+ "fail_desense_%": 82.0
+}
