@@ -26,7 +26,7 @@ flowchart LR
 Analysed in [`sim/hf_rx/`](../sim/hf_rx/README.md) (model validated against the LTC6409 + LTC2262-14 datasheet measurement to within 0.3 dB).
 
 - **LNA path + DC-coupled bypass** (revised — the v0 "no LNA" decision was wrong above ~10 MHz). LNA: **LTC6433-15 A-grade** (16 dB, NF 2.9–3.7 dB, IIP3 ≈ +32 dBm). Used from 10 to 49 MHz only.
-- **Sub-octave preselector in the LNA path** (mandatory — 2nd-order intermod): 10–17 / 17–29 / 29–49 MHz. Below 10 MHz the bypass path is used (antenna-noise limited).
+- **Sub-octave preselector in the LNA path** (mandatory — 2nd-order intermod): 10–17 / 17–29 / 29–49 MHz, elliptic, 4 × 0805HP + 10 C0G per band ([`sim/preselector/`](../sim/preselector/README.md) rev 1). With the diplexer LP arm in front, effective IIP2 ≥ +60 dBm in all bands (two stations up to ~S9+38 each). Below 10 MHz the bypass path is used (antenna-noise limited). Open: out-of-band reflection loading the diplexer.
 - **Attenuator 0/10/20 dB:** resistive pads with switches that work from DC.
 - **FDA:** LTC6409, fixed AV5 (RI 50 Ω, RF 250 Ω, RT 120 Ω for a 50 Ω match), DC-coupled.
 - **Anti-alias filter** (50 Ω, before the FDA) must be deep by 90 MHz; post-FDA RC limits wideband noise folding.

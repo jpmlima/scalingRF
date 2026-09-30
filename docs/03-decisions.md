@@ -138,3 +138,12 @@ Analysis (sim/hf_rx, validated against datasheet measurement): without an LNA th
 - LTC6433-15 A-grade: SiGe (low 1/f noise, usable at HF), 16 dB, NF 2.9–3.7 dB at 10–50 MHz, IIP3 ≈ +32 dBm. NF misses the rev 1 target (2 dB) but costs only +0.5 dB at system level; linearity exceeds it by 10 dB. Low-NF alternatives in this range typically have much lower IIP3.
 - Its HD2 (−54 dBc) implies IIP2 ≈ +38 dBm; unfiltered, IM2 from two strong in-band stations lands ~44 dB above the noise floor. Required IIP2 without filtering (~+82 dBm) is not achievable by any part.
 - **Decision:** LNA used only 10–49 MHz, behind a 3-band sub-octave preselector (10–17 / 17–29 / 29–49 MHz). Below 10 MHz the bypass is used (antenna-noise limited). System NF 8.5–9.2 dB, ≤ 1.3 dB above galactic noise.
+
+---
+
+## D13 — Preselector: elliptic sections, loss budget from noise, diplexer counted
+
+- A plain LP+HP cascade (rev 0) lacks skirt at 2·fl; elliptic sections put transmission zeros at the critical IM2 frequencies using capacitors only.
+- Loss limit per band is a curve derived from the external noise floor, not a blanket figure: B1 tolerates > 5 dB, B3 only ~2 dB at 49 MHz.
+- The diplexer LP arm is part of the IM2 protection for tones above ~57 MHz (B3 would otherwise fail in 13 % of builds); its rejection must be preserved.
+- Top-edge desense deviations (B2 +0.06 dB, B3 +0.15 dB worst case) accepted: smaller than the uncertainty of the ITU-R P.372 medians the limit is based on.

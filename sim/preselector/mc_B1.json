@@ -1,0 +1,17 @@
+{
+ "band": "B1",
+ "runs": 100,
+ "nominal": {
+  "iip2_presel": 61.5,
+  "iip2_with_diplexer": 62.0,
+  "desense": 0.27,
+  "rl": 10.55
+ },
+ "iip2_presel_p1": 60.2,
+ "iip2_with_diplexer_p1": 60.7,
+ "desense_p99": 0.32,
+ "rl_p1": 8.1,
+ "fail_iip2_presel_%": 0.0,
+ "fail_iip2_with_diplexer_%": 0.0,
+ "fail_desense_%": 0.0
+}

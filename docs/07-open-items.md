@@ -47,7 +47,9 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] HF RX lineup (sim/hf_rx rev 1): NF, full scale, gain modes; LNA path added
 - [x] HF RX: LNA selected — LTC6433-15 A-grade (sim/hf_rx rev 2)
 - [ ] HF RX: LTC6433-15 price/availability; add 475 mW to power budget; bias choke network per datasheet Table 1
-- [ ] HF RX: 3-band preselector (sim/preselector). Rev 0 LP+HP cascade fails selectivity; spec revised from noise analysis: loss ≤ 6 / 4 / 2 dB (B1/B2/B3), IIP2_eff ≥ +60 dBm. Next: elliptic redesign
+- [x] HF RX: 3-band preselector, elliptic, 0805HP (sim/preselector rev 1): IIP2_eff ≥ +60 dBm in 100 % of Monte Carlo runs; desense deviations B2/B3 ≤ 0.15 dB accepted
+- [ ] HF RX: simulate diplexer + preselector as one network (preselector is reflective out of band and loads the diplexer LP port in LNA mode)
+- [ ] Refactor sim/hf_rx/modes.py so importing it has no side effects
 - [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
 - [ ] HF TX lineup: AD9707 → amplifier → reconstruction filter → port; images, sinc, output level
