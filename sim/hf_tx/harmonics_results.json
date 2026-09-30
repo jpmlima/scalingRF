@@ -1,0 +1,198 @@
+[
+ {
+  "n": 2,
+  "tone_MHz": 5.0,
+  "harm_MHz": 10.0,
+  "filtering_dB": 0.1,
+  "HD_needed_at_amp_dBc": -59.9
+ },
+ {
+  "n": 2,
+  "tone_MHz": 10.0,
+  "harm_MHz": 20.0,
+  "filtering_dB": 0.1,
+  "HD_needed_at_amp_dBc": -59.9
+ },
+ {
+  "n": 2,
+  "tone_MHz": 15.0,
+  "harm_MHz": 30.0,
+  "filtering_dB": 0.1,
+  "HD_needed_at_amp_dBc": -59.9
+ },
+ {
+  "n": 2,
+  "tone_MHz": 20.0,
+  "harm_MHz": 40.0,
+  "filtering_dB": 0.2,
+  "HD_needed_at_amp_dBc": -59.8
+ },
+ {
+  "n": 2,
+  "tone_MHz": 24.0,
+  "harm_MHz": 48.0,
+  "filtering_dB": 0.4,
+  "HD_needed_at_amp_dBc": -59.6
+ },
+ {
+  "n": 2,
+  "tone_MHz": 25.0,
+  "harm_MHz": 50.0,
+  "filtering_dB": 0.7,
+  "HD_needed_at_amp_dBc": -59.3
+ },
+ {
+  "n": 2,
+  "tone_MHz": 26.0,
+  "harm_MHz": 52.0,
+  "filtering_dB": 1.4,
+  "HD_needed_at_amp_dBc": -58.6
+ },
+ {
+  "n": 2,
+  "tone_MHz": 28.0,
+  "harm_MHz": 56.0,
+  "filtering_dB": 5.2,
+  "HD_needed_at_amp_dBc": -54.8
+ },
+ {
+  "n": 2,
+  "tone_MHz": 30.0,
+  "harm_MHz": 60.0,
+  "filtering_dB": 12.4,
+  "HD_needed_at_amp_dBc": -47.6
+ },
+ {
+  "n": 2,
+  "tone_MHz": 33.0,
+  "harm_MHz": 66.0,
+  "filtering_dB": 23.7,
+  "HD_needed_at_amp_dBc": -36.3
+ },
+ {
+  "n": 2,
+  "tone_MHz": 36.0,
+  "harm_MHz": 72.0,
+  "filtering_dB": 32.9,
+  "HD_needed_at_amp_dBc": -27.1
+ },
+ {
+  "n": 2,
+  "tone_MHz": 40.0,
+  "harm_MHz": 80.0,
+  "filtering_dB": 43.4,
+  "HD_needed_at_amp_dBc": -16.6
+ },
+ {
+  "n": 2,
+  "tone_MHz": 45.0,
+  "harm_MHz": 90.0,
+  "filtering_dB": 55.0,
+  "HD_needed_at_amp_dBc": -5.0
+ },
+ {
+  "n": 2,
+  "tone_MHz": 49.0,
+  "harm_MHz": 98.0,
+  "filtering_dB": 63.2,
+  "HD_needed_at_amp_dBc": 3.2
+ },
+ {
+  "n": 3,
+  "tone_MHz": 5.0,
+  "harm_MHz": 15.0,
+  "filtering_dB": 0.2,
+  "HD_needed_at_amp_dBc": -59.8
+ },
+ {
+  "n": 3,
+  "tone_MHz": 10.0,
+  "harm_MHz": 30.0,
+  "filtering_dB": 0.2,
+  "HD_needed_at_amp_dBc": -59.8
+ },
+ {
+  "n": 3,
+  "tone_MHz": 15.0,
+  "harm_MHz": 45.0,
+  "filtering_dB": 0.3,
+  "HD_needed_at_amp_dBc": -59.7
+ },
+ {
+  "n": 3,
+  "tone_MHz": 20.0,
+  "harm_MHz": 60.0,
+  "filtering_dB": 12.4,
+  "HD_needed_at_amp_dBc": -47.6
+ },
+ {
+  "n": 3,
+  "tone_MHz": 24.0,
+  "harm_MHz": 72.0,
+  "filtering_dB": 33.1,
+  "HD_needed_at_amp_dBc": -26.9
+ },
+ {
+  "n": 3,
+  "tone_MHz": 25.0,
+  "harm_MHz": 75.0,
+  "filtering_dB": 37.2,
+  "HD_needed_at_amp_dBc": -22.8
+ },
+ {
+  "n": 3,
+  "tone_MHz": 26.0,
+  "harm_MHz": 78.0,
+  "filtering_dB": 41.1,
+  "HD_needed_at_amp_dBc": -18.9
+ },
+ {
+  "n": 3,
+  "tone_MHz": 28.0,
+  "harm_MHz": 84.0,
+  "filtering_dB": 48.5,
+  "HD_needed_at_amp_dBc": -11.5
+ },
+ {
+  "n": 3,
+  "tone_MHz": 30.0,
+  "harm_MHz": 90.0,
+  "filtering_dB": 55.3,
+  "HD_needed_at_amp_dBc": -4.7
+ },
+ {
+  "n": 3,
+  "tone_MHz": 33.0,
+  "harm_MHz": 99.0,
+  "filtering_dB": 64.5,
+  "HD_needed_at_amp_dBc": 4.5
+ },
+ {
+  "n": 3,
+  "tone_MHz": 36.0,
+  "harm_MHz": 108.0,
+  "filtering_dB": 72.9,
+  "HD_needed_at_amp_dBc": 12.9
+ },
+ {
+  "n": 3,
+  "tone_MHz": 40.0,
+  "harm_MHz": 120.0,
+  "filtering_dB": 82.9,
+  "HD_needed_at_amp_dBc": 22.9
+ },
+ {
+  "n": 3,
+  "tone_MHz": 45.0,
+  "harm_MHz": 135.0,
+  "filtering_dB": 94.0,
+  "HD_needed_at_amp_dBc": 34.0
+ },
+ {
+  "n": 3,
+  "tone_MHz": 49.0,
+  "harm_MHz": 147.0,
+  "filtering_dB": 101.8,
+  "HD_needed_at_amp_dBc": 41.8
+ }
+]

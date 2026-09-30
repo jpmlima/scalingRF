@@ -55,10 +55,13 @@ flowchart LR
 
 ### HF TX
 
-- DAC current outputs → DC-coupled differential-to-single-ended amplifier (no transformer: it would not reach 1 kHz).
-- Reconstruction LPF: image of a 60 MHz tone sits at 90 MHz.
-- sinc roll-off at 60 MHz with 150 MSPS ≈ 2.4 dB; compensate in the PL.
-- Output ~0 dBm. No HF PA in scope.
+Analysed in [`sim/hf_tx/`](../sim/hf_tx/README.md) (rev 0).
+
+- AD9707 at 150 MSPS → DC-coupled diff-to-SE amplifier (back-terminated) → reconstruction LPF → diplexer LP arm. No transformer anywhere (it would not reach 1 kHz).
+- ~0 dBm at the port; the amplifier delivers +2.2 dBm into the filter.
+- Images: the diplexer LP arm already gives ~31 dB at 101 MHz; the reconstruction filter must add ≥ 23 dB (≥ 5th order).
+- Harmonics of tones up to ~26 MHz cannot be filtered: DAC + amplifier HD2/HD3 ≤ −60 dBc (AD9707 specified only to 20 MHz).
+- sinc droop (1.6 dB at 49 MHz) compensated in the PL. No HF PA in scope.
 
 ### VHF–6 GHz TX
 

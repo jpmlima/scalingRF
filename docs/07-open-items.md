@@ -51,10 +51,13 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [x] HF RX: diplexer + preselector as one network (sim/system rev 1): AD9361 path not degraded; B3 re-optimised in the chain; B2 passes all; B1/B3 IIP2 ≤ 0.6 dB short in 3 % (accepted)
 - [x] HF RX: B3 with air-core inductors (2222SQ/2929SQ): desense 0 % fails on the chain (sim/system rev 2)
 - [ ] Layout: air-core coils in B3 — orthogonal axes / spacing / shield; EM check of mutual coupling
-- [ ] Refactor sim/hf_rx/modes.py so importing it has no side effects
+- [x] Refactor sim/hf_rx/modes.py so importing it has no side effects
 - [ ] HF RX: switches that work from DC to 50 MHz with ≤ 0.3 dB loss (bypass, attenuator, DC block)
 - [ ] HF RX: design anti-alias filter (50 Ω, deep by 90 MHz) and post-FDA RC
-- [ ] HF TX lineup: AD9707 → amplifier → reconstruction filter → port; images, sinc, output level
+- [x] HF TX lineup (sim/hf_tx rev 0): level plan, image and harmonic budgets → requirements
+- [ ] HF TX: select diff→SE amplifier (DC–49 MHz, ≥ 1.63 Vpp, HD2/HD3 ≤ −65 dBc to 28 MHz); decide DAC load (50 vs 200 Ω)
+- [ ] HF TX: design reconstruction filter (≥ 23 dB @ 101 MHz, ≥ 5th order) and verify in the chain with the diplexer
+- [ ] HF TX: AD9707 SFDR 20–49 MHz not specified — find data or plan a measurement
 - [ ] VHF–6 GHz RX cascade: filter bank + switches + LNA + balun + AD9361 (NF, IIP3, sensitivity per band)
 - [ ] VHF–6 GHz TX cascade and filter bank: harmonic suppression per band, output power
 - [ ] Clock: phase noise / jitter budget with real VCTCXO and LMK03328 data (TICS Pro)

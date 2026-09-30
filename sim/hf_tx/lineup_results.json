@@ -1,0 +1,106 @@
+{
+ "images": [
+  {
+   "f_MHz": 1.0,
+   "image_MHz": 149.0,
+   "image_dBc_ZOH": -43.5,
+   "diplexer_rel_rej_dB": 50.0,
+   "recon_rej_needed_dB": 0.0,
+   "sinc_droop_dB": -0.0
+  },
+  {
+   "f_MHz": 5.0,
+   "image_MHz": 145.0,
+   "image_dBc_ZOH": -29.2,
+   "diplexer_rel_rej_dB": 48.6,
+   "recon_rej_needed_dB": 0.0,
+   "sinc_droop_dB": -0.02
+  },
+  {
+   "f_MHz": 10.0,
+   "image_MHz": 140.0,
+   "image_dBc_ZOH": -22.9,
+   "diplexer_rel_rej_dB": 46.9,
+   "recon_rej_needed_dB": 0.0,
+   "sinc_droop_dB": -0.06
+  },
+  {
+   "f_MHz": 20.0,
+   "image_MHz": 130.0,
+   "image_dBc_ZOH": -16.3,
+   "diplexer_rel_rej_dB": 43.3,
+   "recon_rej_needed_dB": 0.5,
+   "sinc_droop_dB": -0.26
+  },
+  {
+   "f_MHz": 30.0,
+   "image_MHz": 120.0,
+   "image_dBc_ZOH": -12.0,
+   "diplexer_rel_rej_dB": 39.4,
+   "recon_rej_needed_dB": 8.6,
+   "sinc_droop_dB": -0.58
+  },
+  {
+   "f_MHz": 40.0,
+   "image_MHz": 110.0,
+   "image_dBc_ZOH": -8.8,
+   "diplexer_rel_rej_dB": 35.1,
+   "recon_rej_needed_dB": 16.1,
+   "sinc_droop_dB": -1.04
+  },
+  {
+   "f_MHz": 45.0,
+   "image_MHz": 105.0,
+   "image_dBc_ZOH": -7.4,
+   "diplexer_rel_rej_dB": 32.8,
+   "recon_rej_needed_dB": 19.8,
+   "sinc_droop_dB": -1.33
+  },
+  {
+   "f_MHz": 49.0,
+   "image_MHz": 101.0,
+   "image_dBc_ZOH": -6.3,
+   "diplexer_rel_rej_dB": 30.8,
+   "recon_rej_needed_dB": 22.9,
+   "sinc_droop_dB": -1.58
+  }
+ ],
+ "level_plan": {
+  "diplexer_LP_loss_at_49MHz_dB": 0.91,
+  "amp_output_power_into_filter_dBm": 2.21,
+  "amp_output_Vpp_open_circuit_equiv": 1.63,
+  "DAC": {
+   "IOUTFS_mA": 2,
+   "R_per_side_ohm": 50.0,
+   "diff_Vpp": 0.2,
+   "per_side_max_V": 0.1,
+   "within_compliance_+1.25V": true
+  },
+  "amp_gain_needed_dB (diff->SE, incl. 1.6 dB sinc at 49 MHz unless compensated in PL)": 19.8,
+  "amp_gain_needed_dB_if_sinc_compensated_in_PL": 18.2
+ },
+ "recon_filter_requirement": {
+  "passband": "DC-49 MHz, loss <= 1 dB (assumed in level plan)",
+  "worst_case": {
+   "f_MHz": 49.0,
+   "image_MHz": 101.0,
+   "image_dBc_ZOH": -6.3,
+   "diplexer_rel_rej_dB": 30.8,
+   "recon_rej_needed_dB": 22.9,
+   "sinc_droop_dB": -1.58
+  },
+  "rejection_needed_at_101MHz_dB": 22.9,
+  "note": "image rejection is shared with the diplexer LP arm; the filter only needs the difference"
+ },
+ "in_band_harmonics": {
+  "tones_with_in_band_harmonics": "<= 24.5 MHz (2nd harmonic <= 49 MHz)",
+  "AD9707_SFDR_dBc": {
+   "5 MHz": 84,
+   "10 MHz": 83,
+   "20 MHz": 75
+  },
+  "amp_requirement": "HD2/HD3 <= -75 dBc up to 24.5 MHz at full output, so the amplifier does not dominate the DAC",
+  "tones_above_24.5MHz": "harmonics >= 50 MHz: filtered by recon filter + diplexer LP arm",
+  "gap": "AD9707 SFDR not specified above 20 MHz (non-harmonic spurs 20-49 MHz unknown)"
+ }
+}
