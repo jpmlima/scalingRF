@@ -1,6 +1,20 @@
-# Power tree — rev 0 (inventory and architecture)
+# Power tree — rev 1
 
-**Status:** load inventory with sources, proposed architecture, input budget, sequencing and noise requirements. **11 of 21 loads are not yet datasheet-verified** (`loads.json → unverified`); regulators not chosen; efficiencies assumed.
+**Status (rev 1):** the two largest estimated loads verified in datasheets and the AD9361 1.3 V supply changed to ADI's reference split. **9 loads still unverified** (`loads.json → unverified`); regulators not chosen; efficiencies assumed.
+
+## Rev 1 — verified loads
+
+- **LMK03328** was estimated at 200 mA for the whole part: the datasheet gives IDD-IN 61, PLL1 144, PLL2 110, DIG 41 mA (typ), and 60–92 mA per output group. With PLL2 off and two output groups: **~246 mA core at 3.3 V + ~184 mA outputs** (VDDO can be 1.8 V → used here; check that the chosen output formats are valid at 1.8 V). About **2× the estimate**. Supply-noise rejection is good (PSNR −80 dBc).
+- **AD9361 1.3 V**, FDD 800 MHz, 2R2T, 20 MHz BW: **1020 mA** with TX at +7 dBm, 730 mA at −27 dBm (datasheet table) → the 1.0 A budget was right, barely; wider bandwidths draw more.
+- The AD9361 datasheet shows ADI's supply reference: **a 1.2 A buck for the main 1.3 V and a 300 mA LDO for the sensitive SYNTH/LO/VCO nets** → adopted, instead of one LDO for the full ampere (which wasted 0.4 W).
+
+Result: loads **7.7 W**, input **8.9 W (0.74 A at 12 V), 86 %**.
+
+Open trade-off: the 300 mA synth LDO fed from 2.3 V loses 0.3 W; lowering its input improves efficiency but **LDO PSRR drops at low headroom** → decided with the actual regulator's PSRR-vs-headroom data.
+
+---
+
+# Rev 0 (inventory and architecture)
 
 ## Loads by rail and noise class (`loads.py`)
 

@@ -6,7 +6,8 @@ import json, os
 LOADS = [
     # name, rail_V, current_A (typ, design), source, noise class, note
     ("TE0720 SoM (Zynq-7020, DDR3, GbE PHY)", 3.3, 0.9, "DS: 2-3 W typ; 3 A start-up capability recommended (family TRMs)", "digital", "VIN and 3.3VIN tied (single-supply mode)"),
-    ("AD9361 1.3 V (all VDDA1P3/VDDD1P3)", 1.3, 1.0, "EST: 1R1T FDD 345-490 mA (DS); 2R2T FDD higher -> budget 1.0 A", "rf-clean", "split: separate low-noise LDO for SYNTH/LO/VCO nets (UG-673)"),
+    ("AD9361 1.3 V main (RX/TX/BB/DIG)", 1.3, 0.72, "DS: 2R2T FDD 800 MHz 20 MHz BW: 1020 mA @ +7 dBm TX (730 mA @ -27 dBm); minus the 0.3 A synth share", "clean", "ADI reference: 1.2 A buck directly"),
+    ("AD9361 1.3 V SYNTH/LO/VCO nets", 1.3, 0.30, "DS: ADI reference design uses a 300 mA LDO for these nets", "rf-clean", "separate low-noise LDO (UG-673)"),
     ("AD9361 VDD_INTERFACE", 1.8, 0.02, "DS: ~4-8 mA CMOS FDD", "clean", "same rail as Zynq banks 13/35 (1.8 V)"),
     ("AD9361 VDD_GPO", 3.3, 0.01, "DS: GPO outputs 10 mA max each", "digital", ""),
     ("LTC2262-14 HF ADC", 1.8, 0.083, "DS: 149 mW", "rf-clean", ""),
@@ -20,7 +21,8 @@ LOADS = [
     ("PE42582 x2 (VDD)", 3.3, 0.0004, "DS: 120 uA each", "clean", ""),
     ("PE42582 x2 (VSS_EXT)", -3.0, 0.0001, "DS: 16 uA each", "clean", "spur-free mode"),
     ("VCTCXO 40 MHz", 3.3, 0.01, "EST", "rf-clean", "phase-noise critical: dedicated LDO"),
-    ("LMK03328 clock generator", 3.3, 0.2, "EST", "rf-clean", ""),
+    ("LMK03328 core (IN + PLL1 + DIG, PLL2 off)", 3.3, 0.246, "DS: 61 + 144 + 41 mA typ (max 78 + 168 + 60)", "rf-clean", "was estimated 200 mA for the whole part: 2x low"),
+    ("LMK03328 outputs (2 groups)", 1.8, 0.184, "DS: 92 mA per group typ (datasheet conditions); VDDO at 1.8 V", "rf-clean", "check output formats are valid at 1.8 V VDDO"),
     ("ADF4002 + tune DAC", 3.3, 0.01, "EST", "clean", ""),
     ("Relays G6KU x4 (latching, pulsed)", 5.0, 0.0, "DS: 100 mW coil, pulse only", "digital", "H-bridge drivers; zero static current"),
     ("I2C expanders, misc logic", 3.3, 0.02, "EST", "digital", ""),

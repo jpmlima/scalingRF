@@ -23,7 +23,8 @@ Things to verify or decide before starting schematics. Tick them off as they clo
 - [ ] HFCLK (150 MHz differential) into a 1.8 V HR bank: confirm LVDS input without internal termination is allowed (UG471), or use LVCMOS from the LMK
 - [ ] HF gain plan: antenna → ADC full scale, attenuator steps, FDA gain
 - [x] Power tree rev 0 (sim/power): inventory, architecture, budget 9.1 W in (0.76 A at 12 V), sequencing/noise requirements
-- [ ] Power: verify 11 unverified loads; choose regulators; PSRR/spur budget per rail; sequencer
+- [x] Power rev 1: LMK03328 (2× the estimate) and AD9361 2R2T FDD (1.02 A) verified; ADI 1.2 A buck + 300 mA LDO split adopted; 8.9 W in
+- [ ] Power: verify 9 remaining loads; choose regulators (PSRR vs headroom); PSRR/spur budget per rail; sequencer
 - [ ] Ethernet throughput measured on real hardware (Pluto+/LibreSDR) with libiio
 
 ## Design risks
